@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Clínica - Médicos & Agenda</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon"><i class="fas fa-stethoscope"></i></div>
+            CliniCare
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="patients.html"><i class="fas fa-users"></i> Pacientes</a></li>
+            <li class="active"><a href="doctors.html"><i class="fas fa-user-md"></i> Médicos & Agenda</a></li>
+            <li><a href="appointments.html"><i class="fas fa-calendar-check"></i> Consultas</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-header">
+            <h1>Gestão de Médicos e Agendas</h1>
+            <div class="user-profile">
+                <!-- Theme Toggle Button -->
+                <button class="btn-icon-only" onclick="toggleTheme()" title="Alternar Tema">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <span style="color: var(--text-muted); font-weight: 500;">Administrador</span>
+                <div class="avatar">AD</div>
+            </div>
+        </header>
+
+        <div class="panel" style="margin-bottom: 2rem;">
+            <div class="panel-header">
+                <h2>Todos os Médicos</h2>
+                <button class="btn btn-primary" onclick="window.doc.openCreateModal()"><i class="fas fa-plus"></i> Novo Médico</button>
+            </div>
+            <div style="padding: 0; overflow-x: auto;">
+                <table id="doctors-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Especialidade</th>
+                            <th>Contato</th>
+                            <th style="text-align: right;">Ações da Agenda</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="4" style="text-align: center; padding: 2rem;">Carregando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Create Doctor -->
+    <div class="modal-backdrop" id="doctor-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Novo Médico</h3>
+                <button class="modal-close" onclick="hideModal('doctor-modal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="doctor-form">
+                    <input type="hidden" id="doc-id">
+                    <div class="form-group">
+                        <label>Nome do Médico *</label>
+                        <input type="text" id="doc-name" class="form-control" required placeholder="Ex: Dr. Carlos Roberto">
+                    </div>
+                    <div class="form-group">
+                        <label>Especialidade *</label>
+                        <input type="text" id="doc-spec" class="form-control" placeholder="Ex: Cardiologista">
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>Email</label>
+                            <input type="email" id="doc-email" class="form-control" placeholder="medico@clinica.com">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>Telefone</label>
+                            <input type="text" id="doc-phone" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="hideModal('doctor-modal')">Cancelar</button>
+                <button class="btn btn-primary" onclick="window.doc.saveDoctor()">Salvar Médico</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Agenda Blocks -->
+    <div class="modal-backdrop" id="agenda-modal">
+        <div class="modal" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3>Abrir Agenda: <span id="agenda-doctor-name"></span></h3>
+                <button class="modal-close" onclick="hideModal('agenda-modal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="agenda-form" style="background: var(--background); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 2rem;">
+                    <h4>Adicionar Novo Turno</h4>
+                    <input type="hidden" id="agenda-doc-id">
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>Data</label>
+                            <input type="date" id="avail-date" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>Início</label>
+                            <input type="time" id="avail-start" class="form-control" required>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>Fim</label>
+                            <input type="time" id="avail-end" class="form-control" required>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <button type="button" class="btn btn-accent" onclick="window.doc.addAvailability()"><i class="fas fa-plus"></i> Abrir Vagas</button>
+                    </div>
+                </form>
+
+                <h4>Turnos Abertos (Agenda Ativa)</h4>
+                <div style="max-height: 250px; overflow-y: auto; margin-top: 1rem;">
+                    <table id="availabilities-table" style="font-size: 0.875rem;">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Horário</th>
+                                <th style="text-align: right;">Excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Loaded via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/doctors.js"></script>
+</body>
+</html>

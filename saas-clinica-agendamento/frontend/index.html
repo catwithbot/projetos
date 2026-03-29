@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Clínica - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome API or equivalent for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Sidebar Layout -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon"><i class="fas fa-stethoscope"></i></div>
+            CliniCare
+        </div>
+        <ul class="nav-links">
+            <li class="active"><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="patients.html"><i class="fas fa-users"></i> Pacientes</a></li>
+            <li><a href="doctors.html"><i class="fas fa-user-md"></i> Médicos & Agenda</a></li>
+            <li><a href="appointments.html"><i class="fas fa-calendar-check"></i> Consultas</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-header">
+            <h1>Visão Geral da Clínica</h1>
+            <div class="user-profile">
+                <!-- Theme Toggle Button -->
+                <button class="btn-icon-only" onclick="toggleTheme()" title="Alternar Tema">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <span style="color: var(--text-muted); font-weight: 500;">Administrador</span>
+                <div class="avatar">AD</div>
+            </div>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon blue"><i class="fas fa-users"></i></div>
+                <div class="stat-info">
+                    <h3>Pacientes Totais</h3>
+                    <p id="stat-total-patients">-</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon green"><i class="fas fa-calendar-day"></i></div>
+                <div class="stat-info">
+                    <h3>Consultas Hoje</h3>
+                    <p id="stat-today-appointments">-</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Today's List Panel -->
+        <div class="panel">
+            <div class="panel-header">
+                <h2>O que temos para hoje?</h2>
+                <a href="appointments.html" class="btn btn-outline">Ver Toda Agenda</a>
+            </div>
+            <div style="padding: 0;">
+                <table id="today-appointments-table">
+                    <thead>
+                        <tr>
+                            <th>Horário</th>
+                            <th>Paciente</th>
+                            <th>Médico</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be loaded here -->
+                        <tr><td colspan="4" style="text-align: center; padding: 2rem;">Carregando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
