@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClinicaOS – Agendamentos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <i class="fas fa-clinic-medical"></i>
+        <span>ClinicaOS</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item">
+          <i class="fas fa-chart-line"></i><span>Dashboard</span>
+        </a>
+        <a href="appointments.html" class="nav-item active">
+          <i class="fas fa-calendar-alt"></i><span>Agendamentos</span>
+        </a>
+        <a href="patients.html" class="nav-item">
+          <i class="fas fa-user-injured"></i><span>Pacientes</span>
+        </a>
+        <a href="doctors.html" class="nav-item">
+          <i class="fas fa-user-md"></i><span>Médicos</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="theme-toggle" id="themeToggle" title="Alternar tema">
+          <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <h1 class="page-title"><i class="fas fa-calendar-alt"></i> Agendamentos</h1>
+        <div class="topbar-actions">
+          <div class="view-toggle">
+            <button class="btn btn-sm btn-secondary active" id="btnListView">
+              <i class="fas fa-list"></i> Lista
+            </button>
+            <button class="btn btn-sm btn-secondary" id="btnCalendarView">
+              <i class="fas fa-calendar"></i> Calendário
+            </button>
+          </div>
+          <button class="btn btn-primary" id="btnNewAppointment">
+            <i class="fas fa-plus"></i> Novo Agendamento
+          </button>
+        </div>
+      </header>
+
+      <!-- Lista -->
+      <section class="card" id="listView">
+        <div class="card-header">
+          <h2><i class="fas fa-list-ul"></i> Lista de Agendamentos</h2>
+        </div>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Data/Hora</th>
+                <th>Paciente</th>
+                <th>Médico</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="appointmentsBody">
+              <tr><td colspan="5" class="empty-msg">Carregando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Calendário -->
+      <section class="card" id="calendarView" style="display:none">
+        <div id="fullCalendar"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal Novo/Editar Agendamento -->
+  <div class="modal-overlay" id="appointmentModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="appointmentModalTitle">Novo Agendamento</h3>
+        <button class="modal-close" id="closeAppointmentModal"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <form id="appointmentForm">
+          <input type="hidden" id="appointmentId" />
+
+          <!-- CPF + busca -->
+          <div class="form-group" id="cpfGroup">
+            <label>CPF do Paciente <span class="required">*</span></label>
+            <div class="input-action">
+              <input type="text" id="apptCpf" placeholder="000.000.000-00" maxlength="14" />
+              <button type="button" class="btn btn-secondary btn-sm" id="btnSearchCpf">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+            <span class="field-hint" id="cpfHint"></span>
+          </div>
+
+          <!-- Dados do paciente existente -->
+          <div id="patientFoundInfo" style="display:none">
+            <div class="patient-badge">
+              <i class="fas fa-user-check"></i>
+              <span id="patientFoundName"></span>
+            </div>
+          </div>
+
+          <!-- Campos para novo paciente -->
+          <div id="newPatientFields" style="display:none">
+            <div class="form-group">
+              <label>Nome Completo <span class="required">*</span></label>
+              <input type="text" id="apptPatientName" placeholder="Nome do paciente" />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Telefone <span class="required">*</span></label>
+                <input type="text" id="apptPatientPhone" placeholder="(00) 00000-0000" />
+              </div>
+              <div class="form-group">
+                <label>Data de Nascimento <span class="required">*</span></label>
+                <input type="date" id="apptPatientBirth" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Paciente readonly (edição) -->
+          <div id="patientReadonly" style="display:none">
+            <div class="form-group">
+              <label>Paciente</label>
+              <input type="text" id="apptPatientReadonly" readonly class="readonly-input" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Médico <span class="required">*</span></label>
+              <select id="apptDoctor">
+                <option value="">Selecione...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Data e Hora <span class="required">*</span></label>
+              <input type="datetime-local" id="apptDateTime" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Observações</label>
+            <textarea id="apptNotes" rows="2" placeholder="Informações adicionais..."></textarea>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="btn btn-danger" id="btnDeleteAppointment" style="display:none">
+              <i class="fas fa-trash"></i> Excluir
+            </button>
+            <button type="button" class="btn btn-secondary" id="cancelAppointmentModal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save"></i> Salvar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.11/locales-all.global.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/appointments.js"></script>
+</body>
+</html>
