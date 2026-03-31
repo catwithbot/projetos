@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClinicaOS – Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="login-page">
+
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-logo">
+        <i class="fas fa-clinic-medical"></i>
+        <span>ClinicaOS</span>
+      </div>
+      <h2 class="login-title">Bem-vindo</h2>
+      <p class="login-subtitle">Faça login para continuar</p>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" id="loginEmail" placeholder="seu@email.com" autocomplete="email" required />
+        </div>
+        <div class="form-group">
+          <label>Senha</label>
+          <div class="input-action">
+            <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" required />
+            <button type="button" class="btn btn-secondary btn-sm" id="btnTogglePassword" tabindex="-1">
+              <i class="fas fa-eye" id="eyeIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <div id="loginError" class="login-error" style="display:none"></div>
+
+        <button type="submit" class="btn btn-primary btn-login" id="btnLogin">
+          <i class="fas fa-sign-in-alt"></i> Entrar
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const API = 'http://localhost:3000/api';
+
+    // Se já estiver logado, redireciona
+    if (localStorage.getItem('clinica_token')) {
+      window.location.href = '/index.html';
+    }
+
+    // Toggle senha visível
+    document.getElementById('btnTogglePassword').addEventListener('click', () => {
+      const input = document.getElementById('loginPassword');
+      const icon  = document.getElementById('eyeIcon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'fas fa-eye-slash';
+      } else {
+        input.type = 'password';
+        icon.className = 'fas fa-eye';
+      }
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email    = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const errorEl  = document.getElementById('loginError');
+      const btn      = document.getElementById('btnLogin');
+
+      errorEl.style.display = 'none';
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Entrando...';
+
+      try {
+        const res = await fetch(`${API}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || 'Erro ao fazer login');
+        }
+
+        localStorage.setItem('clinica_token', data.token);
+        localStorage.setItem('clinica_user',  JSON.stringify(data.user));
+        window.location.href = '/index.html';
+      } catch (err) {
+        errorEl.textContent = err.message;
+        errorEl.style.display = 'block';
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Entrar';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -4,6 +4,33 @@
 
 const API = 'http://localhost:3000/api';
 
+// ── Auth ───────────────────────────────────────────────────
+function getCurrentUser() {
+  try {
+    return JSON.parse(localStorage.getItem('clinica_user'));
+  } catch {
+    return null;
+  }
+}
+
+function getToken() {
+  return localStorage.getItem('clinica_token');
+}
+
+function logout() {
+  localStorage.removeItem('clinica_token');
+  localStorage.removeItem('clinica_user');
+  window.location.href = '/login.html';
+}
+
+// Guard: redireciona para login se não autenticado
+(function authGuard() {
+  const isLoginPage = window.location.pathname.endsWith('login.html');
+  if (!isLoginPage && !getToken()) {
+    window.location.href = '/login.html';
+  }
+})();
+
 // ── Theme ──────────────────────────────────────────────────
 (function initTheme() {
   const saved = localStorage.getItem('theme') || 'light';
@@ -24,6 +51,31 @@ document.getElementById('themeToggle')?.addEventListener('click', () => {
   localStorage.setItem('theme', next);
   updateThemeIcon(next);
 });
+
+// ── Logout ─────────────────────────────────────────────────
+document.getElementById('btnLogout')?.addEventListener('click', logout);
+
+// ── Sidebar: user info + admin links ───────────────────────
+(function initSidebar() {
+  const user = getCurrentUser();
+  if (!user) return;
+
+  const roleLabel = { admin: 'Administrador', recepcao: 'Recepção', medico: 'Médico' };
+  const roleCls   = { admin: 'role-admin', recepcao: 'role-recepcao', medico: 'role-medico' };
+
+  const sidebarUser = document.getElementById('sidebarUser');
+  if (sidebarUser) {
+    sidebarUser.innerHTML = `
+      <div class="sidebar-user-name">${user.name}</div>
+      <div class="sidebar-user-role ${roleCls[user.role] || ''}">${roleLabel[user.role] || user.role}</div>
+    `;
+  }
+
+  // Mostrar link de Usuários apenas para admin
+  if (user.role === 'admin') {
+    document.getElementById('navUsers')?.removeAttribute('style');
+  }
+})();
 
 // ── Date display ───────────────────────────────────────────
 const dateEl = document.getElementById('topbarDate');
@@ -114,7 +166,9 @@ function formatDateTime(dt) {
 }
 
 function formatDate(d) {
-  return new Date(d + 'T00:00:00').toLocaleDateString('pt-BR');
+  // Extrai só YYYY-MM-DD para não duplicar timezone (ex: "2026-03-30T00:00:00.000Z")
+  const dateOnly = String(d).slice(0, 10);
+  return new Date(dateOnly + 'T00:00:00').toLocaleDateString('pt-BR');
 }
 
 // ── Status badge ───────────────────────────────────────────
@@ -123,6 +177,7 @@ function statusBadge(status) {
     agendado:  ['badge-info',    'Agendado'],
     concluido: ['badge-success', 'Concluído'],
     cancelado: ['badge-danger',  'Cancelado'],
+    falta:     ['badge-warning', 'Falta'],
   };
   const [cls, label] = map[status] || ['badge-gray', status];
   return `<span class="badge ${cls}">${label}</span>`;
@@ -130,10 +185,18 @@ function statusBadge(status) {
 
 // ── API fetch helper ───────────────────────────────────────
 async function apiFetch(path, options = {}) {
-  const res = await fetch(API + path, {
-    headers: { 'Content-Type': 'application/json' },
-    ...options,
-  });
+  const token = getToken();
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
+  const res = await fetch(API + path, { headers, ...options });
+
+  // Token expirado ou inválido
+  if (res.status === 401) {
+    logout();
+    return;
+  }
+
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(data.error || `Erro ${res.status}`);
   return data;

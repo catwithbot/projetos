@@ -46,6 +46,7 @@ function renderAppointmentsList(list) {
           <option value="agendado"  ${a.status === 'agendado'  ? 'selected' : ''}>Agendado</option>
           <option value="concluido" ${a.status === 'concluido' ? 'selected' : ''}>Concluído</option>
           <option value="cancelado" ${a.status === 'cancelado' ? 'selected' : ''}>Cancelado</option>
+          <option value="falta"     ${a.status === 'falta'     ? 'selected' : ''}>Falta</option>
         </select>
       </td>
       <td>
@@ -70,13 +71,12 @@ async function updateStatus(id, status) {
       body: JSON.stringify({ status })
     });
     showToast('Status atualizado.', 'success');
-    // Update local
     const a = allAppointments.find(x => x.id === id);
     if (a) a.status = status;
     if (calendar) refreshCalendar();
   } catch (err) {
     showToast('Erro: ' + err.message, 'error');
-    init(); // reload to revert select
+    init();
   }
 }
 
@@ -106,26 +106,32 @@ document.getElementById('btnCalendarView').addEventListener('click', () => {
   document.getElementById('calendarView').style.display = '';
   document.getElementById('btnListView').classList.remove('active');
   document.getElementById('btnCalendarView').classList.add('active');
-  // Aguarda o elemento ser visível antes de renderizar
   requestAnimationFrame(() => initCalendar());
 });
 
 // ── FullCalendar ───────────────────────────────────────────
+const statusConfig = {
+  agendado:  { bg: '#2563eb', border: '#1d4ed8', label: 'Agendado' },
+  concluido: { bg: '#16a34a', border: '#15803d', label: 'Concluído' },
+  cancelado: { bg: '#dc2626', border: '#b91c1c', label: 'Cancelado' },
+  falta:     { bg: '#d97706', border: '#b45309', label: 'Falta' },
+};
+
 function buildCalendarEvents() {
   return allAppointments.map(a => {
-    const colorMap = {
-      agendado:  '#3b82f6',
-      concluido: '#22c55e',
-      cancelado: '#ef4444',
-    };
+    const cfg = statusConfig[a.status] || { bg: '#64748b', border: '#475569' };
+    const firstName = a.patient_name.split(' ')[0];
+    const lastName  = a.patient_name.split(' ').slice(-1)[0];
+    const shortName = firstName === lastName ? firstName : `${firstName} ${lastName}`;
+
     return {
       id: String(a.id),
-      title: `${a.patient_name} (${formatCpf(a.patient_cpf)})`,
+      title: shortName,
       start: a.appointment_date,
       end: new Date(new Date(a.appointment_date).getTime() + 30 * 60000).toISOString(),
-      backgroundColor: colorMap[a.status] || '#94a3b8',
-      borderColor: 'transparent',
-      extendedProps: { appointment: a }
+      backgroundColor: cfg.bg,
+      borderColor: cfg.border,
+      extendedProps: { appointment: a, doctor: a.doctor_name, status: a.status }
     };
   });
 }
@@ -139,11 +145,16 @@ function initCalendar() {
   }
 
   calendar = new FullCalendar.Calendar(el, {
-    initialView: 'timeGridWeek',
+    initialView: 'timeGridDay',
     locale: 'pt-br',
     slotMinTime: '07:00:00',
-    slotMaxTime: '21:00:00',
-    slotDuration: '00:15:00',
+    slotMaxTime: '22:00:00',
+    slotDuration: '00:30:00',
+    slotLabelInterval: '01:00:00',
+    scrollTime: '08:00:00',
+    nowIndicator: true,
+    allDaySlot: false,
+    expandRows: true,
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
@@ -151,14 +162,26 @@ function initCalendar() {
     },
     buttonText: { today: 'Hoje', day: 'Dia', week: 'Semana', month: 'Mês' },
     events: buildCalendarEvents(),
-    dateClick(info) {
-      openNewAppointment(info.dateStr);
+    eventContent(arg) {
+      const { appointment: a, doctor } = arg.event.extendedProps;
+      const start = arg.event.start;
+      const end   = arg.event.end;
+      const fmt   = d => d ? `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}` : '';
+      return {
+        html: `
+          <div class="fc-event-inner">
+            <span class="fc-event-name">${arg.event.title}</span>
+            <span class="fc-event-meta">${fmt(start)}–${fmt(end)}</span>
+            <span class="fc-event-doctor">${doctor || ''}</span>
+          </div>`
+      };
     },
+    dateClick(info) { openNewAppointment(info.dateStr); },
     eventClick(info) {
       const a = info.event.extendedProps.appointment;
       openEditAppointment(a.id);
     },
-    height: 'auto',
+    height: 600,
   });
 
   calendar.render();
@@ -169,6 +192,17 @@ function refreshCalendar() {
   calendar.removeAllEvents();
   buildCalendarEvents().forEach(e => calendar.addEvent(e));
 }
+
+// ── Modal tabs ─────────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tabFormPanel').style.display  = target === 'tabFormPanel'  ? '' : 'none';
+    document.getElementById('tabAuditPanel').style.display = target === 'tabAuditPanel' ? '' : 'none';
+  });
+});
 
 // ── Modal ──────────────────────────────────────────────────
 function populateDoctorSelect() {
@@ -202,12 +236,30 @@ function resetAppointmentModal() {
   document.getElementById('apptPatientName').value = '';
   document.getElementById('apptPatientPhone').value = '';
   document.getElementById('apptPatientBirth').value = '';
+
+  // Reset tabs
+  document.getElementById('appointmentTabs').style.display = 'none';
+  document.getElementById('tabFormPanel').style.display  = '';
+  document.getElementById('tabAuditPanel').style.display = 'none';
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.tab-btn[data-tab="tabFormPanel"]').classList.add('active');
+}
+
+function fillAuditPanel(a) {
+  document.getElementById('auditCreatedBy').textContent =
+    a.created_by_name || 'Sistema';
+  document.getElementById('auditCreatedAt').textContent =
+    a.created_at ? formatDateTime(a.created_at) : '–';
+
+  const updatedUser = a.updated_by_name || a.created_by_name || 'Sistema';
+  const updatedAt   = a.updated_at || a.created_at;
+  document.getElementById('auditUpdatedBy').textContent = updatedUser;
+  document.getElementById('auditUpdatedAt').textContent = updatedAt ? formatDateTime(updatedAt) : '–';
 }
 
 function openNewAppointment(dateStr) {
   resetAppointmentModal();
   if (dateStr) {
-    // Convert to datetime-local format
     const dt = new Date(dateStr);
     const pad = n => String(n).padStart(2, '0');
     document.getElementById('apptDateTime').value =
@@ -225,12 +277,10 @@ function openEditAppointment(id) {
   document.getElementById('appointmentId').value = id;
   document.getElementById('appointmentModalTitle').textContent = 'Editar Agendamento';
 
-  // Hide CPF group, show readonly patient
   document.getElementById('cpfGroup').style.display = 'none';
   document.getElementById('patientReadonly').style.display = '';
   document.getElementById('apptPatientReadonly').value = `${a.patient_name} – ${formatCpf(a.patient_cpf)}`;
 
-  // Fill doctor + date
   document.getElementById('apptDoctor').value = a.doctor_id;
 
   const dt = new Date(a.appointment_date);
@@ -240,6 +290,10 @@ function openEditAppointment(id) {
 
   document.getElementById('apptNotes').value = a.notes || '';
   document.getElementById('btnDeleteAppointment').style.display = '';
+
+  // Mostrar tabs e preencher auditoria
+  document.getElementById('appointmentTabs').style.display = '';
+  fillAuditPanel(a);
 
   openModal('appointmentModal');
 }
@@ -277,7 +331,6 @@ async function searchByCpf() {
 
   try {
     const patient = await apiFetch(`/patients/cpf/${cpf.replace(/\D/g, '')}`);
-    // Found
     document.getElementById('patientFoundName').textContent = `${patient.name} – ${formatCpf(patient.cpf)}`;
     document.getElementById('patientFoundInfo').style.display = '';
     document.getElementById('newPatientFields').style.display = 'none';
@@ -285,7 +338,6 @@ async function searchByCpf() {
     hint.className = 'field-hint success';
     document.getElementById('apptCpf').setAttribute('readonly', true);
   } catch {
-    // Not found – show registration fields
     document.getElementById('patientFoundInfo').style.display = 'none';
     document.getElementById('newPatientFields').style.display = '';
     hint.textContent = 'Paciente não encontrado. Preencha os dados para cadastrá-lo.';
@@ -310,14 +362,12 @@ document.getElementById('appointmentForm').addEventListener('submit', async (e) 
 
   try {
     if (id) {
-      // Reagendar
       await apiFetch(`/appointments/${id}/reschedule`, {
         method: 'PUT',
         body: JSON.stringify({ doctor_id, appointment_date, notes })
       });
       showToast('Agendamento atualizado.', 'success');
     } else {
-      // Novo
       const cpf = document.getElementById('apptCpf').value;
       if (!validateCpf(cpf)) {
         showToast('CPF inválido.', 'error');
@@ -325,9 +375,9 @@ document.getElementById('appointmentForm').addEventListener('submit', async (e) 
       }
 
       const newPatientVisible = document.getElementById('newPatientFields').style.display !== 'none';
-      const name  = newPatientVisible ? document.getElementById('apptPatientName').value.trim()  : '';
-      const phone = newPatientVisible ? document.getElementById('apptPatientPhone').value.trim() : '';
-      const birth_date = newPatientVisible ? document.getElementById('apptPatientBirth').value : '';
+      const name       = newPatientVisible ? document.getElementById('apptPatientName').value.trim()  : '';
+      const phone      = newPatientVisible ? document.getElementById('apptPatientPhone').value.trim() : '';
+      const birth_date = newPatientVisible ? document.getElementById('apptPatientBirth').value        : '';
 
       await apiFetch('/appointments', {
         method: 'POST',

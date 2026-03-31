@@ -15,6 +15,7 @@
         <i class="fas fa-clinic-medical"></i>
         <span>ClinicaOS</span>
       </div>
+      <div class="sidebar-user" id="sidebarUser"></div>
       <nav class="sidebar-nav">
         <a href="index.html" class="nav-item">
           <i class="fas fa-chart-line"></i><span>Dashboard</span>
@@ -28,10 +29,19 @@
         <a href="doctors.html" class="nav-item">
           <i class="fas fa-user-md"></i><span>Médicos</span>
         </a>
+        <a href="reports.html" class="nav-item">
+          <i class="fas fa-chart-bar"></i><span>Relatórios</span>
+        </a>
+        <a href="users.html" class="nav-item" id="navUsers" style="display:none">
+          <i class="fas fa-users-cog"></i><span>Usuários</span>
+        </a>
       </nav>
       <div class="sidebar-footer">
         <button class="theme-toggle" id="themeToggle" title="Alternar tema">
           <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <button class="btn-logout" id="btnLogout" title="Sair">
+          <i class="fas fa-sign-out-alt"></i>
         </button>
       </div>
     </aside>
@@ -91,84 +101,127 @@
         <h3 id="appointmentModalTitle">Novo Agendamento</h3>
         <button class="modal-close" id="closeAppointmentModal"><i class="fas fa-times"></i></button>
       </div>
+
+      <!-- Tabs (só aparecem na edição) -->
+      <div class="modal-tabs" id="appointmentTabs" style="display:none">
+        <button class="tab-btn active" data-tab="tabFormPanel">
+          <i class="fas fa-edit"></i> Dados
+        </button>
+        <button class="tab-btn" data-tab="tabAuditPanel">
+          <i class="fas fa-history"></i> Histórico
+        </button>
+      </div>
+
       <div class="modal-body">
-        <form id="appointmentForm">
-          <input type="hidden" id="appointmentId" />
 
-          <!-- CPF + busca -->
-          <div class="form-group" id="cpfGroup">
-            <label>CPF do Paciente <span class="required">*</span></label>
-            <div class="input-action">
-              <input type="text" id="apptCpf" placeholder="000.000.000-00" maxlength="14" />
-              <button type="button" class="btn btn-secondary btn-sm" id="btnSearchCpf">
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
-            <span class="field-hint" id="cpfHint"></span>
-          </div>
+        <!-- Painel Formulário -->
+        <div id="tabFormPanel">
+          <form id="appointmentForm">
+            <input type="hidden" id="appointmentId" />
 
-          <!-- Dados do paciente existente -->
-          <div id="patientFoundInfo" style="display:none">
-            <div class="patient-badge">
-              <i class="fas fa-user-check"></i>
-              <span id="patientFoundName"></span>
+            <!-- CPF + busca -->
+            <div class="form-group" id="cpfGroup">
+              <label>CPF do Paciente <span class="required">*</span></label>
+              <div class="input-action">
+                <input type="text" id="apptCpf" placeholder="000.000.000-00" maxlength="14" />
+                <button type="button" class="btn btn-secondary btn-sm" id="btnSearchCpf">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+              <span class="field-hint" id="cpfHint"></span>
             </div>
-          </div>
 
-          <!-- Campos para novo paciente -->
-          <div id="newPatientFields" style="display:none">
-            <div class="form-group">
-              <label>Nome Completo <span class="required">*</span></label>
-              <input type="text" id="apptPatientName" placeholder="Nome do paciente" />
+            <!-- Dados do paciente existente -->
+            <div id="patientFoundInfo" style="display:none">
+              <div class="patient-badge">
+                <i class="fas fa-user-check"></i>
+                <span id="patientFoundName"></span>
+              </div>
             </div>
+
+            <!-- Campos para novo paciente -->
+            <div id="newPatientFields" style="display:none">
+              <div class="form-group">
+                <label>Nome Completo <span class="required">*</span></label>
+                <input type="text" id="apptPatientName" placeholder="Nome do paciente" />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Telefone <span class="required">*</span></label>
+                  <input type="text" id="apptPatientPhone" placeholder="(00) 00000-0000" />
+                </div>
+                <div class="form-group">
+                  <label>Data de Nascimento <span class="required">*</span></label>
+                  <input type="date" id="apptPatientBirth" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Paciente readonly (edição) -->
+            <div id="patientReadonly" style="display:none">
+              <div class="form-group">
+                <label>Paciente</label>
+                <input type="text" id="apptPatientReadonly" readonly class="readonly-input" />
+              </div>
+            </div>
+
             <div class="form-row">
               <div class="form-group">
-                <label>Telefone <span class="required">*</span></label>
-                <input type="text" id="apptPatientPhone" placeholder="(00) 00000-0000" />
+                <label>Médico <span class="required">*</span></label>
+                <select id="apptDoctor">
+                  <option value="">Selecione...</option>
+                </select>
               </div>
               <div class="form-group">
-                <label>Data de Nascimento <span class="required">*</span></label>
-                <input type="date" id="apptPatientBirth" />
+                <label>Data e Hora <span class="required">*</span></label>
+                <input type="datetime-local" id="apptDateTime" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Observações</label>
+              <textarea id="apptNotes" rows="2" placeholder="Informações adicionais..."></textarea>
+            </div>
+
+            <div class="modal-actions">
+              <button type="button" class="btn btn-danger" id="btnDeleteAppointment" style="display:none">
+                <i class="fas fa-trash"></i> Excluir
+              </button>
+              <button type="button" class="btn btn-secondary" id="cancelAppointmentModal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Salvar
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Painel Histórico/Auditoria -->
+        <div id="tabAuditPanel" style="display:none">
+          <div class="audit-info">
+            <div class="audit-row">
+              <div class="audit-icon audit-created">
+                <i class="fas fa-user-plus"></i>
+              </div>
+              <div class="audit-detail">
+                <span class="audit-label">Criado por</span>
+                <span class="audit-user" id="auditCreatedBy">–</span>
+                <span class="audit-date" id="auditCreatedAt">–</span>
+              </div>
+            </div>
+            <div class="audit-divider"></div>
+            <div class="audit-row">
+              <div class="audit-icon audit-updated">
+                <i class="fas fa-user-edit"></i>
+              </div>
+              <div class="audit-detail">
+                <span class="audit-label">Última alteração por</span>
+                <span class="audit-user" id="auditUpdatedBy">–</span>
+                <span class="audit-date" id="auditUpdatedAt">–</span>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Paciente readonly (edição) -->
-          <div id="patientReadonly" style="display:none">
-            <div class="form-group">
-              <label>Paciente</label>
-              <input type="text" id="apptPatientReadonly" readonly class="readonly-input" />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label>Médico <span class="required">*</span></label>
-              <select id="apptDoctor">
-                <option value="">Selecione...</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Data e Hora <span class="required">*</span></label>
-              <input type="datetime-local" id="apptDateTime" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Observações</label>
-            <textarea id="apptNotes" rows="2" placeholder="Informações adicionais..."></textarea>
-          </div>
-
-          <div class="modal-actions">
-            <button type="button" class="btn btn-danger" id="btnDeleteAppointment" style="display:none">
-              <i class="fas fa-trash"></i> Excluir
-            </button>
-            <button type="button" class="btn btn-secondary" id="cancelAppointmentModal">Cancelar</button>
-            <button type="submit" class="btn btn-primary">
-              <i class="fas fa-save"></i> Salvar
-            </button>
-          </div>
-        </form>
       </div>
     </div>
   </div>
