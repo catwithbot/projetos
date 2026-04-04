@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clínica Vida Plena</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #060f1a;
+      --deep:    #0a1929;
+      --surface: #0f2236;
+      --card:    #132840;
+      --blue:    #1a4a6e;
+      --sky:     #3b8fd4;
+      --sky-dim: #2472b0;
+      --gold:    #d4a843;
+      --gold-dim:#b8903a;
+      --white:   #ffffff;
+      --text:    #e8f0f8;
+      --muted:   #7fa8c9;
+      --border:  rgba(59,143,212,.18);
+      --radius:  12px;
+      --shadow:  0 8px 40px rgba(0,0,0,.45);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--deep);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── HEADER ─────────────────────────────────────── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 5vw;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(6,15,26,.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(59,143,212,.15);
+      transition: box-shadow .3s;
+    }
+    header.scrolled { box-shadow: 0 2px 32px rgba(0,0,0,.5); }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -.5px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo span {
+      display: inline-block;
+      width: 32px; height: 32px;
+      background: var(--sky);
+      border-radius: 50%;
+      position: relative;
+    }
+    .logo span::after {
+      content: '+';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    nav { display: flex; align-items: center; gap: 2rem; }
+    nav a {
+      font-size: .9rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.55);
+      text-decoration: none;
+      letter-spacing: .02em;
+      transition: color .2s;
+    }
+    nav a:hover { color: var(--white); }
+    nav .btn-nav {
+      padding: .5rem 1.25rem;
+      background: var(--sky);
+      color: var(--white) !important;
+      border-radius: 999px;
+      font-size: .85rem;
+      transition: background .2s, transform .15s;
+    }
+    nav .btn-nav:hover { background: var(--sky-dim); transform: translateY(-1px); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all .3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 5vw 2rem;
+      flex-direction: column;
+      gap: 1.25rem;
+      z-index: 99;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.8);
+      text-decoration: none;
+    }
+    .mobile-menu .btn-nav {
+      display: inline-block;
+      padding: .75rem 1.5rem;
+      background: var(--navy);
+      color: var(--white) !important;
+      border-radius: 999px;
+      text-align: center;
+      font-size: .95rem;
+    }
+
+    /* ─── HERO ───────────────────────────────────────── */
+    #hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 120px 5vw 80px;
+      gap: 4rem;
+      background: linear-gradient(145deg, var(--navy) 0%, #0d2240 50%, #091a30 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -80px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(59,143,212,.22) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -60px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(212,168,67,.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-text { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 1.25rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px; height: 1px;
+      background: var(--sky);
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--white);
+      letter-spacing: -.02em;
+      margin-bottom: 1.25rem;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--sky);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: rgba(200,220,240,.7);
+      font-weight: 300;
+      max-width: 440px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: .9rem 2rem;
+      background: var(--sky);
+      color: var(--white);
+      border-radius: 999px;
+      font-size: .95rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background .25s, transform .2s, box-shadow .25s;
+      box-shadow: 0 4px 24px rgba(59,143,212,.35);
+    }
+    .btn-primary:hover {
+      background: var(--sky-dim);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(59,143,212,.5);
+    }
+    .btn-primary svg { transition: transform .2s; }
+    .btn-primary:hover svg { transform: translateX(4px); }
+
+    .hero-image {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-card {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+      max-width: 380px;
+      width: 100%;
+      position: relative;
+      border: 1px solid rgba(59,143,212,.2);
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: -1px; right: -1px; bottom: -1px;
+      border-radius: 25px;
+      background: linear-gradient(135deg, rgba(59,143,212,.4), rgba(212,168,67,.2));
+      z-index: -1;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    .stat {
+      padding: 1.25rem;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(59,143,212,.15);
+      border-radius: var(--radius);
+      text-align: center;
+    }
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: .3rem;
+      font-weight: 400;
+    }
+    .hero-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 1rem 1.25rem;
+      background: var(--navy);
+      border-radius: var(--radius);
+      margin-top: 1.25rem;
+      color: var(--white);
+    }
+    .badge-icon {
+      width: 36px; height: 36px;
+      background: var(--sky);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .badge-text { font-size: .85rem; font-weight: 300; }
+    .badge-text strong { display: block; font-weight: 500; font-size: .9rem; }
+
+    /* ─── SECTIONS SHARED ─────────────────────────────── */
+    section { padding: 100px 5vw; }
+    .section-label {
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--sky);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: .85rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px; height: 1px;
+      background: var(--sky);
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.15;
+      letter-spacing: -.02em;
+    }
+    h2 em { font-style: italic; color: var(--sky); }
+
+    /* ─── SERVIÇOS ────────────────────────────────────── */
+    #servicos { background: var(--deep); }
+    .servicos-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+    .servicos-desc {
+      font-size: 1rem;
+      color: rgba(200,220,240,.6);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .card {
+      padding: 2rem;
+      background: var(--card);
+      border: 1px solid rgba(59,143,212,.15);
+      border-radius: 18px;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--sky), var(--gold));
+      transform: scaleX(0);
+      transition: transform .3s;
+      transform-origin: left;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 48px rgba(0,0,0,.5);
+      border-color: rgba(59,143,212,.35);
+    }
+    .card:hover::before { transform: scaleX(1); }
+
+    .card-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, rgba(59,143,212,.2), rgba(59,143,212,.1));
+      border: 1px solid rgba(59,143,212,.25);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: .6rem;
+    }
+    .card p {
+      font-size: .9rem;
+      color: rgba(180,210,235,.65);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ─── DEPOIMENTOS ─────────────────────────────────── */
+    #depoimentos { background: var(--surface); }
+    .depoimentos-header { margin-bottom: 3.5rem; }
+
+    .depoimentos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .depoimento {
+      background: var(--card);
+      border: 1px solid rgba(59,143,212,.15);
+      border-radius: 18px;
+      padding: 2rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,.3);
+      transition: transform .3s, border-color .3s;
+    }
+    .depoimento:hover { border-color: rgba(59,143,212,.3); }
+    .depoimento:hover { transform: translateY(-4px); }
+
+    .stars {
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+    .depoimento blockquote {
+      line-height: 1.7;
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: rgba(220,235,248,.85);
+      margin-bottom: 1.5rem;
+    }
+    .depoimento-autor {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .autor-info strong {
+      display: block;
+      font-size: .9rem;
+      color: var(--white);
+      font-weight: 500;
+    }
+    .autor-info span {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    /* ─── AGENDAMENTO ─────────────────────────────────── */
+    #agendamento { background: var(--navy); border-top: 1px solid rgba(59,143,212,.15); }
+    #agendamento .section-label { color: var(--gold); }
+    #agendamento .section-label::before { background: var(--gold); }
+    #agendamento h2 { color: var(--white); }
+    #agendamento h2 em { color: var(--gold); }
+
+    .form-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+    .form-info p {
+      font-size: 1rem;
+      color: rgba(255,255,255,.65);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-top: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .info-items { display: flex; flex-direction: column; gap: 1.25rem; }
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: rgba(255,255,255,.8);
+      font-size: .9rem;
+    }
+    .info-item span:first-child {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    form {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(59,143,212,.2);
+      border-radius: 20px;
+      padding: 2.5rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group { display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1rem; }
+    .form-group label {
+      font-size: .8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.6);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: .85rem 1.1rem;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(59,143,212,.2);
+      border-radius: var(--radius);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .95rem;
+      font-weight: 300;
+      transition: border-color .2s, background .2s;
+      outline: none;
+      width: 100%;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,.3); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--sky);
+      background: rgba(59,143,212,.1);
+      box-shadow: 0 0 0 3px rgba(59,143,212,.12);
+    }
+    .form-group select option { background: var(--navy); color: var(--white); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--sky), #1a5f9e);
+      color: var(--white);
+      border: none;
+      border-radius: 999px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: .5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: opacity .2s, transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 24px rgba(46,122,182,.4);
+    }
+    .btn-submit:hover {
+      opacity: .92;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(46,122,182,.5);
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    footer {
+      padding: 2.5rem 5vw;
+      background: var(--navy);
+      border-top: 1px solid rgba(59,143,212,.12);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    footer p {
+      font-size: .8rem;
+      color: rgba(255,255,255,.35);
+    }
+
+    /* ─── ANIMATIONS ──────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* ─── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .hamburger { display: flex; }
+
+      #hero {
+        grid-template-columns: 1fr;
+        padding: 110px 5vw 60px;
+        text-align: center;
+      }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .hero-eyebrow { justify-content: center; }
+      #hero::before { display: none; }
+      .hero-image { display: none; }
+
+      .servicos-header { grid-template-columns: 1fr; }
+      .cards-grid { grid-template-columns: 1fr; }
+
+      .depoimentos-grid { grid-template-columns: 1fr; }
+
+      .form-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+
+      footer { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 70px 5vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header id="header">
+    <a href="#" class="logo">
+      <span></span>
+      Vida Plena
+    </a>
+    <nav>
+      <a href="#servicos">Serviços</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#agendamento">Contato</a>
+      <a href="#agendamento" class="btn-nav">Agendar consulta</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#servicos" class="mobile-link">Serviços</a>
+    <a href="#depoimentos" class="mobile-link">Depoimentos</a>
+    <a href="#agendamento" class="mobile-link">Contato</a>
+    <a href="#agendamento" class="btn-nav mobile-link">Agendar consulta</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Cuidado com excelência</div>
+      <h1>Sua saúde merece<br><em>atenção plena</em></h1>
+      <p class="hero-sub">
+        Oferecemos consultas, exames e acompanhamento contínuo com profissionais dedicados ao seu bem-estar em cada etapa da vida.
+      </p>
+      <a href="#agendamento" class="btn-primary">
+        Agendar consulta
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="hero-image">
+      <div class="hero-card">
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat-number">12+</div>
+            <div class="stat-label">Anos de experiência</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">8k</div>
+            <div class="stat-label">Pacientes atendidos</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">98%</div>
+            <div class="stat-label">Satisfação</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">15</div>
+            <div class="stat-label">Especialidades</div>
+          </div>
+        </div>
+        <div class="hero-badge">
+          <div class="badge-icon">✦</div>
+          <div class="badge-text">
+            <strong>Atendimento humanizado</strong>
+            Cada paciente é único para nós
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos">
+    <div class="servicos-header">
+      <div>
+        <div class="section-label">O que oferecemos</div>
+        <h2>Serviços pensados<br><em>para você</em></h2>
+      </div>
+      <p class="servicos-desc">
+        Nossa clínica reúne especialistas de diversas áreas para oferecer cuidado integrado, do diagnóstico ao acompanhamento de longo prazo.
+      </p>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card reveal">
+        <div class="card-icon">🩺</div>
+        <h3>Consultas Médicas</h3>
+        <p>Atendimento com especialistas em clínica geral, cardiologia, dermatologia, ortopedia e muito mais, com agendamento rápido e fácil.</p>
+      </div>
+      <div class="card reveal reveal-delay-1">
+        <div class="card-icon">🔬</div>
+        <h3>Exames Laboratoriais</h3>
+        <p>Coleta e análise de exames com equipamentos de última geração. Resultados precisos entregues em tempo ágil diretamente no seu e-mail.</p>
+      </div>
+      <div class="card reveal reveal-delay-2">
+        <div class="card-icon">📋</div>
+        <h3>Acompanhamento Contínuo</h3>
+        <p>Planos de saúde personalizados com retornos periódicos, monitoramento de condições crônicas e suporte preventivo ao longo do tempo.</p>
+      </div>
+      <div class="card reveal reveal-delay-1">
+        <div class="card-icon">💊</div>
+        <h3>Medicina Preventiva</h3>
+        <p>Check-ups completos, vacinação, avaliações de risco e orientações para manter sua saúde em dia antes de qualquer sintoma surgir.</p>
+      </div>
+      <div class="card reveal reveal-delay-2">
+        <div class="card-icon">🧠</div>
+        <h3>Saúde Mental</h3>
+        <p>Psicologia e psiquiatria integradas ao cuidado médico. Tratamos o ser humano por completo, com acolhimento, escuta e ciência.</p>
+      </div>
+      <div class="card reveal reveal-delay-3">
+        <div class="card-icon">🍎</div>
+        <h3>Nutrição Clínica</h3>
+        <p>Acompanhamento nutricional individualizado para perda de peso, doenças metabólicas, performance esportiva e qualidade de vida.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section id="depoimentos">
+    <div class="depoimentos-header reveal">
+      <div class="section-label">O que dizem nossos pacientes</div>
+      <h2>Histórias de <em>cuidado real</em></h2>
+    </div>
+
+    <div class="depoimentos-grid">
+      <div class="depoimento reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Encontrei na Clínica Vida Plena o atendimento que sempre busquei. Os médicos têm paciência genuína e explicam tudo com clareza. Me sinto cuidado de verdade."</blockquote>
+        <div class="depoimento-autor">
+          <div class="avatar" style="background: linear-gradient(135deg, #1a4a6e, #2e7ab6);">MR</div>
+          <div class="autor-info">
+            <strong>Marcos Rodrigues</strong>
+            <span>Paciente há 3 anos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="depoimento reveal reveal-delay-1">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Fiz todos os meus exames aqui e o resultado chegou no mesmo dia. A recepção é super atenciosa e o ambiente deixa a gente muito à vontade."</blockquote>
+        <div class="depoimento-autor">
+          <div class="avatar" style="background: linear-gradient(135deg, #c9a84c, #a07c2e);">AC</div>
+          <div class="autor-info">
+            <strong>Ana Clara Souza</strong>
+            <span>Paciente há 1 ano</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="depoimento reveal reveal-delay-2">
+        <div class="stars">★★★★★</div>
+        <blockquote>"O acompanhamento nutricional transformou minha saúde. Perdi 14kg com orientação de qualidade e suporte constante. Recomendo sem hesitar para toda a família."</blockquote>
+        <div class="depoimento-autor">
+          <div class="avatar" style="background: linear-gradient(135deg, #2e7ab6, #1a6a9e);">LP</div>
+          <div class="autor-info">
+            <strong>Lucas Pereira</strong>
+            <span>Paciente há 2 anos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AGENDAMENTO -->
+  <section id="agendamento">
+    <div class="reveal">
+      <div class="section-label">Fale conosco</div>
+      <h2>Agende sua <em>consulta</em></h2>
+    </div>
+
+    <div class="form-layout">
+      <div class="form-info reveal">
+        <p>Preencha o formulário e entraremos em contato pelo WhatsApp para confirmar seu agendamento. Rápido, simples e sem complicação.</p>
+        <div class="info-items">
+          <div class="info-item">
+            <span>📍</span>
+            <span>Av. da Saúde, 1200 — Centro, São Paulo/SP</span>
+          </div>
+          <div class="info-item">
+            <span>📞</span>
+            <span>(11) 4002-8922</span>
+          </div>
+          <div class="info-item">
+            <span>🕐</span>
+            <span>Seg–Sex: 7h às 19h &nbsp;|&nbsp; Sáb: 8h às 13h</span>
+          </div>
+          <div class="info-item">
+            <span>💬</span>
+            <span>Resposta em até 30 minutos pelo WhatsApp</span>
+          </div>
+        </div>
+      </div>
+
+      <form id="formAgendamento" class="reveal reveal-delay-1" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
+          </div>
+          <div class="form-group">
+            <label for="telefone">Telefone / WhatsApp</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-0000" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="servico">Serviço desejado</label>
+          <select id="servico" name="servico" required>
+            <option value="" disabled selected>Selecione um serviço</option>
+            <option value="Consulta Médica">Consulta Médica</option>
+            <option value="Exames Laboratoriais">Exames Laboratoriais</option>
+            <option value="Acompanhamento Contínuo">Acompanhamento Contínuo</option>
+            <option value="Medicina Preventiva / Check-up">Medicina Preventiva / Check-up</option>
+            <option value="Saúde Mental">Saúde Mental</option>
+            <option value="Nutrição Clínica">Nutrição Clínica</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="mensagem">Mensagem (opcional)</label>
+          <textarea id="mensagem" name="mensagem" placeholder="Descreva brevemente o motivo da consulta ou alguma informação adicional..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M11.893 0C5.335 0 0 5.334 0 11.891c0 2.097.547 4.152 1.588 5.945L.057 23.975l6.304-1.654a11.88 11.88 0 005.533 1.37c6.557 0 11.892-5.335 11.892-11.892C23.786 5.334 18.45 0 11.893 0zm0 21.773a9.86 9.86 0 01-5.031-1.377l-.361-.214-3.741.981.999-3.648-.235-.374a9.858 9.858 0 01-1.511-5.266c0-5.445 4.431-9.876 9.879-9.876 5.446 0 9.877 4.43 9.877 9.876 0 5.445-4.431 9.898-9.876 9.898z"/>
+          </svg>
+          Enviar pelo WhatsApp
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Clínica Vida Plena</div>
+    <p>© 2025 Clínica Vida Plena — Todos os direitos reservados</p>
+  </footer>
+
+  <script>
+    // Header scroll
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Phone mask
+    const phoneInput = document.getElementById('telefone');
+    phoneInput.addEventListener('input', e => {
+      let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length <= 2) v = v.replace(/^(\d{0,2})/, '($1');
+      else if (v.length <= 6) v = v.replace(/^(\d{2})(\d{0,4})/, '($1) $2');
+      else if (v.length <= 10) v = v.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+      else v = v.replace(/^(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+      e.target.value = v;
+    });
+
+    // Form submit → WhatsApp
+    document.getElementById('formAgendamento').addEventListener('submit', e => {
+      e.preventDefault();
+      const nome     = document.getElementById('nome').value.trim();
+      const telefone = document.getElementById('telefone').value.trim();
+      const servico  = document.getElementById('servico').value;
+      const mensagem = document.getElementById('mensagem').value.trim();
+
+      if (!nome || !telefone || !servico) {
+        alert('Por favor, preencha nome, telefone e serviço desejado.');
+        return;
+      }
+
+      const texto = [
+        `Olá! Gostaria de agendar uma consulta na Clínica Vida Plena.`,
+        ``,
+        `*Nome:* ${nome}`,
+        `*Telefone:* ${telefone}`,
+        `*Serviço desejado:* ${servico}`,
+        mensagem ? `*Mensagem:* ${mensagem}` : null,
+      ].filter(Boolean).join('\n');
+
+      const numero = '5511940028922'; // Número fictício da clínica
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+      window.open(url, '_blank');
+    });
+  </script>
+</body>
+</html>

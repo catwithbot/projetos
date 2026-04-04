@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/venom/Documents/Github/projetos/portfolio/**)"
+    ]
+  }
+}

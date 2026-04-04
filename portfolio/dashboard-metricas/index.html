@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Clinica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar__brand">
+        <div class="brand-mark">C+</div>
+        <div>
+          <h1>Clinica Vita</h1>
+          <p>Painel de Metricas</p>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <a href="#" class="nav-item active"><i class="fa-solid fa-chart-line"></i><span>Dashboard</span></a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-calendar-check"></i><span>Agenda</span></a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-user-group"></i><span>Pacientes</span></a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-file-invoice-dollar"></i><span>Financeiro</span></a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-gear"></i><span>Configuracoes</span></a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <header class="header">
+        <div>
+          <p class="header__eyebrow">Resumo operacional</p>
+          <h2>Metricas da clinica</h2>
+        </div>
+
+        <div class="profile">
+          <div>
+            <p class="profile__name">Dra. Ana Souza</p>
+            <p class="profile__role">Administradora</p>
+          </div>
+          <img src="https://i.pravatar.cc/80?img=32" alt="Avatar do usuario" />
+        </div>
+      </header>
+
+      <section class="summary-grid">
+        <article class="metric-card">
+          <p>Total de agendamentos</p>
+          <h3 id="totalAppointments">0</h3>
+          <span><i class="fa-solid fa-arrow-up"></i> +12% vs semana passada</span>
+        </article>
+
+        <article class="metric-card">
+          <p>Pacientes atendidos</p>
+          <h3 id="attendedPatients">0</h3>
+          <span><i class="fa-solid fa-arrow-up"></i> +8% no periodo</span>
+        </article>
+
+        <article class="metric-card">
+          <p>Receita do mes</p>
+          <h3 id="monthlyRevenue">R$ 0</h3>
+          <span><i class="fa-solid fa-arrow-up"></i> +15% no faturamento</span>
+        </article>
+
+        <article class="metric-card metric-card--alert">
+          <p>Taxa de cancelamento</p>
+          <h3 id="cancelRate">0%</h3>
+          <span><i class="fa-solid fa-arrow-down"></i> -2 pontos percentuais</span>
+        </article>
+      </section>
+
+      <section class="charts-grid">
+        <article class="panel">
+          <div class="panel__header">
+            <h3>Agendamentos (ultimos 7 dias)</h3>
+          </div>
+          <div class="chart-box">
+            <canvas id="appointmentsChart"></canvas>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel__header">
+            <h3>Receita por mes</h3>
+          </div>
+          <div class="chart-box">
+            <canvas id="revenueChart"></canvas>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel panel--table">
+        <div class="panel__header">
+          <h3>Proximos agendamentos</h3>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Paciente</th>
+                <th>Horario</th>
+                <th>Servico</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="appointmentsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>

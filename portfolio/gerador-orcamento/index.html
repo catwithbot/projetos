@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OrcaFree — Gerador de Orçamento</title>
+
+  <!-- jsPDF CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #0f0e0c;
+      --ink-2:     #3a3732;
+      --ink-3:     #7a7570;
+      --paper:     #faf8f4;
+      --paper-2:   #f2efe8;
+      --paper-3:   #e8e3d8;
+      --gold:      #c9a84c;
+      --gold-dk:   #a07830;
+      --accent:    #1a4a3a;
+      --accent-lt: #e8f0ec;
+      --danger:    #b84040;
+      --r:         6px;
+      --r-lg:      12px;
+      --shadow:    0 2px 12px rgba(15,14,12,.08);
+      --shadow-lg: 0 8px 40px rgba(15,14,12,.14);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ─── Grain overlay ──────────────────────────────────────────────*/
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px;
+    }
+
+    /* ─── Layout ─────────────────────────────────────────────────────*/
+    .app-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ─── Header ─────────────────────────────────────────────────────*/
+    header {
+      padding: 48px 0 40px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--paper-3);
+      margin-bottom: 48px;
+    }
+
+    .brand { display: flex; flex-direction: column; gap: 4px; }
+
+    .brand-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.4rem;
+      line-height: 1;
+      letter-spacing: -.02em;
+      color: var(--ink);
+    }
+
+    .brand-name span { color: var(--gold); }
+
+    .brand-tagline {
+      font-size: .8rem;
+      font-weight: 300;
+      color: var(--ink-3);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .header-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: .72rem;
+      color: var(--ink-3);
+      text-align: right;
+    }
+
+    /* ─── Section titles ─────────────────────────────────────────────*/
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 20px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--paper-3);
+    }
+
+    /* ─── Cards ──────────────────────────────────────────────────────*/
+    .card {
+      background: #fff;
+      border: 1px solid var(--paper-3);
+      border-radius: var(--r-lg);
+      padding: 28px 32px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    /* ─── Form grid ──────────────────────────────────────────────────*/
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field.span-2 { grid-column: span 2; }
+    .field.span-3 { grid-column: span 3; }
+
+    label {
+      font-size: .78rem;
+      font-weight: 500;
+      color: var(--ink-2);
+      letter-spacing: .02em;
+    }
+
+    input, textarea, select {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .92rem;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1.5px solid var(--paper-3);
+      border-radius: var(--r);
+      padding: 10px 14px;
+      transition: border-color .18s, box-shadow .18s;
+      outline: none;
+      width: 100%;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,.12);
+    }
+
+    input::placeholder, textarea::placeholder { color: var(--ink-3); }
+
+    textarea { resize: vertical; min-height: 88px; }
+
+    /* ─── Services table ─────────────────────────────────────────────*/
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 90px 120px 40px;
+      gap: 10px;
+      padding: 0 0 8px;
+      border-bottom: 1px solid var(--paper-3);
+      margin-bottom: 4px;
+    }
+
+    .services-header span {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+
+    .service-row {
+      display: grid;
+      grid-template-columns: 1fr 90px 120px 40px;
+      gap: 10px;
+      align-items: start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--paper-2);
+      animation: rowIn .22s ease;
+    }
+
+    @keyframes rowIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .service-row:last-child { border-bottom: none; }
+
+    .btn-remove {
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--paper-3);
+      border-radius: var(--r);
+      background: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ink-3);
+      transition: border-color .15s, color .15s, background .15s;
+      margin-top: 2px;
+    }
+
+    .btn-remove:hover {
+      border-color: var(--danger);
+      color: var(--danger);
+      background: #fff5f5;
+    }
+
+    .btn-remove svg { width: 14px; height: 14px; }
+
+    /* ─── Buttons ────────────────────────────────────────────────────*/
+    .btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .88rem;
+      font-weight: 500;
+      border: none;
+      border-radius: var(--r);
+      padding: 11px 20px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .18s;
+      outline: none;
+    }
+
+    .btn-ghost {
+      background: none;
+      border: 1.5px dashed var(--paper-3);
+      color: var(--ink-2);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold-dk);
+      background: rgba(201,168,76,.04);
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: var(--r-lg);
+      letter-spacing: .01em;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(26,74,58,.2);
+    }
+
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-outline {
+      background: none;
+      border: 1.5px solid var(--paper-3);
+      color: var(--ink-2);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--ink-2);
+      background: var(--paper-2);
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-dk);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(160,120,48,.25);
+    }
+
+    .generate-wrap {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 8px;
+    }
+
+    /* ─── Preview ────────────────────────────────────────────────────*/
+    #preview-section {
+      display: none;
+      animation: fadeUp .35s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    #preview-section.visible { display: block; }
+
+    .preview-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-bottom: 16px;
+    }
+
+    /* ─── The actual PDF-ready preview ──────────────────────────────*/
+    #orcamento-preview {
+      background: #fff;
+      border: 1px solid var(--paper-3);
+      border-radius: var(--r-lg);
+      padding: 52px 56px;
+      box-shadow: var(--shadow-lg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+    }
+
+    .pv-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 28px;
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 32px;
+    }
+
+    .pv-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+
+    .pv-brand span { color: var(--gold); }
+
+    .pv-meta { text-align: right; }
+
+    .pv-meta .doc-title {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 4px;
+    }
+
+    .pv-meta .doc-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: .03em;
+    }
+
+    .pv-meta .doc-date {
+      font-size: .82rem;
+      color: var(--ink-3);
+      margin-top: 4px;
+    }
+
+    .pv-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 36px;
+    }
+
+    .pv-info-block { display: flex; flex-direction: column; gap: 3px; }
+
+    .pv-info-block .lbl {
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .pv-info-block .val {
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .pv-info-block .val-sm {
+      font-size: .85rem;
+      color: var(--ink-2);
+    }
+
+    /* Services table in preview */
+    .pv-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 28px;
+    }
+
+    .pv-table thead tr {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .pv-table thead th {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    .pv-table thead th:last-child,
+    .pv-table thead th:nth-child(2),
+    .pv-table thead th:nth-child(3) { text-align: right; }
+
+    .pv-table tbody tr {
+      border-bottom: 1px solid var(--paper-2);
+      transition: background .12s;
+    }
+
+    .pv-table tbody tr:hover { background: var(--paper); }
+
+    .pv-table tbody td {
+      font-size: .9rem;
+      padding: 14px 16px;
+      color: var(--ink-2);
+    }
+
+    .pv-table tbody td:nth-child(2),
+    .pv-table tbody td:nth-child(3),
+    .pv-table tbody td:last-child {
+      text-align: right;
+      font-family: 'DM Mono', monospace;
+      font-size: .85rem;
+    }
+
+    .pv-table tbody td:nth-child(1) { color: var(--ink); font-weight: 500; }
+
+    /* Totals block */
+    .pv-totals {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 36px;
+    }
+
+    .pv-totals-inner {
+      min-width: 280px;
+      background: var(--paper);
+      border-radius: var(--r-lg);
+      padding: 20px 24px;
+    }
+
+    .pv-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      font-size: .88rem;
+      color: var(--ink-2);
+    }
+
+    .pv-total-row .amt {
+      font-family: 'DM Mono', monospace;
+      font-size: .9rem;
+      color: var(--ink);
+    }
+
+    .pv-total-row.discount .amt { color: var(--danger); }
+
+    .pv-total-row.grand {
+      border-top: 2px solid var(--ink);
+      margin-top: 10px;
+      padding-top: 14px;
+    }
+
+    .pv-total-row.grand .lbl {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .pv-total-row.grand .amt {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* Footer info rows */
+    .pv-footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding-top: 24px;
+      border-top: 1px solid var(--paper-3);
+      margin-bottom: 28px;
+    }
+
+    .pv-footer-block .lbl {
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .pv-footer-block p {
+      font-size: .88rem;
+      color: var(--ink-2);
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    .pv-signature {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 48px;
+      gap: 40px;
+    }
+
+    .pv-sign-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pv-sign-line {
+      width: 100%;
+      height: 1px;
+      background: var(--ink);
+    }
+
+    .pv-sign-label {
+      font-size: .72rem;
+      color: var(--ink-3);
+      letter-spacing: .05em;
+    }
+
+    .pv-stamp {
+      text-align: center;
+      padding-top: 24px;
+      font-size: .7rem;
+      color: var(--ink-3);
+      letter-spacing: .06em;
+      border-top: 1px solid var(--paper-2);
+      margin-top: 8px;
+    }
+
+    /* ─── Discount row in form ───────────────────────────────────────*/
+    .discount-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 0;
+      border-top: 1px solid var(--paper-2);
+      margin-top: 8px;
+    }
+
+    .discount-row label { min-width: 100px; font-size: .82rem; }
+
+    .discount-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .discount-input-wrap input { width: 100px; }
+
+    .discount-type {
+      display: flex;
+      gap: 4px;
+    }
+
+    .discount-type button {
+      font-family: 'DM Mono', monospace;
+      font-size: .8rem;
+      padding: 6px 12px;
+      border: 1.5px solid var(--paper-3);
+      border-radius: var(--r);
+      background: none;
+      cursor: pointer;
+      color: var(--ink-3);
+      transition: all .15s;
+    }
+
+    .discount-type button.active {
+      border-color: var(--gold);
+      color: var(--gold-dk);
+      background: rgba(201,168,76,.08);
+    }
+
+    /* ─── Toast ──────────────────────────────────────────────────────*/
+    .toast {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: .85rem;
+      font-weight: 500;
+      padding: 12px 20px;
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-lg);
+      z-index: 9999;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all .22s ease;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Responsive ─────────────────────────────────────────────────*/
+    @media (max-width: 640px) {
+      .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; }
+      .field.span-2, .field.span-3 { grid-column: span 1; }
+      .services-header { grid-template-columns: 1fr 70px 100px 36px; }
+      .service-row { grid-template-columns: 1fr 70px 100px 36px; }
+      header { flex-direction: column; gap: 12px; align-items: flex-start; }
+      #orcamento-preview { padding: 28px 20px; }
+      .pv-header { flex-direction: column; gap: 16px; }
+      .pv-meta { text-align: left; }
+      .pv-info-grid, .pv-footer-grid { grid-template-columns: 1fr; }
+      .pv-signature { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-wrap">
+
+  <!-- ── Header ── -->
+  <header>
+    <div class="brand">
+      <div class="brand-name">Orca<span>Free</span></div>
+      <div class="brand-tagline">Gerador de orçamentos para freelancers</div>
+    </div>
+    <div class="header-badge">
+      v1.0<br />HTML · CSS · JS
+    </div>
+  </header>
+
+  <!-- ── Form ── -->
+  <form id="form-orcamento" novalidate>
+
+    <!-- Dados do projeto -->
+    <div class="card">
+      <div class="section-label">Dados do projeto</div>
+      <div class="form-grid-2">
+        <div class="field">
+          <label for="cliente">Nome do cliente *</label>
+          <input id="cliente" type="text" placeholder="Ex: Empresa XYZ Ltda" required />
+        </div>
+        <div class="field">
+          <label for="projeto">Nome do projeto *</label>
+          <input id="projeto" type="text" placeholder="Ex: Identidade Visual 2025" required />
+        </div>
+        <div class="field">
+          <label for="prazo">Prazo de entrega *</label>
+          <input id="prazo" type="text" placeholder="Ex: 15 dias úteis / 30/05/2025" required />
+        </div>
+        <div class="field">
+          <label for="pagamento">Condições de pagamento *</label>
+          <input id="pagamento" type="text" placeholder="Ex: 50% na aprovação, 50% na entrega" required />
+        </div>
+        <div class="field span-2">
+          <label for="obs">Observações</label>
+          <textarea id="obs" placeholder="Termos adicionais, condições especiais, revisões incluídas…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Serviços -->
+    <div class="card">
+      <div class="section-label">Serviços</div>
+
+      <div class="services-header">
+        <span>Descrição</span>
+        <span style="text-align:right">Qtd.</span>
+        <span style="text-align:right">Valor unit.</span>
+        <span></span>
+      </div>
+
+      <div id="services-list"></div>
+
+      <div style="margin-top: 14px;">
+        <button type="button" class="btn btn-ghost" id="btn-add-service">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M10 4v12M4 10h12" stroke-linecap="round"/></svg>
+          Adicionar serviço
+        </button>
+      </div>
+
+      <!-- Desconto -->
+      <div class="discount-row">
+        <label for="desconto">Desconto</label>
+        <div class="discount-input-wrap">
+          <input id="desconto" type="number" min="0" placeholder="0" />
+          <div class="discount-type">
+            <button type="button" id="btn-pct" class="active">%</button>
+            <button type="button" id="btn-brl">R$</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gerar -->
+    <div class="generate-wrap">
+      <button type="submit" class="btn btn-primary" id="btn-gerar">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M9 5H7a2 2 0 00-2 2v8a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Gerar Orçamento
+      </button>
+    </div>
+
+  </form>
+
+  <!-- ── Preview ── -->
+  <div id="preview-section">
+
+    <div class="preview-actions">
+      <button class="btn btn-outline" id="btn-copy">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="8" y="8" width="10" height="10" rx="2"/><path d="M4 12H3a1 1 0 01-1-1V3a1 1 0 011-1h8a1 1 0 011 1v1" stroke-linecap="round"/></svg>
+        Copiar texto
+      </button>
+      <button class="btn btn-gold" id="btn-pdf">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M4 16v1a1 1 0 001 1h10a1 1 0 001-1v-1M7 10l3 3 3-3M10 13V4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Baixar PDF
+      </button>
+    </div>
+
+    <div id="orcamento-preview">
+      <!-- Populated by JS -->
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // ─── State ───────────────────────────────────────────────────────
+  let discountType = 'pct'; // 'pct' | 'brl'
+  let serviceCount = 0;
+
+  // ─── Helpers ─────────────────────────────────────────────────────
+  const $ = id => document.getElementById(id);
+  const fmt = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  const fmtNum = v => v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  function genNum() {
+    const y = new Date().getFullYear();
+    const n = String(Math.floor(Math.random() * 9000) + 1000);
+    return `ORC-${y}-${n}`;
+  }
+
+  function fmtDate(d) {
+    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+  }
+
+  function showToast(msg) {
+    const t = $('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2600);
+  }
+
+  // ─── Service rows ─────────────────────────────────────────────────
+  function addService() {
+    serviceCount++;
+    const list = $('services-list');
+    const row = document.createElement('div');
+    row.className = 'service-row';
+    row.dataset.id = serviceCount;
+    row.innerHTML = `
+      <div class="field">
+        <input type="text" placeholder="Descrição do serviço" class="svc-desc" />
+      </div>
+      <div class="field">
+        <input type="number" placeholder="1" min="1" value="1" class="svc-qty" />
+      </div>
+      <div class="field">
+        <input type="number" placeholder="0,00" min="0" step="0.01" class="svc-unit" />
+      </div>
+      <button type="button" class="btn-remove" title="Remover">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 8h12M7 8V5a1 1 0 011-1h4a1 1 0 011 1v3M9 12v4M11 12v4M6 8l.7 9a1 1 0 001 .9h4.6a1 1 0 001-.9L14 8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    `;
+    row.querySelector('.btn-remove').addEventListener('click', () => {
+      row.style.transition = 'opacity .18s, transform .18s';
+      row.style.opacity = '0';
+      row.style.transform = 'translateY(-6px)';
+      setTimeout(() => row.remove(), 180);
+    });
+    list.appendChild(row);
+  }
+
+  $('btn-add-service').addEventListener('click', addService);
+
+  // ─── Discount toggle ──────────────────────────────────────────────
+  $('btn-pct').addEventListener('click', () => {
+    discountType = 'pct';
+    $('btn-pct').classList.add('active');
+    $('btn-brl').classList.remove('active');
+  });
+
+  $('btn-brl').addEventListener('click', () => {
+    discountType = 'brl';
+    $('btn-brl').classList.add('active');
+    $('btn-pct').classList.remove('active');
+  });
+
+  // ─── Collect services ─────────────────────────────────────────────
+  function collectServices() {
+    const rows = document.querySelectorAll('.service-row');
+    return Array.from(rows).map(r => ({
+      desc: r.querySelector('.svc-desc').value.trim(),
+      qty: parseFloat(r.querySelector('.svc-qty').value) || 1,
+      unit: parseFloat(r.querySelector('.svc-unit').value) || 0,
+    })).filter(s => s.desc);
+  }
+
+  // ─── Render preview ───────────────────────────────────────────────
+  function renderPreview(data) {
+    const { cliente, projeto, prazo, pagamento, obs, services, discountVal, docNum, docDate } = data;
+
+    const subtotal = services.reduce((s, i) => s + i.qty * i.unit, 0);
+    let discountAmt = 0;
+    if (discountVal > 0) {
+      discountAmt = discountType === 'pct' ? subtotal * (discountVal / 100) : discountVal;
+    }
+    const total = Math.max(0, subtotal - discountAmt);
+
+    const rows = services.map((s, i) => `
+      <tr>
+        <td>${i + 1}. ${s.desc}</td>
+        <td>${fmtNum(s.qty)}</td>
+        <td>${fmt(s.unit)}</td>
+        <td>${fmt(s.qty * s.unit)}</td>
+      </tr>
+    `).join('');
+
+    const discountRow = discountAmt > 0 ? `
+      <div class="pv-total-row discount">
+        <span>${discountType === 'pct' ? `Desconto (${discountVal}%)` : 'Desconto'}</span>
+        <span class="amt">− ${fmt(discountAmt)}</span>
+      </div>` : '';
+
+    const obsBlock = obs ? `
+      <div class="pv-footer-block">
+        <div class="lbl">Observações</div>
+        <p>${obs}</p>
+      </div>` : '';
+
+    $('orcamento-preview').innerHTML = `
+      <div class="pv-header">
+        <div class="pv-brand">Orca<span>Free</span></div>
+        <div class="pv-meta">
+          <div class="doc-title">Proposta Comercial</div>
+          <div class="doc-num">${docNum}</div>
+          <div class="doc-date">${docDate}</div>
+        </div>
+      </div>
+
+      <div class="pv-info-grid">
+        <div class="pv-info-block">
+          <div class="lbl">Para</div>
+          <div class="val">${cliente}</div>
+        </div>
+        <div class="pv-info-block">
+          <div class="lbl">Projeto</div>
+          <div class="val">${projeto}</div>
+        </div>
+      </div>
+
+      <table class="pv-table">
+        <thead>
+          <tr>
+            <th>Serviço</th>
+            <th>Qtd.</th>
+            <th>Valor Unit.</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+
+      <div class="pv-totals">
+        <div class="pv-totals-inner">
+          <div class="pv-total-row">
+            <span>Subtotal</span>
+            <span class="amt">${fmt(subtotal)}</span>
+          </div>
+          ${discountRow}
+          <div class="pv-total-row grand">
+            <span class="lbl">Total</span>
+            <span class="amt">${fmt(total)}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pv-footer-grid">
+        <div class="pv-footer-block">
+          <div class="lbl">Prazo de entrega</div>
+          <p>${prazo}</p>
+        </div>
+        <div class="pv-footer-block">
+          <div class="lbl">Condições de pagamento</div>
+          <p>${pagamento}</p>
+        </div>
+        ${obsBlock}
+      </div>
+
+      <div class="pv-signature">
+        <div class="pv-sign-col">
+          <div class="pv-sign-line"></div>
+          <div class="pv-sign-label">Prestador de Serviços</div>
+        </div>
+        <div class="pv-sign-col">
+          <div class="pv-sign-line"></div>
+          <div class="pv-sign-label">${cliente} — Contratante</div>
+        </div>
+      </div>
+
+      <div class="pv-stamp">
+        Documento gerado em ${docDate} · ${docNum} · OrcaFree
+      </div>
+    `;
+  }
+
+  // ─── Form submit ─────────────────────────────────────────────────
+  $('form-orcamento').addEventListener('submit', e => {
+    e.preventDefault();
+
+    const cliente = $('cliente').value.trim();
+    const projeto = $('projeto').value.trim();
+    const prazo = $('prazo').value.trim();
+    const pagamento = $('pagamento').value.trim();
+    const obs = $('obs').value.trim();
+    const services = collectServices();
+    const discountVal = parseFloat($('desconto').value) || 0;
+
+    if (!cliente || !projeto || !prazo || !pagamento) {
+      showToast('Preencha os campos obrigatórios (*)');
+      return;
+    }
+
+    if (services.length === 0) {
+      showToast('Adicione ao menos um serviço');
+      return;
+    }
+
+    const docNum = genNum();
+    const docDate = fmtDate(new Date());
+
+    renderPreview({ cliente, projeto, prazo, pagamento, obs, services, discountVal, docNum, docDate });
+
+    const ps = $('preview-section');
+    ps.classList.add('visible');
+    setTimeout(() => ps.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+  });
+
+  // ─── Copy text ───────────────────────────────────────────────────
+  $('btn-copy').addEventListener('click', () => {
+    const el = $('orcamento-preview');
+    const text = el.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('Texto copiado para a área de transferência');
+    });
+  });
+
+  // ─── PDF download ────────────────────────────────────────────────
+  $('btn-pdf').addEventListener('click', () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+
+    const pv = $('orcamento-preview');
+
+    // Pull data from rendered preview to build PDF cleanly
+    const docNum = pv.querySelector('.doc-num')?.textContent || '';
+    const docDate = pv.querySelector('.doc-date')?.textContent || '';
+    const cliente = pv.querySelectorAll('.pv-info-block .val')[0]?.textContent || '';
+    const projeto = pv.querySelectorAll('.pv-info-block .val')[1]?.textContent || '';
+
+    // Colors
+    const INK = [15, 14, 12];
+    const GOLD = [201, 168, 76];
+    const GRAY = [122, 117, 112];
+    const PAPER = [242, 239, 232];
+    const GREEN = [26, 74, 58];
+
+    const W = 210;
+    const pad = 20;
+    let y = pad;
+
+    // Header bar
+    doc.setFillColor(...INK);
+    doc.rect(0, 0, W, 30, 'F');
+
+    doc.setTextColor(242, 239, 232);
+    doc.setFontSize(18);
+    doc.setFont('helvetica', 'bold');
+    doc.text('OrcaFree', pad, 13);
+
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(...GOLD);
+    doc.text('PROPOSTA COMERCIAL', pad, 20);
+
+    // Doc number / date
+    doc.setTextColor(242, 239, 232);
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+    doc.text(docNum, W - pad, 13, { align: 'right' });
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(...GRAY);
+    doc.text(docDate, W - pad, 20, { align: 'right' });
+
+    y = 40;
+
+    // Client / Project info boxes
+    const boxH = 22;
+    doc.setFillColor(...PAPER);
+    doc.roundedRect(pad, y, (W - 2*pad)/2 - 4, boxH, 2, 2, 'F');
+    doc.roundedRect(pad + (W - 2*pad)/2 + 4, y, (W - 2*pad)/2 - 4, boxH, 2, 2, 'F');
+
+    doc.setTextColor(...GOLD);
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'bold');
+    doc.text('PARA', pad + 6, y + 7);
+    doc.text('PROJETO', pad + (W - 2*pad)/2 + 10, y + 7);
+
+    doc.setTextColor(...INK);
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.text(cliente, pad + 6, y + 15);
+    doc.text(projeto, pad + (W - 2*pad)/2 + 10, y + 15);
+
+    y += boxH + 10;
+
+    // Table header
+    doc.setFillColor(...INK);
+    doc.rect(pad, y, W - 2*pad, 9, 'F');
+    doc.setTextColor(242, 239, 232);
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'bold');
+    doc.text('SERVIÇO', pad + 4, y + 6);
+    doc.text('QTD.', pad + 90, y + 6, { align: 'right' });
+    doc.text('VALOR UNIT.', pad + 130, y + 6, { align: 'right' });
+    doc.text('TOTAL', W - pad - 2, y + 6, { align: 'right' });
+
+    y += 9;
+
+    // Table rows
+    const tableRows = pv.querySelectorAll('.pv-table tbody tr');
+    tableRows.forEach((tr, i) => {
+      const cells = tr.querySelectorAll('td');
+      const bg = i % 2 === 0 ? [255, 255, 255] : [248, 246, 242];
+      doc.setFillColor(...bg);
+      doc.rect(pad, y, W - 2*pad, 9, 'F');
+
+      doc.setTextColor(...INK);
+      doc.setFontSize(8.5);
+      doc.setFont('helvetica', 'normal');
+      doc.text(cells[0]?.textContent || '', pad + 4, y + 6);
+
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(...GRAY);
+      doc.text(cells[1]?.textContent || '', pad + 90, y + 6, { align: 'right' });
+      doc.text(cells[2]?.textContent || '', pad + 130, y + 6, { align: 'right' });
+      doc.setTextColor(...INK);
+      doc.text(cells[3]?.textContent || '', W - pad - 2, y + 6, { align: 'right' });
+
+      y += 9;
+    });
+
+    y += 6;
+
+    // Totals
+    const totalRows = pv.querySelectorAll('.pv-total-row');
+    totalRows.forEach(row => {
+      const lbl = row.querySelector('.lbl, span:first-child')?.textContent || '';
+      const amt = row.querySelector('.amt')?.textContent || '';
+      const isGrand = row.classList.contains('grand');
+      const isDiscount = row.classList.contains('discount');
+
+      if (isGrand) {
+        doc.setFillColor(...GREEN);
+        doc.roundedRect(W - pad - 70, y - 3, 70, 12, 2, 2, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'bold');
+        doc.text(lbl, W - pad - 66, y + 5);
+        doc.text(amt, W - pad - 2, y + 5, { align: 'right' });
+      } else {
+        doc.setTextColor(isDiscount ? [184, 64, 64][0] : GRAY[0], isDiscount ? [184, 64, 64][1] : GRAY[1], isDiscount ? [184, 64, 64][2] : GRAY[2]);
+        doc.setFontSize(8);
+        doc.setFont('helvetica', 'normal');
+        doc.text(lbl, W - pad - 66, y + 5);
+        doc.text(amt, W - pad - 2, y + 5, { align: 'right' });
+      }
+      y += 10;
+    });
+
+    y += 6;
+
+    // Footer info (prazo, pagamento, obs)
+    const footerBlocks = pv.querySelectorAll('.pv-footer-block');
+    let col = 0;
+    const colW = (W - 2*pad) / 2 - 4;
+
+    doc.setDrawColor(...PAPER);
+    doc.setLineWidth(0.5);
+    doc.line(pad, y, W - pad, y);
+    y += 6;
+
+    footerBlocks.forEach(block => {
+      const lbl = block.querySelector('.lbl')?.textContent || '';
+      const txt = block.querySelector('p')?.textContent || '';
+      const x = col === 0 ? pad + 2 : pad + colW + 10;
+
+      doc.setTextColor(...GOLD);
+      doc.setFontSize(7);
+      doc.setFont('helvetica', 'bold');
+      doc.text(lbl.toUpperCase(), x, y + 4);
+
+      doc.setTextColor(...INK);
+      doc.setFontSize(8.5);
+      doc.setFont('helvetica', 'normal');
+      const lines = doc.splitTextToSize(txt, colW);
+      doc.text(lines, x, y + 10);
+
+      col++;
+      if (col >= 2) { col = 0; y += 24; }
+    });
+
+    y += 24;
+
+    // Signature lines
+    doc.setDrawColor(...INK);
+    doc.setLineWidth(0.4);
+    const sigW = (W - 2*pad)/2 - 10;
+    doc.line(pad, y + 15, pad + sigW, y + 15);
+    doc.line(W - pad - sigW, y + 15, W - pad, y + 15);
+
+    doc.setTextColor(...GRAY);
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Prestador de Serviços', pad + sigW/2, y + 20, { align: 'center' });
+    doc.text(`${cliente} — Contratante`, W - pad - sigW/2, y + 20, { align: 'center' });
+
+    // Stamp
+    doc.setTextColor(...GRAY);
+    doc.setFontSize(7);
+    doc.text(`Gerado por OrcaFree · ${docNum} · ${docDate}`, W/2, 290, { align: 'center' });
+
+    doc.save(`${docNum}.pdf`);
+    showToast('PDF gerado com sucesso!');
+  });
+
+  // ─── Init: add first service row ─────────────────────────────────
+  addService();
+</script>
+</body>
+</html>
