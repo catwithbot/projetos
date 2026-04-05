@@ -1,34 +1,34 @@
 const express = require('express');
-const router = express.Router();
-const pool = require('../db');
+const router  = express.Router();
+const pool    = require('../db');
 const { authMiddleware } = require('../middleware/auth');
+const { unitScope } = require('../middleware/unit');
 
-router.use(authMiddleware);
+router.use(authMiddleware, unitScope);
 
 // GET /api/reports/appointments?doctor_id=&date_from=&date_to=&status=
 router.get('/appointments', async (req, res) => {
   const { doctor_id, date_from, date_to, status } = req.query;
 
   const conditions = [];
-  const params = [];
+  const params     = [];
   let i = 1;
 
+  // Escopo de unidade sempre primeiro
+  if (req.unitId !== null) { conditions.push(`a.unit_id = $${i++}`); params.push(req.unitId); }
+
   if (doctor_id) { conditions.push(`a.doctor_id = $${i++}`); params.push(doctor_id); }
-  if (date_from)  { conditions.push(`DATE(a.appointment_date) >= $${i++}`); params.push(date_from); }
-  if (date_to)    { conditions.push(`DATE(a.appointment_date) <= $${i++}`); params.push(date_to); }
-  if (status)     { conditions.push(`a.status = $${i++}`); params.push(status); }
+  if (date_from) { conditions.push(`DATE(a.appointment_date) >= $${i++}`); params.push(date_from); }
+  if (date_to)   { conditions.push(`DATE(a.appointment_date) <= $${i++}`); params.push(date_to); }
+  if (status)    { conditions.push(`a.status = $${i++}`); params.push(status); }
 
   const where = conditions.length ? 'WHERE ' + conditions.join(' AND ') : '';
 
   try {
     const result = await pool.query(`
       SELECT
-        a.id,
-        a.appointment_date,
-        a.status,
-        a.notes,
-        a.created_at,
-        a.updated_at,
+        a.id, a.appointment_date, a.status, a.notes,
+        a.created_at, a.updated_at,
         p.name  AS patient_name,
         p.cpf   AS patient_cpf,
         d.name  AS doctor_name,
@@ -56,12 +56,14 @@ router.get('/summary', async (req, res) => {
   const { doctor_id, date_from, date_to } = req.query;
 
   const conditions = [];
-  const params = [];
+  const params     = [];
   let i = 1;
 
+  if (req.unitId !== null) { conditions.push(`a.unit_id = $${i++}`); params.push(req.unitId); }
+
   if (doctor_id) { conditions.push(`a.doctor_id = $${i++}`); params.push(doctor_id); }
-  if (date_from)  { conditions.push(`DATE(a.appointment_date) >= $${i++}`); params.push(date_from); }
-  if (date_to)    { conditions.push(`DATE(a.appointment_date) <= $${i++}`); params.push(date_to); }
+  if (date_from) { conditions.push(`DATE(a.appointment_date) >= $${i++}`); params.push(date_from); }
+  if (date_to)   { conditions.push(`DATE(a.appointment_date) <= $${i++}`); params.push(date_to); }
 
   const where = conditions.length ? 'WHERE ' + conditions.join(' AND ') : '';
 

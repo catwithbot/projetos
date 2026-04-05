@@ -1,11 +1,19 @@
 const express = require('express');
-const router = express.Router();
-const pool = require('../db');
+const router  = express.Router();
+const pool    = require('../db');
+const { authMiddleware } = require('../middleware/auth');
+const { unitScope, unitFilter } = require('../middleware/unit');
+
+router.use(authMiddleware, unitScope);
 
 // GET /api/doctors
 router.get('/', async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM doctors ORDER BY name ASC');
+    const { clause, params } = unitFilter(req.unitId);
+    const result = await pool.query(
+      `SELECT * FROM doctors ${clause} ORDER BY name ASC`,
+      params
+    );
     res.json(result.rows);
   } catch (err) {
     console.error(err);
@@ -16,7 +24,13 @@ router.get('/', async (req, res) => {
 // GET /api/doctors/:id
 router.get('/:id', async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM doctors WHERE id=$1', [req.params.id]);
+    const { clause, params, nextIdx } = unitFilter(req.unitId);
+    const idClause = clause
+      ? `${clause} AND id = $${nextIdx}`
+      : 'WHERE id = $1';
+    const allParams = clause ? [...params, req.params.id] : [req.params.id];
+
+    const result = await pool.query(`SELECT * FROM doctors ${idClause}`, allParams);
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Médico não encontrado' });
     }
@@ -37,9 +51,9 @@ router.post('/', async (req, res) => {
 
   try {
     const result = await pool.query(
-      `INSERT INTO doctors (name, specialty, email, phone)
-       VALUES ($1, $2, $3, $4) RETURNING *`,
-      [name, specialty || null, email || null, phone || null]
+      `INSERT INTO doctors (name, specialty, email, phone, unit_id)
+       VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+      [name, specialty || null, email || null, phone || null, req.unitId]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -57,11 +71,15 @@ router.put('/:id', async (req, res) => {
   }
 
   try {
+    const unitCheck = req.unitId ? 'AND unit_id = $7' : '';
+    const extraParams = req.unitId ? [req.unitId] : [];
+
     const result = await pool.query(
       `UPDATE doctors SET name=$1, specialty=$2, email=$3, phone=$4, active=$5
-       WHERE id=$6 RETURNING *`,
+       WHERE id=$6 ${unitCheck}
+       RETURNING *`,
       [name, specialty || null, email || null, phone || null,
-       active !== undefined ? active : true, req.params.id]
+       active !== undefined ? active : true, req.params.id, ...extraParams]
     );
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Médico não encontrado' });
@@ -76,9 +94,12 @@ router.put('/:id', async (req, res) => {
 // DELETE /api/doctors/:id
 router.delete('/:id', async (req, res) => {
   try {
+    const unitCheck = req.unitId ? 'AND unit_id = $2' : '';
+    const params = req.unitId ? [req.params.id, req.unitId] : [req.params.id];
+
     const result = await pool.query(
-      'DELETE FROM doctors WHERE id=$1 RETURNING id',
-      [req.params.id]
+      `DELETE FROM doctors WHERE id=$1 ${unitCheck} RETURNING id`,
+      params
     );
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Médico não encontrado' });
@@ -93,6 +114,18 @@ router.delete('/:id', async (req, res) => {
 // GET /api/doctors/:id/availabilities
 router.get('/:id/availabilities', async (req, res) => {
   try {
+    // Confirma que o médico pertence à unidade antes de retornar disponibilidades
+    const { clause, params, nextIdx } = unitFilter(req.unitId);
+    const idClause = clause
+      ? `${clause} AND id = $${nextIdx}`
+      : 'WHERE id = $1';
+    const docParams = clause ? [...params, req.params.id] : [req.params.id];
+
+    const docCheck = await pool.query(`SELECT id FROM doctors ${idClause}`, docParams);
+    if (docCheck.rows.length === 0) {
+      return res.status(404).json({ error: 'Médico não encontrado' });
+    }
+
     const result = await pool.query(
       `SELECT * FROM doctor_availabilities
        WHERE doctor_id=$1
@@ -119,6 +152,18 @@ router.post('/:id/availabilities', async (req, res) => {
   }
 
   try {
+    // Confirma que o médico pertence à unidade
+    const { clause, params, nextIdx } = unitFilter(req.unitId);
+    const idClause = clause
+      ? `${clause} AND id = $${nextIdx}`
+      : 'WHERE id = $1';
+    const docParams = clause ? [...params, req.params.id] : [req.params.id];
+
+    const docCheck = await pool.query(`SELECT id FROM doctors ${idClause}`, docParams);
+    if (docCheck.rows.length === 0) {
+      return res.status(404).json({ error: 'Médico não encontrado' });
+    }
+
     const result = await pool.query(
       `INSERT INTO doctor_availabilities (doctor_id, work_date, start_time, end_time)
        VALUES ($1, $2, $3, $4) RETURNING *`,
@@ -134,6 +179,18 @@ router.post('/:id/availabilities', async (req, res) => {
 // DELETE /api/doctors/:id/availabilities/:avail_id
 router.delete('/:id/availabilities/:avail_id', async (req, res) => {
   try {
+    // Confirma que o médico pertence à unidade
+    const { clause, params, nextIdx } = unitFilter(req.unitId);
+    const idClause = clause
+      ? `${clause} AND id = $${nextIdx}`
+      : 'WHERE id = $1';
+    const docParams = clause ? [...params, req.params.id] : [req.params.id];
+
+    const docCheck = await pool.query(`SELECT id FROM doctors ${idClause}`, docParams);
+    if (docCheck.rows.length === 0) {
+      return res.status(404).json({ error: 'Médico não encontrado' });
+    }
+
     const result = await pool.query(
       'DELETE FROM doctor_availabilities WHERE id=$1 AND doctor_id=$2 RETURNING id',
       [req.params.avail_id, req.params.id]

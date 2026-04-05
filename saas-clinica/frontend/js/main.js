@@ -2,7 +2,7 @@
    main.js – utilitários compartilhados em todas as páginas
    ============================================================ */
 
-const API = 'http://localhost:3000/api';
+const API = '/api';
 
 // ── Auth ───────────────────────────────────────────────────
 function getCurrentUser() {
@@ -55,25 +55,44 @@ document.getElementById('themeToggle')?.addEventListener('click', () => {
 // ── Logout ─────────────────────────────────────────────────
 document.getElementById('btnLogout')?.addEventListener('click', logout);
 
-// ── Sidebar: user info + admin links ───────────────────────
+// ── Sidebar: user info + links por role ────────────────────
 (function initSidebar() {
   const user = getCurrentUser();
   if (!user) return;
 
-  const roleLabel = { admin: 'Administrador', recepcao: 'Recepção', medico: 'Médico' };
-  const roleCls   = { admin: 'role-admin', recepcao: 'role-recepcao', medico: 'role-medico' };
+  const roleLabel = {
+    admin:      'Super Admin',
+    unit_admin: 'Admin de Unidade',
+    recepcao:   'Recepção',
+    medico:     'Médico',
+  };
+  const roleCls = {
+    admin:      'role-admin',
+    unit_admin: 'role-unit-admin',
+    recepcao:   'role-recepcao',
+    medico:     'role-medico',
+  };
 
   const sidebarUser = document.getElementById('sidebarUser');
   if (sidebarUser) {
+    const unitLine = user.unit_name
+      ? `<div class="sidebar-user-unit">${user.unit_name}</div>`
+      : '';
     sidebarUser.innerHTML = `
       <div class="sidebar-user-name">${user.name}</div>
       <div class="sidebar-user-role ${roleCls[user.role] || ''}">${roleLabel[user.role] || user.role}</div>
+      ${unitLine}
     `;
   }
 
-  // Mostrar link de Usuários apenas para admin
-  if (user.role === 'admin') {
+  // Usuários: admin e unit_admin
+  if (user.role === 'admin' || user.role === 'unit_admin') {
     document.getElementById('navUsers')?.removeAttribute('style');
+  }
+
+  // Unidades: só super admin
+  if (user.role === 'admin') {
+    document.getElementById('navUnits')?.removeAttribute('style');
   }
 })();
 

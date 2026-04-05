@@ -15,7 +15,10 @@ router.post('/login', async (req, res) => {
 
   try {
     const result = await pool.query(
-      'SELECT * FROM users WHERE email = $1 AND active = true',
+      `SELECT u.*, un.name AS unit_name
+       FROM users u
+       LEFT JOIN units un ON un.id = u.unit_id
+       WHERE u.email = $1 AND u.active = true`,
       [email.toLowerCase().trim()]
     );
 
@@ -30,7 +33,14 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Credenciais inválidas' });
     }
 
-    const payload = { id: user.id, name: user.name, email: user.email, role: user.role };
+    const payload = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      unit_id: user.unit_id ?? null,
+      unit_name: user.unit_name ?? null,
+    };
     const token = jwt.sign(payload, SECRET, { expiresIn: '8h' });
 
     res.json({ token, user: payload });

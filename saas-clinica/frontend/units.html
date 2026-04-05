@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ClinicaOS – Pacientes</title>
+  <title>ClinicaOS – Unidades</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -22,7 +22,7 @@
         <a href="appointments.html" class="nav-item">
           <i class="fas fa-calendar-alt"></i><span>Agendamentos</span>
         </a>
-        <a href="patients.html" class="nav-item active">
+        <a href="patients.html" class="nav-item">
           <i class="fas fa-user-injured"></i><span>Pacientes</span>
         </a>
         <a href="doctors.html" class="nav-item">
@@ -34,7 +34,7 @@
         <a href="users.html" class="nav-item" id="navUsers" style="display:none">
           <i class="fas fa-users-cog"></i><span>Usuários</span>
         </a>
-        <a href="units.html" class="nav-item" id="navUnits" style="display:none">
+        <a href="units.html" class="nav-item active" id="navUnits" style="display:none">
           <i class="fas fa-building"></i><span>Unidades</span>
         </a>
       </nav>
@@ -50,35 +50,30 @@
 
     <main class="main-content">
       <header class="topbar">
-        <h1 class="page-title"><i class="fas fa-user-injured"></i> Pacientes</h1>
-        <button class="btn btn-primary" id="btnNewPatient">
-          <i class="fas fa-plus"></i> Novo Paciente
+        <h1 class="page-title"><i class="fas fa-building"></i> Unidades</h1>
+        <button class="btn btn-primary" id="btnNewUnit">
+          <i class="fas fa-plus"></i> Nova Unidade
         </button>
       </header>
 
       <section class="card">
         <div class="card-header">
-          <h2><i class="fas fa-list"></i> Cadastro de Pacientes</h2>
-          <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" id="searchPatient" placeholder="Buscar por nome ou CPF..." />
-          </div>
+          <h2><i class="fas fa-list"></i> Unidades Cadastradas</h2>
         </div>
         <div class="table-wrapper">
           <table class="data-table">
             <thead>
               <tr>
-                <th>#</th>
                 <th>Nome</th>
-                <th>CPF</th>
-                <th>E-mail</th>
+                <th>Endereço</th>
                 <th>Telefone</th>
-                <th>Data Nasc.</th>
+                <th>Usuários</th>
+                <th>Status</th>
                 <th>Ações</th>
               </tr>
             </thead>
-            <tbody id="patientsBody">
-              <tr><td colspan="7" class="empty-msg">Carregando...</td></tr>
+            <tbody id="unitsBody">
+              <tr><td colspan="6" class="empty-msg">Carregando...</td></tr>
             </tbody>
           </table>
         </div>
@@ -86,46 +81,39 @@
     </main>
   </div>
 
-  <!-- Modal Paciente -->
-  <div class="modal-overlay" id="patientModal">
+  <!-- Modal Unidade -->
+  <div class="modal-overlay" id="unitModal">
     <div class="modal">
       <div class="modal-header">
-        <h3 id="patientModalTitle">Novo Paciente</h3>
-        <button class="modal-close" id="closePatientModal"><i class="fas fa-times"></i></button>
+        <h3 id="unitModalTitle">Nova Unidade</h3>
+        <button class="modal-close" id="closeUnitModal"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
-        <form id="patientForm">
-          <input type="hidden" id="patientId" />
-          <div class="form-row">
-            <div class="form-group">
-              <label>CPF <span class="required">*</span></label>
-              <input type="text" id="patientCpf" placeholder="000.000.000-00" maxlength="14" />
-            </div>
-            <div class="form-group">
-              <label>Data de Nascimento <span class="required">*</span></label>
-              <input type="date" id="patientBirthDate" />
-            </div>
+        <form id="unitForm">
+          <input type="hidden" id="unitId" />
+          <div class="form-group">
+            <label>Nome da Unidade <span class="required">*</span></label>
+            <input type="text" id="unitName" placeholder="Ex: Unidade Centro" />
           </div>
           <div class="form-group">
-            <label>Nome Completo <span class="required">*</span></label>
-            <input type="text" id="patientName" placeholder="Nome do paciente" />
+            <label>Endereço</label>
+            <input type="text" id="unitAddress" placeholder="Rua, número, bairro..." />
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label>E-mail</label>
-              <input type="email" id="patientEmail" placeholder="email@exemplo.com" />
+              <label>Telefone</label>
+              <input type="text" id="unitPhone" placeholder="(00) 00000-0000" />
             </div>
-            <div class="form-group">
-              <label>Telefone <span class="required">*</span></label>
-              <input type="text" id="patientPhone" placeholder="(00) 00000-0000" />
+            <div class="form-group" id="unitActiveGroup" style="display:none">
+              <label>Status</label>
+              <select id="unitActive">
+                <option value="true">Ativa</option>
+                <option value="false">Inativa</option>
+              </select>
             </div>
-          </div>
-          <div class="form-group">
-            <label>Observações</label>
-            <textarea id="patientObs" rows="3" placeholder="Alergias, condições especiais..."></textarea>
           </div>
           <div class="modal-actions">
-            <button type="button" class="btn btn-secondary" id="cancelPatientModal">Cancelar</button>
+            <button type="button" class="btn btn-secondary" id="cancelUnitModal">Cancelar</button>
             <button type="submit" class="btn btn-primary">
               <i class="fas fa-save"></i> Salvar
             </button>
@@ -136,6 +124,6 @@
   </div>
 
   <script src="js/main.js"></script>
-  <script src="js/patients.js"></script>
+  <script src="js/units.js"></script>
 </body>
 </html>
