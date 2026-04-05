@@ -178,16 +178,22 @@ document.querySelectorAll('[data-mask="cpf"], #patientCpf, #apptCpf').forEach(in
 
 // ── Date format ────────────────────────────────────────────
 function formatDateTime(dt) {
-  return new Date(dt).toLocaleString('pt-BR', {
-    day: '2-digit', month: '2-digit', year: 'numeric',
-    hour: '2-digit', minute: '2-digit'
-  });
+  if (!dt) return '—';
+  // pg now returns raw strings like "2024-03-15 14:00:00.123".
+  // Slice to "YYYY-MM-DDTHH:mm", split, and format without any timezone conversion.
+  const s = String(dt).replace(' ', 'T').slice(0, 16); // "YYYY-MM-DDTHH:mm"
+  const [date, time] = s.split('T');
+  if (!date) return dt;
+  const [y, m, d] = date.split('-');
+  return `${d}/${m}/${y}${time ? ' ' + time : ''}`;
 }
 
 function formatDate(d) {
-  // Extrai só YYYY-MM-DD para não duplicar timezone (ex: "2026-03-30T00:00:00.000Z")
-  const dateOnly = String(d).slice(0, 10);
-  return new Date(dateOnly + 'T00:00:00').toLocaleDateString('pt-BR');
+  if (!d) return '—';
+  // Garante formato YYYY-MM-DD independente de timezone
+  const iso = typeof d === 'string' ? d : d.toISOString();
+  const [year, month, day] = iso.slice(0, 10).split('-');
+  return `${day}/${month}/${year}`;
 }
 
 // ── Status badge ───────────────────────────────────────────

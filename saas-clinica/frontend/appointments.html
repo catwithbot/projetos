@@ -67,6 +67,27 @@
         </div>
       </header>
 
+      <!-- Calendário -->
+      <section class="card" id="calendarView" style="display:none">
+        <div class="calendar-toolbar">
+          <div class="calendar-filter">
+            <i class="fas fa-user-md"></i>
+            <select id="calendarDoctorFilter">
+              <option value="">Todos os médicos</option>
+            </select>
+          </div>
+          <div class="calendar-legend" id="calendarLegend" style="display:none">
+            <span class="legend-item">
+              <span class="legend-dot" style="background:#22c55e;opacity:.45"></span> Disponível
+            </span>
+            <span class="legend-item">
+              <span class="legend-dot" style="background:#2563eb"></span> Agendado
+            </span>
+          </div>
+        </div>
+        <div id="fullCalendar"></div>
+      </section>
+
       <!-- Lista -->
       <section class="card" id="listView">
         <div class="card-header">
@@ -88,11 +109,6 @@
             </tbody>
           </table>
         </div>
-      </section>
-
-      <!-- Calendário -->
-      <section class="card" id="calendarView" style="display:none">
-        <div id="fullCalendar"></div>
       </section>
     </main>
   </div>
@@ -155,7 +171,7 @@
                 </div>
                 <div class="form-group">
                   <label>Data de Nascimento <span class="required">*</span></label>
-                  <input type="date" id="apptPatientBirth" />
+                  <input type="text" id="apptPatientBirth" placeholder="dd/mm/aaaa" maxlength="10" inputmode="numeric" />
                 </div>
               </div>
             </div>
@@ -175,10 +191,28 @@
                   <option value="">Selecione...</option>
                 </select>
               </div>
-              <div class="form-group">
-                <label>Data e Hora <span class="required">*</span></label>
-                <input type="datetime-local" id="apptDateTime" />
+              <div class="form-group date-picker-wrap">
+                <label>Data <span class="required">*</span></label>
+                <input type="text" id="apptDate" placeholder="dd/mm/aaaa" maxlength="10" inputmode="numeric" autocomplete="off" />
+                <div class="date-picker-calendar" id="apptDatePicker">
+                  <div class="dp-header">
+                    <button type="button" class="dp-nav" id="dpPrev"><i class="fas fa-chevron-left"></i></button>
+                    <span class="dp-month-year" id="dpMonthYear"></span>
+                    <button type="button" class="dp-nav" id="dpNext"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+                  <div class="dp-weekdays">
+                    <span>D</span><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span>
+                  </div>
+                  <div class="dp-days" id="dpDays"></div>
+                </div>
               </div>
+            </div>
+
+            <!-- Horários disponíveis (aparece após selecionar data) -->
+            <div class="form-group time-slot-group" id="timeSlotGroup" style="display:none">
+              <label>Horário <span class="required">*</span></label>
+              <input type="hidden" id="apptTime" />
+              <div class="time-slots-grid" id="timeSlotsGrid"></div>
             </div>
 
             <div class="form-group">

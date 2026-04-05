@@ -28,7 +28,7 @@ function renderTodayTable(appointments) {
 
   tbody.innerHTML = appointments.map(a => `
     <tr>
-      <td>${new Date(a.appointment_date).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</td>
+      <td>${a.appointment_date.replace(' ', 'T').slice(11, 16)}</td>
       <td>
         <strong>${a.patient_name}</strong><br>
         <small style="color:var(--text-muted)">${formatCpf(a.patient_cpf)}</small>

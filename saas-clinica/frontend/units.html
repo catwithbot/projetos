@@ -104,7 +104,20 @@
               <label>Telefone</label>
               <input type="text" id="unitPhone" placeholder="(00) 00000-0000" />
             </div>
-            <div class="form-group" id="unitActiveGroup" style="display:none">
+            <div class="form-group">
+              <label>Intervalo entre agendamentos</label>
+              <select id="unitInterval">
+                <option value="10">10 minutos</option>
+                <option value="15">15 minutos</option>
+                <option value="20">20 minutos</option>
+                <option value="30" selected>30 minutos</option>
+                <option value="45">45 minutos</option>
+                <option value="60">60 minutos</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row" id="unitActiveGroup" style="display:none">
+            <div class="form-group">
               <label>Status</label>
               <select id="unitActive">
                 <option value="true">Ativa</option>

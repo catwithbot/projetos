@@ -74,9 +74,9 @@ router.post('/', async (req, res) => {
   const unitId = req.unitId;
 
   try {
-    const apptDate    = new Date(appointment_date);
-    const apptDateStr = apptDate.toISOString().split('T')[0];
-    const apptTimeStr = apptDate.toTimeString().slice(0, 5);
+    // Parse directly from string — avoids timezone shifts from new Date()
+    const apptDateStr = appointment_date.slice(0, 10);  // "YYYY-MM-DD"
+    const apptTimeStr = appointment_date.slice(11, 16); // "HH:mm"
 
     // Verifica que o médico pertence à unidade do usuário logado
     if (unitId !== null) {
@@ -192,9 +192,9 @@ router.put('/:id/reschedule', async (req, res) => {
   }
 
   try {
-    const apptDate    = new Date(appointment_date);
-    const apptDateStr = apptDate.toISOString().split('T')[0];
-    const apptTimeStr = apptDate.toTimeString().slice(0, 5);
+    // Parse directly from string — avoids timezone shifts from new Date()
+    const apptDateStr = appointment_date.slice(0, 10);  // "YYYY-MM-DD"
+    const apptTimeStr = appointment_date.slice(11, 16); // "HH:mm"
 
     // Verifica que o médico pertence à unidade
     if (req.unitId !== null) {

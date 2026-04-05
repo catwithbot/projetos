@@ -142,9 +142,39 @@ async function openScheduleModal(doctorId, doctorName) {
   document.getElementById('availStart').value = '';
   document.getElementById('availEnd').value = '';
 
+  // Load doctor's current interval
+  const doctor = allDoctors.find(d => d.id === doctorId);
+  const interval = (doctor && doctor.appointment_interval) ? doctor.appointment_interval : 30;
+  document.getElementById('doctorInterval').value = String(interval);
+
   openModal('scheduleModal');
   await loadAvailabilities(doctorId);
 }
+
+document.getElementById('btnSaveInterval').addEventListener('click', async () => {
+  const interval = parseInt(document.getElementById('doctorInterval').value);
+  const doctor = allDoctors.find(d => d.id === currentDoctorId);
+  if (!doctor) return;
+
+  try {
+    const updated = await apiFetch(`/doctors/${currentDoctorId}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        name: doctor.name,
+        specialty: doctor.specialty,
+        email: doctor.email,
+        phone: doctor.phone,
+        active: doctor.active,
+        appointment_interval: interval
+      })
+    });
+    // Update local cache
+    Object.assign(doctor, updated);
+    showToast(`Intervalo salvo: ${interval} minutos.`, 'success');
+  } catch (err) {
+    showToast('Erro ao salvar intervalo: ' + err.message, 'error');
+  }
+});
 
 document.getElementById('closeScheduleModal').addEventListener('click', () => closeModal('scheduleModal'));
 

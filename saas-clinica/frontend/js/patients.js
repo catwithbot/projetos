@@ -29,7 +29,7 @@ function renderPatients(list) {
       <td>${formatCpf(p.cpf)}</td>
       <td>${p.email || '–'}</td>
       <td>${p.phone}</td>
-      <td>${formatDate(p.birth_date)}</td>
+      <td>${p.birth_date ? p.birth_date.slice(0, 10).split('-').reverse().join('/') : '—'}</td>
       <td>
         <div class="action-btns">
           <button class="btn btn-sm btn-secondary" onclick="openEditPatient(${p.id})" title="Editar">
@@ -80,6 +80,14 @@ document.getElementById('patientCpf').addEventListener('input', function () {
   this.value = maskCpf(this.value);
 });
 
+// ── Data de nascimento mask (dd/mm/aaaa) ───────────────────
+document.getElementById('patientBirthDate').addEventListener('input', function () {
+  let v = this.value.replace(/\D/g, '').slice(0, 8);
+  if (v.length >= 5) v = v.slice(0, 2) + '/' + v.slice(2, 4) + '/' + v.slice(4);
+  else if (v.length >= 3) v = v.slice(0, 2) + '/' + v.slice(2);
+  this.value = v;
+});
+
 // ── Edit ───────────────────────────────────────────────────
 function openEditPatient(id) {
   const p = allPatients.find(x => x.id === id);
@@ -90,7 +98,8 @@ function openEditPatient(id) {
   document.getElementById('patientName').value = p.name;
   document.getElementById('patientEmail').value = p.email || '';
   document.getElementById('patientPhone').value = p.phone;
-  document.getElementById('patientBirthDate').value = p.birth_date.split('T')[0];
+  const [y, m, d] = p.birth_date.slice(0, 10).split('-');
+  document.getElementById('patientBirthDate').value = `${d}/${m}/${y}`;
   document.getElementById('patientObs').value = p.observations || '';
 
   document.getElementById('patientModalTitle').textContent = 'Editar Paciente';
@@ -119,15 +128,26 @@ document.getElementById('patientForm').addEventListener('submit', async (e) => {
   const name = document.getElementById('patientName').value.trim();
   const email = document.getElementById('patientEmail').value.trim();
   const phone = document.getElementById('patientPhone').value.trim();
-  const birth_date = document.getElementById('patientBirthDate').value;
+  const rawDate = document.getElementById('patientBirthDate').value;
   const observations = document.getElementById('patientObs').value.trim();
 
   if (!validateCpf(cpf)) {
     showToast('CPF inválido.', 'error');
     return;
   }
-  if (!name || !phone || !birth_date) {
-    showToast('Nome, telefone e data de nascimento são obrigatórios.', 'error');
+  if (!name || !phone) {
+    showToast('Nome e telefone são obrigatórios.', 'error');
+    return;
+  }
+  const dateParts = rawDate.split('/');
+  if (dateParts.length !== 3 || rawDate.length !== 10) {
+    showToast('Data de nascimento inválida. Use dd/mm/aaaa.', 'error');
+    return;
+  }
+  const [dd, mm, yyyy] = dateParts;
+  const birth_date = `${yyyy}-${mm}-${dd}`;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(birth_date)) {
+    showToast('Data de nascimento inválida. Use dd/mm/aaaa.', 'error');
     return;
   }
 

@@ -60,10 +60,11 @@ function renderUnits(list) {
 
 function resetUnitForm() {
   editingUnitId = null;
-  document.getElementById('unitId').value      = '';
-  document.getElementById('unitName').value    = '';
-  document.getElementById('unitAddress').value = '';
-  document.getElementById('unitPhone').value   = '';
+  document.getElementById('unitId').value       = '';
+  document.getElementById('unitName').value     = '';
+  document.getElementById('unitAddress').value  = '';
+  document.getElementById('unitPhone').value    = '';
+  document.getElementById('unitInterval').value = '30';
   document.getElementById('unitActiveGroup').style.display = 'none';
   document.getElementById('unitModalTitle').textContent    = 'Nova Unidade';
 }
@@ -81,11 +82,12 @@ function openEditUnit(id) {
   if (!u) return;
 
   editingUnitId = id;
-  document.getElementById('unitId').value      = id;
-  document.getElementById('unitName').value    = u.name;
-  document.getElementById('unitAddress').value = u.address || '';
-  document.getElementById('unitPhone').value   = u.phone   || '';
-  document.getElementById('unitActive').value  = String(u.active);
+  document.getElementById('unitId').value       = id;
+  document.getElementById('unitName').value     = u.name;
+  document.getElementById('unitAddress').value  = u.address || '';
+  document.getElementById('unitPhone').value    = u.phone   || '';
+  document.getElementById('unitInterval').value = String(u.appointment_interval || 30);
+  document.getElementById('unitActive').value   = String(u.active);
   document.getElementById('unitActiveGroup').style.display = '';
   document.getElementById('unitModalTitle').textContent    = 'Editar Unidade';
 
@@ -97,18 +99,19 @@ function openEditUnit(id) {
 document.getElementById('unitForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const id      = document.getElementById('unitId').value;
-  const name    = document.getElementById('unitName').value.trim();
-  const address = document.getElementById('unitAddress').value.trim();
-  const phone   = document.getElementById('unitPhone').value.trim();
-  const active  = document.getElementById('unitActive').value === 'true';
+  const id       = document.getElementById('unitId').value;
+  const name     = document.getElementById('unitName').value.trim();
+  const address  = document.getElementById('unitAddress').value.trim();
+  const phone    = document.getElementById('unitPhone').value.trim();
+  const active   = document.getElementById('unitActive').value === 'true';
+  const interval = parseInt(document.getElementById('unitInterval').value, 10);
 
   if (!name) {
     showToast('Nome da unidade é obrigatório.', 'error');
     return;
   }
 
-  const body = { name, address: address || null, phone: phone || null };
+  const body = { name, address: address || null, phone: phone || null, appointment_interval: interval };
   if (id) body.active = active;
 
   try {

@@ -3,7 +3,20 @@
     "allow": [
       "Bash(xargs grep:*)",
       "Bash(npm install:*)",
-      "Bash(grep -E '\\\\.js$|^d')"
+      "Bash(grep -E '\\\\.js$|^d')",
+      "Bash(npm test:*)",
+      "Bash(npx jest:*)",
+      "Read(//home/venom/Documents/Github/projetos/**)",
+      "Bash(PGPASSWORD=postgres psql -h localhost -U postgres -d clinic_saas -f migrations/004_add_appointment_interval.sql)",
+      "Bash(PGPASSWORD=postgres psql -h localhost -U postgres -d clinic_saas -f backend/migrations/005_add_doctor_interval.sql)",
+      "Bash(PGPASSWORD=postgres psql -h localhost -U postgres -d clinic_saas -c \"SELECT id, name, appointment_interval FROM doctors LIMIT 5;\")",
+      "Bash(PGPASSWORD=postgres psql -h localhost -U postgres -d clinic_saas -c \"SELECT id, doctor_id, appointment_date, status FROM appointments LIMIT 5;\")",
+      "Bash(node backend/server.js)",
+      "Bash(python3 -m json.tool)",
+      "Bash(PGPASSWORD=postgres psql -h localhost -U postgres -d clinic_saas -c \"SELECT email, role FROM users LIMIT 5;\")",
+      "Bash(curl -s -X POST http://localhost:3000/api/auth/login -H \"Content-Type: application/json\" -d '{\"email\":\"admin@clinica.com\",\"password\":\"admin123\"}')",
+      "Bash(PGPASSWORD=postgres psql -h localhost -U postgres -d clinic_saas -c \"SELECT id, name, appointment_interval FROM doctors WHERE id=3;\")",
+      "Bash(PGPASSWORD=postgres psql -h localhost -U postgres -d clinic_saas -c \"UPDATE doctors SET appointment_interval=30, specialty='Dentista', phone='2199999' WHERE id=3;\")"
     ]
   }
 }

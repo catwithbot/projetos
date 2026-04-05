@@ -61,10 +61,21 @@ cd clinicaos
 # Crie o banco via psql ou pgAdmin
 psql -U postgres -c "CREATE DATABASE clinic_saas;"
 
+# Funcionou esse para instalar local (Alternativa caso o outro não funcione):
+sudo -i -u postgres psql -c "CREATE DATABASE clinic_saas;"
+
 # Rode as migrations em ordem
 psql -U postgres -d clinic_saas -f backend/migrations/init.sql
 psql -U postgres -d clinic_saas -f backend/migrations/002_add_users_and_audit.sql
 ```
+#Funcionou alterantivamente esse comando (Alternativa caso o outro não funcione, primeiro vai até a pasta do projeto):
+
+cd /home/venom/Documents/Github/projetos/saas-clinica
+venom@venom:~/Documents/Github/projetos/saas-clinica$ chmod +r backend/migrations/init.sql backend/migrations/002_add_users_and_audit.sql
+
+sudo -u postgres psql -d clinic_saas -f backend/migrations/init.sql
+sudo -u postgres psql -d clinic_saas -f backend/migrations/002_add_users_and_audit.sql
+
 
 ### 3. Configurar variáveis de ambiente
 
@@ -120,7 +131,7 @@ chown -R deploy:deploy /home/deploy/.ssh
 # Desabilitar login por senha e acesso root via SSH
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 sed -i 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
-systemctl restart sshd
+systemctl restart sshd ou systemctl restart ssh
 
 # Firewall
 ufw default deny incoming
@@ -353,3 +364,7 @@ clinicaos/
 | `DB_PASSWORD` | — | Senha do banco (obrigatória) |
 | `JWT_SECRET` | — | Segredo para assinar tokens JWT (obrigatório, mín. 64 bytes) |
 | `CORS_ORIGIN` | `http://localhost:3000` | Domínio(s) permitidos pelo CORS (separados por vírgula) |
+
+#Para deletar algo do banco:
+
+sql -d clinic_saas -c "DELETE FROM units WHERE name = 'Centro2';"

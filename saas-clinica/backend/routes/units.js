@@ -61,22 +61,32 @@ router.post('/', async (req, res) => {
 
 // PUT /api/units/:id
 router.put('/:id', async (req, res) => {
-  const { name, address, phone, active } = req.body;
+  const { name, address, phone, active, appointment_interval } = req.body;
 
   if (!name || !name.trim()) {
     return res.status(400).json({ error: 'Nome da unidade é obrigatório' });
   }
 
+  const validIntervals = [10, 15, 20, 30, 45, 60];
+  const interval = appointment_interval !== undefined
+    ? parseInt(appointment_interval, 10)
+    : 30;
+
+  if (!validIntervals.includes(interval)) {
+    return res.status(400).json({ error: 'Intervalo de agendamento inválido. Use: 10, 15, 20, 30, 45 ou 60 minutos' });
+  }
+
   try {
     const result = await pool.query(
-      `UPDATE units SET name=$1, address=$2, phone=$3, active=$4
-       WHERE id=$5
+      `UPDATE units SET name=$1, address=$2, phone=$3, active=$4, appointment_interval=$5
+       WHERE id=$6
        RETURNING *`,
       [
         name.trim(),
         address?.trim() || null,
         phone?.trim() || null,
         active !== undefined ? active : true,
+        interval,
         req.params.id,
       ]
     );
