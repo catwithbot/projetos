@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AcolheMais — Saúde mental acessível para todos</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .section-dark .section-tag { background: rgba(91,106,240,.2); border: 1.5px solid rgba(91,106,240,.3); color: #A5B0F9; }
+    .hero-grid { padding-top: 20px; }
+    .no-show-bar { margin-top: 0; }
+  </style>
+</head>
+<body>
+
+<!-- ───────── NAVBAR ───────── -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+      AcolheMais
+    </a>
+    <div class="nav-links">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#profissionais">Para profissionais</a>
+      <a href="#impacto">Impacto</a>
+    </div>
+    <div class="nav-actions">
+      <a href="dashboard-pro.html" class="btn btn-outline btn-sm">Sou profissional</a>
+      <a href="triagem.html" class="btn btn-primary btn-sm">Quero atendimento</a>
+    </div>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="menuClose"><i class="fa-solid fa-xmark"></i></button>
+  <a href="#como-funciona" onclick="closeMobileMenu()">Como funciona</a>
+  <a href="#profissionais" onclick="closeMobileMenu()">Para profissionais</a>
+  <a href="#impacto" onclick="closeMobileMenu()">Impacto</a>
+  <a href="dashboard-pro.html" class="btn btn-outline">Sou profissional</a>
+  <a href="triagem.html" class="btn btn-primary">Quero atendimento</a>
+</div>
+
+<!-- ───────── HERO ───────── -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-blob hero-blob-3"></div>
+  </div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>Saúde mental acessível para todos</span>
+        </div>
+        <h1>
+          Você merece apoio psicológico.<br>
+          <span class="highlight">Independente da renda.</span>
+        </h1>
+        <p class="hero-subtitle">
+          O AcolheMais conecta você gratuitamente a estagiários supervisionados
+          e psicólogos com vagas a preço social. Pelo WhatsApp, sem complicação.
+        </p>
+        <div class="hero-actions">
+          <a href="triagem.html" class="btn btn-primary btn-lg">
+            <i class="fa-solid fa-clipboard-list"></i> Fazer triagem gratuita
+          </a>
+          <a href="dashboard-pro.html" class="btn btn-outline btn-lg">
+            Sou psicólogo/estagiário
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat-badge">
+            <span class="stat-dot" style="background:#34C17A"></span>
+            R$0 para o paciente
+          </div>
+          <div class="hero-stat-badge">
+            <span class="stat-dot" style="background:#38BDA8"></span>
+            <i class="fa-brands fa-whatsapp" style="color:#25D366"></i> Via WhatsApp
+          </div>
+          <div class="hero-stat-badge">
+            <span class="stat-dot" style="background:#5B6AF0"></span>
+            +30 mil estagiários/ano
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <!-- SVG Illustration -->
+        <svg viewBox="0 0 480 460" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="bg1" cx="50%" cy="52%" r="50%">
+              <stop offset="0%" stop-color="#DDE1FD"/>
+              <stop offset="100%" stop-color="#F0F2FF" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#5B6AF0"/>
+              <stop offset="100%" stop-color="#38BDA8"/>
+            </linearGradient>
+            <linearGradient id="gradCard" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#5B6AF0"/>
+              <stop offset="100%" stop-color="#7B8AF8"/>
+            </linearGradient>
+            <filter id="shadow-sm" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#1e288a" flood-opacity="0.12"/>
+            </filter>
+            <filter id="shadow-xs" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="0" dy="2" stdDeviation="5" flood-color="#1e288a" flood-opacity="0.10"/>
+            </filter>
+          </defs>
+
+          <!-- Ambient glow background -->
+          <ellipse cx="240" cy="240" rx="210" ry="200" fill="url(#bg1)"/>
+
+          <!-- Orbit ring -->
+          <circle cx="240" cy="235" r="150" stroke="#5B6AF0" stroke-width="1.5" stroke-dasharray="5 8" opacity=".18"/>
+
+          <!-- ── Central figure ── -->
+          <!-- Glow halo -->
+          <circle cx="240" cy="200" r="68" fill="#5B6AF0" opacity=".08"/>
+          <!-- Avatar body -->
+          <circle cx="240" cy="185" r="34" fill="url(#grad1)"/>
+          <!-- Head highlight -->
+          <circle cx="229" cy="176" r="8" fill="#fff" opacity=".18"/>
+          <!-- Torso -->
+          <ellipse cx="240" cy="258" rx="52" ry="44" fill="url(#grad1)" opacity=".9"/>
+          <!-- Collar highlight -->
+          <ellipse cx="240" cy="218" rx="18" ry="8" fill="#fff" opacity=".12"/>
+
+          <!-- ── Connection lines ── -->
+          <line x1="240" y1="222" x2="108" y2="312" stroke="#5B6AF0" stroke-width="1.5" stroke-dasharray="5,6" opacity=".35"/>
+          <line x1="240" y1="222" x2="372" y2="312" stroke="#38BDA8" stroke-width="1.5" stroke-dasharray="5,6" opacity=".35"/>
+          <line x1="240" y1="200" x2="90" y2="155" stroke="#F4845F" stroke-width="1.5" stroke-dasharray="5,6" opacity=".35"/>
+          <line x1="240" y1="200" x2="390" y2="140" stroke="#F0A030" stroke-width="1.5" stroke-dasharray="5,6" opacity=".35"/>
+
+          <!-- ── Avatar: Patient (bottom-left) ── -->
+          <circle cx="108" cy="312" r="28" fill="#E3F8F5" filter="url(#shadow-xs)"/>
+          <circle cx="108" cy="304" r="11" fill="#38BDA8"/>
+          <ellipse cx="108" cy="330" rx="17" ry="14" fill="#38BDA8" opacity=".75"/>
+          <!-- Label -->
+          <rect x="60" y="348" width="96" height="22" rx="8" fill="#fff" filter="url(#shadow-xs)"/>
+          <text x="108" y="363" font-family="Plus Jakarta Sans, sans-serif" font-size="9.5" font-weight="700" fill="#38BDA8" text-anchor="middle">Paciente</text>
+
+          <!-- ── Avatar: Professional (bottom-right) ── -->
+          <circle cx="372" cy="312" r="28" fill="#EEF0FE" filter="url(#shadow-xs)"/>
+          <circle cx="372" cy="304" r="11" fill="#5B6AF0"/>
+          <ellipse cx="372" cy="330" rx="17" ry="14" fill="#5B6AF0" opacity=".75"/>
+          <!-- Label -->
+          <rect x="324" y="348" width="96" height="22" rx="8" fill="#fff" filter="url(#shadow-xs)"/>
+          <text x="372" y="363" font-family="Plus Jakarta Sans, sans-serif" font-size="9.5" font-weight="700" fill="#5B6AF0" text-anchor="middle">Psicólogo</text>
+
+          <!-- ── Company icon (top-left) ── -->
+          <rect x="66" y="134" width="48" height="48" rx="14" fill="#fff" filter="url(#shadow-xs)"/>
+          <rect x="74" y="142" width="32" height="32" rx="9" fill="#F4845F"/>
+          <line x1="84" y1="154" x2="96" y2="154" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="84" y1="161" x2="92" y2="161" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="90" y="197" font-family="Plus Jakarta Sans, sans-serif" font-size="9" font-weight="600" fill="#F4845F" text-anchor="middle">Empresa</text>
+
+          <!-- ── Supervisor icon (top-right) ── -->
+          <circle cx="390" cy="140" r="28" fill="#FEF9E3" filter="url(#shadow-xs)"/>
+          <circle cx="390" cy="132" r="11" fill="#F0A030"/>
+          <ellipse cx="390" cy="158" rx="17" ry="14" fill="#F0A030" opacity=".75"/>
+          <text x="390" y="182" font-family="Plus Jakarta Sans, sans-serif" font-size="9" font-weight="600" fill="#F0A030" text-anchor="middle">Supervisor</text>
+
+          <!-- ── Notification card: confirmed session ── -->
+          <rect x="148" y="46" width="184" height="56" rx="14" fill="#fff" filter="url(#shadow-sm)"/>
+          <!-- Left accent bar -->
+          <rect x="148" y="46" width="5" height="56" rx="14" fill="#34C17A"/>
+          <rect x="148" y="56" width="5" height="36" rx="0" fill="#34C17A"/>
+          <!-- WhatsApp dot -->
+          <circle cx="170" cy="68" r="10" fill="#25D366"/>
+          <!-- Checkmark in circle -->
+          <circle cx="170" cy="68" r="6" fill="#fff" opacity=".25"/>
+          <polyline points="166,68 169,71 175,64" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <!-- Text -->
+          <text x="186" y="63" font-family="Plus Jakarta Sans, sans-serif" font-size="10" font-weight="600" fill="#374151">Sua sessão foi</text>
+          <text x="186" y="78" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="800" fill="#16a34a">✓ Confirmada!</text>
+          <text x="186" y="92" font-family="Plus Jakarta Sans, sans-serif" font-size="8.5" fill="#9CA3AF">Hoje às 14h · Online</text>
+
+          <!-- ── Review card (bottom center) ── -->
+          <rect x="158" y="378" width="164" height="56" rx="14" fill="#fff" filter="url(#shadow-sm)"/>
+          <!-- Stars row -->
+          <text x="220" y="403" font-size="13" fill="#F0A030" text-anchor="middle">★★★★★</text>
+          <text x="220" y="418" font-family="Plus Jakarta Sans, sans-serif" font-size="9.5" font-weight="600" fill="#374151" text-anchor="middle">"Me ajudou demais"</text>
+          <text x="220" y="430" font-family="Plus Jakarta Sans, sans-serif" font-size="8" fill="#9CA3AF" text-anchor="middle">— Ana R., paciente</text>
+
+          <!-- ── Decorative dots ── -->
+          <circle cx="46" cy="90" r="6" fill="#5B6AF0" opacity=".18"/>
+          <circle cx="440" cy="360" r="9" fill="#38BDA8" opacity=".18"/>
+          <circle cx="420" cy="70" r="5" fill="#F4845F" opacity=".25"/>
+          <circle cx="58" cy="390" r="7" fill="#F0A030" opacity=".18"/>
+          <circle cx="454" cy="210" r="4" fill="#5B6AF0" opacity=".15"/>
+          <circle cx="30" cy="260" r="4" fill="#38BDA8" opacity=".15"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── PROBLEMA ───────── -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">O problema</div>
+      <h2 class="text-white">25 milhões de brasileiros sofrem sozinhos</h2>
+      <p>O Brasil é o país mais ansioso do mundo segundo a OMS. Mas quem pode pagar por ajuda?</p>
+    </div>
+    <div class="grid-3">
+      <div class="problem-card animate-in">
+        <div class="problem-label">Custo médio por consulta</div>
+        <div class="problem-num" data-count="150">R$0</div>
+        <p class="problem-desc">Uma consulta particular custa entre R$150 e R$300 — inviável para quem ganha um salário mínimo.</p>
+      </div>
+      <div class="problem-card animate-in animate-delay-1">
+        <div class="problem-label">Fila no CAPS</div>
+        <div class="problem-num">Meses</div>
+        <p class="problem-desc">O serviço público existe, mas tem filas longas, cobertura geográfica limitada e sem tecnologia de triagem.</p>
+      </div>
+      <div class="problem-card animate-in animate-delay-2">
+        <div class="problem-label">Desistiram de buscar ajuda</div>
+        <div class="problem-num" data-count="73">0%</div>
+        <p class="problem-desc">73% dos brasileiros de baixa renda que buscaram apoio psicológico desistiram por não conseguir pagar. (FGV, 2023)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── SOLUÇÃO ───────── -->
+<section class="section" id="como-funciona">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">A solução</div>
+      <h2>Três caminhos para quem precisa de ajuda</h2>
+      <p>O AcolheMais conecta pacientes a três tipos de atendimento acessível — tudo gratuito ou a preço social.</p>
+    </div>
+    <div class="grid-3">
+      <div class="solution-card animate-in">
+        <div class="solution-icon"><i class="fa-solid fa-user-graduate"></i></div>
+        <h3>Estagiário supervisionado</h3>
+        <p>Estudante de Psicologia em fase de estágio obrigatório, acompanhado por um supervisor formado em tempo real.</p>
+        <span class="price-badge badge-success">
+          <i class="fa-solid fa-check"></i> Gratuito
+        </span>
+      </div>
+      <div class="solution-card animate-in animate-delay-1">
+        <div class="solution-icon"><i class="fa-solid fa-user-doctor"></i></div>
+        <h3>Psicólogo com preço social</h3>
+        <p>Psicólogos formados que oferecem vagas acessíveis diretamente na plataforma para quem precisa.</p>
+        <span class="price-badge badge-primary">
+          A partir de R$50
+        </span>
+      </div>
+      <div class="solution-card animate-in animate-delay-2">
+        <div class="solution-icon"><i class="fa-solid fa-building"></i></div>
+        <h3>Sessão pela sua empresa</h3>
+        <p>Empresas e prefeituras compram pacotes de sessões e distribuem como benefício para funcionários.</p>
+        <span class="price-badge badge-success">
+          <i class="fa-solid fa-check"></i> Gratuito para você
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── COMO FUNCIONA ───────── -->
+<section class="section" style="background: var(--surface); border-top: 1.5px solid var(--border); border-bottom: 1.5px solid var(--border);">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">Passo a passo</div>
+      <h2>Em 4 passos, você chega ao apoio que precisa</h2>
+      <p>Sem aplicativo, sem burocracia. Funciona direto pelo WhatsApp em qualquer celular.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-item animate-in">
+        <div class="step-num">
+          <span class="step-num-count">1</span>
+          <i class="fa-solid fa-clipboard-list" style="color: var(--primary);"></i>
+        </div>
+        <h4>Triagem simples</h4>
+        <p>Responda perguntas rápidas sobre como você está se sentindo. Leva menos de 2 minutos.</p>
+      </div>
+      <div class="step-item animate-in animate-delay-1">
+        <div class="step-num">
+          <span class="step-num-count">2</span>
+          <i class="fa-solid fa-magnifying-glass" style="color: var(--secondary);"></i>
+        </div>
+        <h4>Matching inteligente</h4>
+        <p>Receba indicações de profissionais compatíveis com sua necessidade e disponibilidade.</p>
+      </div>
+      <div class="step-item animate-in animate-delay-2">
+        <div class="step-num">
+          <span class="step-num-count">3</span>
+          <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i>
+        </div>
+        <h4>Agendamento pelo WhatsApp</h4>
+        <p>Confirme sua sessão sem aplicativo. Funciona em qualquer celular, até o mais básico.</p>
+      </div>
+      <div class="step-item animate-in animate-delay-3">
+        <div class="step-num">
+          <span class="step-num-count">4</span>
+          <i class="fa-solid fa-heart" style="color: var(--accent);"></i>
+        </div>
+        <h4>Sua sessão</h4>
+        <p>Seja atendido de forma segura, supervisionada e confidencial. Online ou presencial.</p>
+      </div>
+    </div>
+    <div class="flex-center mt-8">
+      <a href="triagem.html" class="btn btn-primary btn-lg">
+        <i class="fa-solid fa-arrow-right"></i> Começar minha triagem gratuita
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── MODELO 3 LADOS ───────── -->
+<section class="section">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">Modelo único</div>
+      <h2>Um modelo que funciona para os três lados</h2>
+      <p>Nenhuma plataforma no Brasil conecta esses três atores de forma integrada.</p>
+    </div>
+    <div class="model-diagram animate-in">
+      <div class="model-node">
+        <div class="model-icon"><i class="fa-solid fa-person" style="color: var(--secondary-dark);"></i></div>
+        <h3>Paciente</h3>
+        <p>Atendimento gratuito ou acessível, sem burocracia. Triagem e agendamento pelo WhatsApp.</p>
+        <div class="mt-4">
+          <span class="badge badge-success">R$0 por padrão</span>
+        </div>
+      </div>
+      <div class="model-connector" style="justify-content:center; padding: 0 8px; font-size:1.5rem; color:rgba(91,106,240,.3);">
+        <i class="fa-solid fa-arrows-left-right"></i>
+      </div>
+      <div class="model-node model-node-center">
+        <div style="width:56px;height:56px;background:rgba(255,255,255,.2);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.5rem;">
+          <i class="fa-solid fa-heart-pulse"></i>
+        </div>
+        <h3>AcolheMais</h3>
+        <p>Plataforma que conecta, organiza triagem, facilita agendamentos e supervisão digital.</p>
+        <div class="mt-4">
+          <span class="badge badge-dark">SaaS + Marketplace</span>
+        </div>
+      </div>
+      <div class="model-connector" style="justify-content:center; padding: 0 8px; font-size:1.5rem; color:rgba(91,106,240,.3);">
+        <i class="fa-solid fa-arrows-left-right"></i>
+      </div>
+      <div class="model-node">
+        <div class="model-icon"><i class="fa-solid fa-briefcase" style="color: var(--accent);"></i></div>
+        <h3>Profissional & Empresa</h3>
+        <p>Estagiários cumprem horas clínicas. Psicólogos recebem pacientes. Empresas fidelizam equipes.</p>
+        <div class="mt-4">
+          <span class="badge badge-primary">Assinatura mensal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── IMPACTO ───────── -->
+<section class="section section-gradient" id="impacto">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag" style="background:rgba(255,255,255,.2);color:#fff;border:1.5px solid rgba(255,255,255,.3);">Números que importam</div>
+      <h2 class="text-white">O impacto que queremos causar</h2>
+      <p class="text-white" style="opacity:.75">Cada estagiário que usa o AcolheMais realiza em média 40 atendimentos. São 40 vidas tocadas.</p>
+    </div>
+    <div class="impact-grid">
+      <div class="impact-stat animate-in">
+        <div class="impact-number"><span data-target="25" data-suffix="M+">0</span></div>
+        <div class="impact-label">Brasileiros com ansiedade ou depressão</div>
+      </div>
+      <div class="impact-stat animate-in animate-delay-1">
+        <div class="impact-number"><span data-target="30" data-suffix="K">0</span></div>
+        <div class="impact-label">Estagiários de Psicologia por ano no Brasil</div>
+      </div>
+      <div class="impact-stat animate-in animate-delay-2">
+        <div class="impact-number">R$0</div>
+        <div class="impact-label">Custo para o paciente</div>
+      </div>
+      <div class="impact-stat animate-in animate-delay-3">
+        <div class="impact-number"><span data-target="4000">0</span></div>
+        <div class="impact-label">Atendimentos gratuitos por ciclo de estágio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── PROFISSIONAIS ───────── -->
+<section class="section" id="profissionais">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-tag">Para profissionais</div>
+      <h2>Estrutura completa para quem atende</h2>
+      <p>Seja você estagiário, psicólogo formado ou supervisor — o AcolheMais tem o plano certo para você.</p>
+    </div>
+    <div class="pricing-grid">
+      <!-- Estagiário -->
+      <div class="pricing-card animate-in">
+        <h3>Estagiário</h3>
+        <div class="pricing-plan-label">Para quem está em estágio supervisionado</div>
+        <div class="pricing-price">
+          <div class="pricing-amount">Grátis</div>
+        </div>
+        <p class="pricing-period">Para sempre. Acesso completo.</p>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Perfil completo na plataforma
+          </div>
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Agendamento automático via WhatsApp
+          </div>
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Painel de supervisão incluso
+          </div>
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Prontuário digital básico
+          </div>
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Suporte por WhatsApp
+          </div>
+        </div>
+        <a href="#cta" class="btn btn-outline" style="width:100%; justify-content:center;">
+          Começar gratuitamente
+        </a>
+      </div>
+
+      <!-- Psicólogo — Featured -->
+      <div class="pricing-card featured animate-in animate-delay-1">
+        <div class="pricing-badge">Mais popular</div>
+        <h3>Psicólogo</h3>
+        <div class="pricing-plan-label">Para profissionais formados com CRP</div>
+        <div class="pricing-price">
+          <div class="pricing-amount"><sup>R$</sup>49<span style="font-size:1.75rem">,90</span></div>
+        </div>
+        <p class="pricing-period">/mês · cancele quando quiser</p>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Tudo do plano Estagiário
+          </div>
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Apareça nas buscas de pacientes
+          </div>
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Receba pacientes novos todo mês
+          </div>
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Prontuário digital completo
+          </div>
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Relatórios e histórico de sessões
+          </div>
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Suporte prioritário
+          </div>
+        </div>
+        <a href="#cta" class="btn btn-primary" style="width:100%; justify-content:center;">
+          Quero começar
+        </a>
+      </div>
+
+      <!-- Supervisor -->
+      <div class="pricing-card animate-in animate-delay-2">
+        <h3>Supervisor</h3>
+        <div class="pricing-plan-label">Para psicólogos que supervisionam estagiários</div>
+        <div class="pricing-price">
+          <div class="pricing-amount"><sup>R$</sup>79<span style="font-size:1.75rem">,90</span></div>
+        </div>
+        <p class="pricing-period">/mês · cancele quando quiser</p>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Painel completo de gestão de estagiários
+          </div>
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Notificações automáticas de risco
+          </div>
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Validação de atendimentos online
+          </div>
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Relatórios de supervisão detalhados
+          </div>
+          <div class="pricing-feature">
+            <span class="pricing-check"><i class="fa-solid fa-check"></i></span>
+            Rastreabilidade total dos atendimentos
+          </div>
+        </div>
+        <a href="#cta" class="btn btn-outline" style="width:100%; justify-content:center;">
+          Começar agora
+        </a>
+      </div>
+    </div>
+    <p class="text-center mt-6" style="font-size:.9rem; color: var(--text-muted);">
+      <i class="fa-solid fa-shield-halved" style="color: var(--secondary);"></i>
+      Paciente sempre gratuito. Sem surpresas. Cancele quando quiser.
+    </p>
+  </div>
+</section>
+
+<!-- ───────── CTA FINAL ───────── -->
+<section class="section cta-section" id="cta">
+  <div class="container">
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+      <div>
+        <div class="section-tag">Seja parte da mudança</div>
+        <h2>Juntos, podemos acolher quem mais precisa</h2>
+        <p class="lead mt-4">
+          Com 100 estagiários ativos, são 4.000 pessoas que chegaram ao limite
+          e não tinham mais pra onde ir — e foram acolhidas.
+        </p>
+        <div style="display:flex; flex-direction:column; gap:16px; margin-top:32px;">
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <div style="width:40px;height:40px;background:var(--secondary-light);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--secondary-dark);flex-shrink:0;">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div>
+              <strong>Startup Experience 2026 — Estácio</strong>
+              <p style="font-size:.875rem;margin:0;">Vertical: Saúde | Projeto de impacto social e tecnológico</p>
+            </div>
+          </div>
+          <div style="display:flex; gap:12px; align-items:flex-start;">
+            <div style="width:40px;height:40px;background:var(--primary-light);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--primary);flex-shrink:0;">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div>
+              <strong>Meta: R$30.000/mês em 12 meses</strong>
+              <p style="font-size:.875rem;margin:0;">200 profissionais assinantes + 5 contratos B2B institucionais</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cta-form">
+        <h3 style="margin-bottom:6px;">Quero participar</h3>
+        <p style="font-size:.9rem; margin-bottom:24px;">Seja paciente, profissional ou parceiro institucional.</p>
+        <div class="form-group">
+          <label class="form-label">Nome completo</label>
+          <input type="text" class="form-input" placeholder="Seu nome">
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-mail</label>
+          <input type="email" class="form-input" placeholder="seu@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Eu sou...</label>
+          <select class="form-select">
+            <option value="">Selecione seu perfil</option>
+            <option>Paciente buscando atendimento</option>
+            <option>Psicólogo formado</option>
+            <option>Estagiário de Psicologia</option>
+            <option>Supervisor / Professor</option>
+            <option>Empresa ou Prefeitura (B2B)</option>
+          </select>
+        </div>
+        <button class="btn btn-primary btn-lg" style="width:100%; justify-content:center; margin-top:8px;" onclick="handleCTASubmit(this)">
+          <i class="fa-solid fa-heart"></i> Quero participar
+        </button>
+        <p style="font-size:.8rem; color:var(--text-light); text-align:center; margin-top:12px;">
+          Sem spam. Seus dados são protegidos.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── FOOTER ───────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+          AcolheMais
+        </a>
+        <p class="footer-tagline">
+          Conectando quem precisa de apoio psicológico a quem pode oferecer — de forma acessível, segura e supervisionada.
+        </p>
+        <div style="display:flex; gap:12px;">
+          <a href="#" style="width:36px;height:36px;background:rgba(255,255,255,.08);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);transition:all .2s;" onmouseover="this.style.background='rgba(255,255,255,.15)';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,.08)';this.style.color='rgba(255,255,255,.5)'"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" style="width:36px;height:36px;background:rgba(255,255,255,.08);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);transition:all .2s;" onmouseover="this.style.background='rgba(255,255,255,.15)';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,.08)';this.style.color='rgba(255,255,255,.5)'"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="#" style="width:36px;height:36px;background:rgba(255,255,255,.08);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);transition:all .2s;" onmouseover="this.style.background='rgba(255,255,255,.15)';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,.08)';this.style.color='rgba(255,255,255,.5)'"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Plataforma</h5>
+        <ul>
+          <li><a href="#">Sobre o AcolheMais</a></li>
+          <li><a href="#como-funciona">Como funciona</a></li>
+          <li><a href="triagem.html">Fazer triagem</a></li>
+          <li><a href="#impacto">Impacto social</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Profissionais</h5>
+        <ul>
+          <li><a href="dashboard-pro.html">Área do profissional</a></li>
+          <li><a href="dashboard-sup.html">Área do supervisor</a></li>
+          <li><a href="#profissionais">Planos e preços</a></li>
+          <li><a href="#">Parceria com faculdades</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#">Política de privacidade</a></li>
+          <li><a href="#">Termos de uso</a></li>
+          <li><a href="#">Ética e conformidade CFP</a></li>
+          <li><a href="#">Contato</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 AcolheMais. Todos os direitos reservados.</span>
+      <span>Startup Experience 2026 | Estácio | Vertical: Saúde</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

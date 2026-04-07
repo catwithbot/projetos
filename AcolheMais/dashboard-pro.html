@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Profissional | AcolheMais</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body { background: var(--bg); }
+    .hidden-row { display: none; }
+  </style>
+</head>
+<body>
+
+<!-- ───────── SIDEBAR ───────── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+    AcolheMais
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-label">Principal</div>
+    <a href="dashboard-pro.html" class="sidebar-link active">
+      <i class="fa-solid fa-house"></i> Início
+    </a>
+    <a href="#" class="sidebar-link">
+      <i class="fa-regular fa-calendar"></i> Agenda
+    </a>
+    <a href="#" class="sidebar-link">
+      <i class="fa-solid fa-users"></i> Pacientes
+    </a>
+    <a href="#" class="sidebar-link">
+      <i class="fa-solid fa-file-medical"></i> Prontuários
+    </a>
+
+    <div class="sidebar-section-label" style="margin-top:8px;">Análises</div>
+    <a href="#" class="sidebar-link">
+      <i class="fa-solid fa-chart-bar"></i> Relatórios
+    </a>
+    <a href="#" class="sidebar-link">
+      <i class="fa-brands fa-whatsapp" style="color:#25D366"></i> Mensagens
+      <span class="link-badge warn">3</span>
+    </a>
+
+    <div class="sidebar-section-label" style="margin-top:8px;">Conta</div>
+    <a href="index.html" class="sidebar-link">
+      <i class="fa-solid fa-globe"></i> Ver site
+    </a>
+    <a href="#" class="sidebar-link">
+      <i class="fa-solid fa-gear"></i> Configurações
+    </a>
+  </nav>
+
+  <div class="sidebar-plan">
+    <i class="fa-solid fa-circle-check"></i> Plano Profissional ativo
+  </div>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar">RF</div>
+      <div>
+        <div class="sidebar-user-name">Dr. Rafael Figueiredo</div>
+        <div class="sidebar-user-role">CRP 06/88732 · Psicólogo</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ───────── MAIN ───────── -->
+<main class="dashboard-main">
+
+  <!-- Topbar -->
+  <div class="dashboard-topbar">
+    <div>
+      <div class="topbar-title">
+        <h2>Bom dia, Dr. Rafael 👋</h2>
+        <p>Segunda-feira, 6 de Abril de 2026</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <a href="triagem.html" class="btn btn-outline btn-sm">
+        <i class="fa-solid fa-plus"></i> Novo paciente
+      </a>
+      <button class="btn btn-icon btn-ghost" title="Notificações" style="position:relative;">
+        <i class="fa-regular fa-bell"></i>
+        <span style="position:absolute;top:6px;right:6px;width:8px;height:8px;background:var(--danger);border-radius:50%;border:2px solid var(--surface);"></span>
+      </button>
+      <div class="avatar" style="cursor:pointer;" title="Perfil">RF</div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="dashboard-content">
+
+    <!-- ── Metrics ── -->
+    <div class="grid-4" style="margin-bottom:28px;">
+      <div class="metric-card">
+        <div class="metric-icon blue"><i class="fa-regular fa-calendar-check"></i></div>
+        <div class="metric-body">
+          <div class="metric-value">18</div>
+          <div class="metric-label">Sessões este mês</div>
+          <div class="metric-sub">
+            <span class="metric-trend up"><i class="fa-solid fa-arrow-up" style="font-size:.6rem"></i> +3 vs mês passado</span>
+          </div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon teal"><i class="fa-solid fa-users"></i></div>
+        <div class="metric-body">
+          <div class="metric-value">12</div>
+          <div class="metric-label">Pacientes ativos</div>
+          <div class="metric-sub">
+            <span class="metric-trend up"><i class="fa-solid fa-arrow-up" style="font-size:.6rem"></i> 2 novos esta semana</span>
+          </div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon orange"><i class="fa-regular fa-clock"></i></div>
+        <div class="metric-body">
+          <div class="metric-value" style="font-size:1.5rem; letter-spacing:0;">Hoje, 15h</div>
+          <div class="metric-label">Próxima sessão</div>
+          <div class="metric-sub" style="color:var(--text-muted); font-size:.8rem;">M.S. — Online</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon yellow"><i class="fa-solid fa-star"></i></div>
+        <div class="metric-body">
+          <div class="metric-value">4.8</div>
+          <div class="metric-label">Avaliação média</div>
+          <div class="metric-sub" style="color:#F0A030; font-size:.85rem;">★★★★★ <span style="color:var(--text-light)">· 34 av.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Two columns ── -->
+    <div class="grid-2" style="margin-bottom:28px; gap:24px;">
+
+      <!-- Próximas Sessões -->
+      <div class="card" style="padding:0; overflow:hidden;">
+        <div class="card-header" style="padding:20px 24px;">
+          <div class="card-title"><i class="fa-regular fa-calendar" style="color:var(--primary); margin-right:6px;"></i> Próximas Sessões</div>
+          <a href="#" class="btn btn-ghost btn-sm">Ver todas</a>
+        </div>
+        <div style="padding:0 16px 16px; display:flex; flex-direction:column; gap:8px;">
+          <div class="session-card">
+            <div class="avatar green">MS</div>
+            <div class="session-info">
+              <div class="session-name">M.S.</div>
+              <div class="session-time"><i class="fa-regular fa-clock" style="color:var(--text-light)"></i> Hoje, 15:00 · Online</div>
+            </div>
+            <span class="badge badge-success">Confirmado</span>
+            <div class="session-actions">
+              <a href="https://wa.me/5521999999999" target="_blank" class="btn btn-sm" style="background:#25D366;color:#fff;padding:7px 10px;" title="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+          <div class="session-card">
+            <div class="avatar teal">LO</div>
+            <div class="session-info">
+              <div class="session-name">L.O.</div>
+              <div class="session-time"><i class="fa-regular fa-clock" style="color:var(--text-light)"></i> Hoje, 17:30 · Online</div>
+            </div>
+            <span class="badge badge-warning">Aguardando</span>
+            <div class="session-actions">
+              <a href="https://wa.me/5521999999999" target="_blank" class="btn btn-sm" style="background:#25D366;color:#fff;padding:7px 10px;" title="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+          <div class="session-card">
+            <div class="avatar purple">PT</div>
+            <div class="session-info">
+              <div class="session-name">P.T.</div>
+              <div class="session-time"><i class="fa-regular fa-clock" style="color:var(--text-light)"></i> Amanhã, 09:00 · Presencial</div>
+            </div>
+            <span class="badge badge-success">Confirmado</span>
+            <div class="session-actions">
+              <a href="https://wa.me/5521999999999" target="_blank" class="btn btn-sm" style="background:#25D366;color:#fff;padding:7px 10px;" title="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+          <div class="session-card">
+            <div class="avatar orange">AM</div>
+            <div class="session-info">
+              <div class="session-name">A.M.</div>
+              <div class="session-time"><i class="fa-regular fa-clock" style="color:var(--text-light)"></i> Amanhã, 11:00 · Online</div>
+            </div>
+            <span class="badge badge-success">Confirmado</span>
+            <div class="session-actions">
+              <a href="https://wa.me/5521999999999" target="_blank" class="btn btn-sm" style="background:#25D366;color:#fff;padding:7px 10px;" title="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agenda da Semana + No-show -->
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><i class="fa-solid fa-table-cells" style="color:var(--secondary); margin-right:6px;"></i> Agenda da Semana</div>
+            <span class="badge badge-outline">6–10 Abr</span>
+          </div>
+          <div class="week-calendar">
+            <div class="week-day">
+              <div class="week-day-label">SEG</div>
+              <div class="week-day-slots">
+                <div class="week-slot busy">09h</div>
+                <div class="week-slot today">15h</div>
+                <div class="week-slot busy">17h</div>
+                <div class="week-slot free">19h</div>
+              </div>
+            </div>
+            <div class="week-day">
+              <div class="week-day-label">TER</div>
+              <div class="week-day-slots">
+                <div class="week-slot busy">09h</div>
+                <div class="week-slot busy">11h</div>
+                <div class="week-slot free">15h</div>
+                <div class="week-slot busy">17h</div>
+              </div>
+            </div>
+            <div class="week-day">
+              <div class="week-day-label">QUA</div>
+              <div class="week-day-slots">
+                <div class="week-slot free">09h</div>
+                <div class="week-slot busy">14h</div>
+                <div class="week-slot busy">16h</div>
+                <div class="week-slot free">19h</div>
+              </div>
+            </div>
+            <div class="week-day">
+              <div class="week-day-label">QUI</div>
+              <div class="week-day-slots">
+                <div class="week-slot busy">10h</div>
+                <div class="week-slot free">13h</div>
+                <div class="week-slot busy">15h</div>
+                <div class="week-slot busy">17h</div>
+              </div>
+            </div>
+            <div class="week-day">
+              <div class="week-day-label">SEX</div>
+              <div class="week-day-slots">
+                <div class="week-slot busy">09h</div>
+                <div class="week-slot busy">11h</div>
+                <div class="week-slot free">14h</div>
+                <div class="week-slot free">16h</div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; gap:12px; margin-top:16px; font-size:.8rem;">
+            <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;background:var(--primary);border-radius:3px;display:inline-block;"></span> Hoje</div>
+            <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;background:var(--primary-light);border-radius:3px;display:inline-block;"></span> Ocupado</div>
+            <div style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;background:var(--border);border-radius:3px;display:inline-block;"></span> Livre</div>
+          </div>
+        </div>
+
+        <!-- No-show Indicator -->
+        <div class="card">
+          <div class="card-header" style="margin-bottom:12px;">
+            <div class="card-title"><i class="fa-solid fa-chart-line" style="color:var(--success); margin-right:6px;"></i> Taxa de Comparecimento</div>
+            <span class="badge badge-success"><i class="fa-solid fa-check"></i> Meta atingida</span>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-label">
+              <span style="font-weight:700; color:var(--success);">92% de comparecimento</span>
+              <span>Meta: >90%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill green" style="width:92%;"></div>
+            </div>
+          </div>
+          <p style="font-size:.8125rem; color:var(--text-muted); margin-top:12px;">
+            <i class="fa-solid fa-circle-info" style="color:var(--primary);"></i>
+            1 no-show neste mês. Confirmações automáticas via WhatsApp ajudam a reduzir faltas.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Appointments Table ── -->
+    <div class="card" style="padding:0; overflow:hidden;">
+      <div class="card-header" style="padding:20px 24px;">
+        <div class="card-title"><i class="fa-solid fa-list-check" style="color:var(--primary); margin-right:6px;"></i> Todos os Agendamentos</div>
+        <div class="filter-tabs">
+          <button class="filter-tab active" onclick="filterTable('todos', this)">Todos</button>
+          <button class="filter-tab" onclick="filterTable('confirmado', this)">Confirmados</button>
+          <button class="filter-tab" onclick="filterTable('pendente', this)">Pendentes</button>
+          <button class="filter-tab" onclick="filterTable('cancelado', this)">Cancelados</button>
+        </div>
+      </div>
+      <div class="table-container" style="border-radius:0; border:none; border-top:1.5px solid var(--border);">
+        <table id="appointmentsTable">
+          <thead>
+            <tr>
+              <th>Paciente</th>
+              <th>Data e Hora</th>
+              <th>Tipo</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-status="confirmado">
+              <td><div class="td-name"><div class="avatar-sm avatar green">MS</div> M.S.</div></td>
+              <td>Hoje, 15:00</td>
+              <td><span class="badge badge-primary">Online</span></td>
+              <td><span class="badge badge-success">Confirmado</span></td>
+              <td>
+                <div class="table-actions">
+                  <a href="https://wa.me/5521999999999" target="_blank" class="btn btn-sm btn-success">
+                    <i class="fa-brands fa-whatsapp"></i>
+                  </a>
+                  <button class="btn btn-sm btn-outline">Prontuário</button>
+                </div>
+              </td>
+            </tr>
+            <tr data-status="pendente">
+              <td><div class="td-name"><div class="avatar-sm avatar teal">LO</div> L.O.</div></td>
+              <td>Hoje, 17:30</td>
+              <td><span class="badge badge-primary">Online</span></td>
+              <td><span class="badge badge-warning">Pendente</span></td>
+              <td>
+                <div class="table-actions">
+                  <a href="https://wa.me/5521999999999" target="_blank" class="btn btn-sm btn-success">
+                    <i class="fa-brands fa-whatsapp"></i>
+                  </a>
+                  <button class="btn btn-sm btn-outline">Prontuário</button>
+                </div>
+              </td>
+            </tr>
+            <tr data-status="confirmado">
+              <td><div class="td-name"><div class="avatar-sm avatar purple">PT</div> P.T.</div></td>
+              <td>07/04, 09:00</td>
+              <td><span class="badge badge-secondary">Presencial</span></td>
+              <td><span class="badge badge-success">Confirmado</span></td>
+              <td>
+                <div class="table-actions">
+                  <a href="https://wa.me/5521999999999" target="_blank" class="btn btn-sm btn-success">
+                    <i class="fa-brands fa-whatsapp"></i>
+                  </a>
+                  <button class="btn btn-sm btn-outline">Prontuário</button>
+                </div>
+              </td>
+            </tr>
+            <tr data-status="confirmado">
+              <td><div class="td-name"><div class="avatar-sm avatar orange">AM</div> A.M.</div></td>
+              <td>07/04, 11:00</td>
+              <td><span class="badge badge-primary">Online</span></td>
+              <td><span class="badge badge-success">Confirmado</span></td>
+              <td>
+                <div class="table-actions">
+                  <a href="https://wa.me/5521999999999" target="_blank" class="btn btn-sm btn-success">
+                    <i class="fa-brands fa-whatsapp"></i>
+                  </a>
+                  <button class="btn btn-sm btn-outline">Prontuário</button>
+                </div>
+              </td>
+            </tr>
+            <tr data-status="cancelado">
+              <td><div class="td-name"><div class="avatar-sm avatar">RN</div> R.N.</div></td>
+              <td>05/04, 14:00</td>
+              <td><span class="badge badge-primary">Online</span></td>
+              <td><span class="badge badge-danger">Cancelado</span></td>
+              <td>
+                <div class="table-actions">
+                  <a href="https://wa.me/5521999999999" target="_blank" class="btn btn-sm btn-success">
+                    <i class="fa-brands fa-whatsapp"></i>
+                  </a>
+                  <button class="btn btn-sm btn-outline">Reagendar</button>
+                </div>
+              </td>
+            </tr>
+            <tr data-status="pendente">
+              <td><div class="td-name"><div class="avatar-sm avatar yellow">KR</div> K.R.</div></td>
+              <td>08/04, 16:00</td>
+              <td><span class="badge badge-secondary">Presencial</span></td>
+              <td><span class="badge badge-warning">Pendente</span></td>
+              <td>
+                <div class="table-actions">
+                  <a href="https://wa.me/5521999999999" target="_blank" class="btn btn-sm btn-success">
+                    <i class="fa-brands fa-whatsapp"></i>
+                  </a>
+                  <button class="btn btn-sm btn-outline">Prontuário</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="padding:16px 24px; display:flex; align-items:center; justify-content:space-between; border-top:1.5px solid var(--border);">
+        <span style="font-size:.875rem; color:var(--text-muted);">Exibindo 6 de 18 agendamentos</span>
+        <div style="display:flex; gap:6px;">
+          <button class="btn btn-sm btn-outline"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="btn btn-sm btn-primary">1</button>
+          <button class="btn btn-sm btn-outline">2</button>
+          <button class="btn btn-sm btn-outline">3</button>
+          <button class="btn btn-sm btn-outline"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+function filterTable(status, btn) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#appointmentsTable tbody tr').forEach(row => {
+    if (status === 'todos' || row.dataset.status === status) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>

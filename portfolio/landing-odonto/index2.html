@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clínica Vida Plena – Saúde com cuidado e excelência</title>
+  <style>
+    /* ─── Reset & base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-900: #0d2f5e;
+      --blue-700: #1a4f9c;
+      --blue-500: #2d73d9;
+      --blue-300: #6aaef6;
+      --blue-50:  #eef5ff;
+      --white:    #ffffff;
+      --gray-100: #f4f7fb;
+      --gray-400: #94a3b8;
+      --gray-700: #334155;
+      --radius:   12px;
+      --shadow:   0 4px 24px rgba(13,47,94,.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: var(--gray-700);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    img { display: block; max-width: 100%; }
+
+    /* ─── Utility ───────────────────────────────────────────────── */
+    .container {
+      width: min(1140px, 100%);
+      margin-inline: auto;
+      padding-inline: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,47,94,.18); }
+
+    .btn-primary {
+      background: var(--blue-500);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--blue-700); }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--white);
+      color: var(--white);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.12); }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--blue-50);
+      color: var(--blue-700);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: var(--blue-900);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--gray-400);
+      max-width: 560px;
+    }
+
+    /* ─── Header ───────────────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      box-shadow: 0 2px 12px rgba(13,47,94,.08);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--blue-900);
+      letter-spacing: -.02em;
+    }
+    .logo span { color: var(--blue-500); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--gray-700);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--blue-500); }
+
+    .nav-cta {
+      background: var(--blue-500);
+      color: var(--white) !important;
+      padding: 9px 22px;
+      border-radius: 50px;
+      font-size: .9rem !important;
+    }
+    .nav-cta:hover { background: var(--blue-700); color: var(--white) !important; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 3px;
+      background: var(--blue-900);
+      border-radius: 3px;
+      transition: all .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--white);
+      padding: 16px 24px 24px;
+      border-top: 1px solid var(--blue-50);
+      gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      display: block;
+      padding: 10px 0;
+      font-weight: 600;
+      color: var(--gray-700);
+      border-bottom: 1px solid var(--blue-50);
+      transition: color .2s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--blue-500); }
+
+    /* ─── Hero ─────────────────────────────────────────────────── */
+    #hero {
+      background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 55%, var(--blue-500) 100%);
+      color: var(--white);
+      padding: 100px 0 80px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+      position: relative;
+    }
+
+    .hero-content { max-width: 540px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: .85rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      backdrop-filter: blur(6px);
+    }
+    .hero-badge::before {
+      content: '●';
+      color: #4ade80;
+      font-size: .7rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero-title span { color: var(--blue-300); }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      opacity: .85;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 52px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,.15);
+    }
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--white);
+    }
+    .stat-label {
+      font-size: .8rem;
+      opacity: .7;
+      margin-top: 2px;
+    }
+
+    /* Hero illustration */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,.1);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 24px;
+      padding: 32px;
+      width: 340px;
+      color: var(--white);
+    }
+
+    .hero-card-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(255,255,255,.15);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+
+    .hero-card h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .hero-card p {
+      font-size: .9rem;
+      opacity: .8;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .card-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .pill {
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50px;
+      padding: 4px 12px;
+      font-size: .78rem;
+      font-weight: 600;
+    }
+
+    /* ─── Serviços ─────────────────────────────────────────────── */
+    #servicos {
+      padding: 100px 0;
+      background: var(--gray-100);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .section-header .section-sub { margin-inline: auto; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      box-shadow: var(--shadow);
+      transition: transform .25s, box-shadow .25s;
+      border-top: 4px solid var(--blue-500);
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(13,47,94,.15);
+    }
+
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--blue-50);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--blue-900);
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: .95rem;
+      color: var(--gray-400);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .service-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .service-features li {
+      font-size: .88rem;
+      color: var(--gray-700);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .service-features li::before {
+      content: '✓';
+      color: var(--blue-500);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ─── Por que nos escolher ─────────────────────────────────── */
+    #diferenciais {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .diff-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .diff-text .section-sub { margin-bottom: 36px; }
+
+    .diff-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .diff-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .diff-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--blue-50);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .diff-item h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blue-900);
+      margin-bottom: 4px;
+    }
+    .diff-item p {
+      font-size: .9rem;
+      color: var(--gray-400);
+    }
+
+    .diff-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .diff-stat-card {
+      background: var(--gray-100);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .diff-stat-card:first-child {
+      background: var(--blue-900);
+      color: var(--white);
+      grid-column: span 2;
+    }
+    .diff-stat-num {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--blue-500);
+      display: block;
+    }
+    .diff-stat-card:first-child .diff-stat-num {
+      color: var(--blue-300);
+    }
+    .diff-stat-label {
+      font-size: .85rem;
+      color: var(--gray-400);
+      margin-top: 4px;
+    }
+    .diff-stat-card:first-child .diff-stat-label { color: rgba(255,255,255,.65); }
+
+    /* ─── Depoimentos ──────────────────────────────────────────── */
+    #depoimentos {
+      padding: 100px 0;
+      background: var(--blue-50);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: transform .25s;
+    }
+    .testimonial-card:hover { transform: translateY(-4px); }
+
+    .stars {
+      display: flex;
+      gap: 4px;
+      color: #f59e0b;
+      font-size: 1rem;
+    }
+
+    .testimonial-text {
+      font-size: .97rem;
+      color: var(--gray-700);
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+    }
+
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-700), var(--blue-300));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--white);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-weight: 700;
+      color: var(--blue-900);
+      font-size: .95rem;
+    }
+    .author-role {
+      font-size: .8rem;
+      color: var(--gray-400);
+    }
+
+    /* ─── Agendamento ──────────────────────────────────────────── */
+    #agendamento {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .form-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .form-info .section-title { margin-bottom: 16px; }
+    .form-info .section-sub { margin-bottom: 32px; }
+
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: .95rem;
+      color: var(--gray-700);
+    }
+    .contact-item-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--blue-50);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-item strong { display: block; font-size: .8rem; color: var(--gray-400); margin-bottom: 1px; }
+
+    /* Form */
+    .form-card {
+      background: var(--gray-100);
+      border-radius: 20px;
+      padding: 40px;
+    }
+
+    .form-card h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--blue-900);
+      margin-bottom: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--gray-700);
+      margin-bottom: 6px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      background: var(--white);
+      font-size: .95rem;
+      color: var(--gray-700);
+      font-family: inherit;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      appearance: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--blue-500);
+      box-shadow: 0 0 0 4px rgba(45,115,217,.12);
+    }
+
+    textarea { resize: vertical; min-height: 110px; }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2394a3b8' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      justify-content: center;
+      padding: 15px;
+      font-size: 1rem;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue-700), var(--blue-500));
+      color: var(--white);
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-family: inherit;
+      transition: transform .2s, box-shadow .2s, opacity .2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(45,115,217,.35);
+    }
+    .submit-btn:active { transform: translateY(0); }
+
+    /* ─── Footer ───────────────────────────────────────────────── */
+    footer {
+      background: var(--blue-900);
+      color: rgba(255,255,255,.75);
+      padding: 60px 0 28px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand .logo { color: var(--white); margin-bottom: 14px; }
+    .footer-brand p { font-size: .9rem; line-height: 1.7; max-width: 300px; }
+
+    .footer-col h4 {
+      color: var(--white);
+      font-size: .9rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      font-size: .9rem;
+      transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--white); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .85rem;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* ─── Responsivo ───────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+      .hero-content { max-width: 100%; }
+      .hero-actions { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-visual { order: -1; }
+      .hero-card { width: 100%; max-width: 380px; }
+
+      .diff-inner { grid-template-columns: 1fr; gap: 48px; }
+
+      .form-wrapper { grid-template-columns: 1fr; gap: 40px; }
+
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: span 2; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      #hero { padding: 70px 0 60px; }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: span 1; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+
+      .diff-visual { grid-template-columns: 1fr; }
+      .diff-stat-card:first-child { grid-column: span 1; }
+
+      .form-card { padding: 28px 20px; }
+    }
+
+    /* ─── Scroll reveal ────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header>
+  <div class="container">
+    <nav>
+      <a href="#" class="logo">Vida<span>Plena</span> Clínica</a>
+
+      <ul class="nav-links">
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#diferenciais">Sobre</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#agendamento" class="nav-cta">Agendar consulta</a></li>
+      </ul>
+
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#servicos"    onclick="closeMenu()">Serviços</a>
+    <a href="#diferenciais" onclick="closeMenu()">Sobre</a>
+    <a href="#depoimentos" onclick="closeMenu()">Depoimentos</a>
+    <a href="#agendamento" onclick="closeMenu()">Agendar consulta</a>
+  </div>
+</header>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+
+      <div class="hero-content">
+        <div class="hero-badge">Atendimento de segunda a sábado</div>
+        <h1 class="hero-title">
+          Cuidamos da sua saúde com <span>dedicação e excelência</span>
+        </h1>
+        <p class="hero-sub">
+          Na Clínica Vida Plena, você encontra atendimento humanizado, profissionais especializados e tecnologia de ponta para cuidar de você e da sua família.
+        </p>
+        <div class="hero-actions">
+          <a href="#agendamento" class="btn btn-primary">
+            📅 Agendar consulta
+          </a>
+          <a href="#servicos" class="btn btn-outline">
+            Ver serviços
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div>
+            <div class="stat-value">+8.000</div>
+            <div class="stat-label">Pacientes atendidos</div>
+          </div>
+          <div>
+            <div class="stat-value">15+</div>
+            <div class="stat-label">Anos de experiência</div>
+          </div>
+          <div>
+            <div class="stat-value">98%</div>
+            <div class="stat-label">Índice de satisfação</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-icon">🏥</div>
+          <h3>Atendimento completo</h3>
+          <p>Consultas, exames e acompanhamento contínuo para garantir sua saúde e bem-estar.</p>
+          <div class="card-pills">
+            <span class="pill">Consultas</span>
+            <span class="pill">Exames</span>
+            <span class="pill">Acompanhamento</span>
+            <span class="pill">Telemedicina</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SERVIÇOS ═══════════════ -->
+<section id="servicos">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">O que oferecemos</span>
+      <h2 class="section-title">Nossos serviços de saúde</h2>
+      <p class="section-sub">Atendimento integral para todas as fases da vida, com equipe multidisciplinar e estrutura moderna.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="service-icon">🩺</div>
+        <h3>Consultas Médicas</h3>
+        <p>Atendimento personalizado com clínicos gerais e especialistas em diversas áreas da medicina.</p>
+        <ul class="service-features">
+          <li>Clínica Geral e Família</li>
+          <li>Cardiologia</li>
+          <li>Pediatria e Geriatria</li>
+          <li>Dermatologia e Ortopedia</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">🔬</div>
+        <h3>Exames Diagnósticos</h3>
+        <p>Exames laboratoriais e de imagem com equipamentos modernos e resultados precisos e ágeis.</p>
+        <ul class="service-features">
+          <li>Exames de sangue e urina</li>
+          <li>Eletrocardiograma (ECG)</li>
+          <li>Ultrassonografia</li>
+          <li>Raio-X e Densitometria</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">📋</div>
+        <h3>Acompanhamento Contínuo</h3>
+        <p>Programas de saúde preventiva e monitoramento para pacientes com condições crônicas.</p>
+        <ul class="service-features">
+          <li>Check-up anual completo</li>
+          <li>Controle de diabetes e hipertensão</li>
+          <li>Nutrição e saúde do peso</li>
+          <li>Saúde mental e psicologia</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ DIFERENCIAIS ═══════════════ -->
+<section id="diferenciais">
+  <div class="container">
+    <div class="diff-inner">
+
+      <div class="diff-text reveal">
+        <span class="section-tag">Por que nos escolher</span>
+        <h2 class="section-title">Saúde que vai além da consulta</h2>
+        <p class="section-sub">Combinamos tecnologia, experiência e cuidado humano para oferecer a melhor experiência em saúde.</p>
+
+        <div class="diff-list">
+          <div class="diff-item">
+            <div class="diff-icon">⚡</div>
+            <div>
+              <h4>Atendimento ágil e sem filas</h4>
+              <p>Agendamento online com confirmação imediata. Sem espera desnecessária.</p>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-icon">👨‍⚕️</div>
+            <div>
+              <h4>Equipe altamente qualificada</h4>
+              <p>Médicos com residência e especialização nas melhores instituições do país.</p>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-icon">💙</div>
+            <div>
+              <h4>Atendimento humanizado</h4>
+              <p>Cada paciente é único. Escutamos, entendemos e tratamos com empatia.</p>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-icon">🔒</div>
+            <div>
+              <h4>Privacidade e sigilo total</h4>
+              <p>Prontuário eletrônico seguro e conformidade total com a LGPD.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="diff-visual reveal">
+        <div class="diff-stat-card">
+          <span class="diff-stat-num">+8.000</span>
+          <p class="diff-stat-label">Pacientes satisfeitos nos últimos 2 anos</p>
+        </div>
+        <div class="diff-stat-card">
+          <span class="diff-stat-num">25+</span>
+          <p class="diff-stat-label">Especialidades médicas</p>
+        </div>
+        <div class="diff-stat-card">
+          <span class="diff-stat-num">15</span>
+          <p class="diff-stat-label">Anos no mercado</p>
+        </div>
+        <div class="diff-stat-card">
+          <span class="diff-stat-num">40+</span>
+          <p class="diff-stat-label">Profissionais de saúde</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ DEPOIMENTOS ═══════════════ -->
+<section id="depoimentos">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Depoimentos</span>
+      <h2 class="section-title">O que nossos pacientes dizem</h2>
+      <p class="section-sub">A satisfação de quem cuida da saúde conosco é o nosso maior orgulho.</p>
+    </div>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Fui atendida pelo Dr. Carlos e fiquei impressionada com a atenção e cuidado. Ele explicou cada detalhe do meu tratamento de forma clara. Me senti acolhida desde o primeiro momento."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div>
+            <div class="author-name">Ana Paula Ferreira</div>
+            <div class="author-role">Paciente de Cardiologia</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Minha filha tem acompanhamento pediátrico aqui há 3 anos. A Dra. Márcia é excepcional — paciente, atenciosa e muito competente. Recomendo a Clínica Vida Plena para toda a família!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">R</div>
+          <div>
+            <div class="author-name">Roberto Almeida</div>
+            <div class="author-role">Paciente de Pediatria</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Fiz meu check-up anual completo aqui. Estrutura moderna, atendimento rápido e resultados dos exames chegaram no mesmo dia. Com certeza voltarei e já indiquei para vários amigos."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">J</div>
+          <div>
+            <div class="author-name">Juliana Costa</div>
+            <div class="author-role">Check-up Preventivo</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ AGENDAMENTO ═══════════════ -->
+<section id="agendamento">
+  <div class="container">
+    <div class="form-wrapper">
+
+      <div class="form-info reveal">
+        <span class="section-tag">Agendar consulta</span>
+        <h2 class="section-title">Cuide da sua saúde hoje mesmo</h2>
+        <p class="section-sub">Preencha o formulário ao lado e entraremos em contato pelo WhatsApp para confirmar o melhor horário para você.</p>
+
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div>
+              <strong>Endereço</strong>
+              Av. Saúde, 1500 – Centro, São Paulo – SP
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📞</div>
+            <div>
+              <strong>Telefone / WhatsApp</strong>
+              (11) 99999-0000
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">🕐</div>
+            <div>
+              <strong>Horário de atendimento</strong>
+              Seg–Sex: 7h às 20h &nbsp;|&nbsp; Sáb: 8h às 14h
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">✉️</div>
+            <div>
+              <strong>E-mail</strong>
+              contato@vidaplena.com.br
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card reveal">
+        <h3>Solicitar agendamento</h3>
+
+        <form id="agendamento-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nome">Nome completo *</label>
+              <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
+            </div>
+            <div class="form-group">
+              <label for="telefone">Telefone / WhatsApp *</label>
+              <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-0000" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="servico">Serviço desejado *</label>
+            <select id="servico" name="servico" required>
+              <option value="" disabled selected>Selecione um serviço</option>
+              <optgroup label="Consultas">
+                <option>Clínica Geral</option>
+                <option>Cardiologia</option>
+                <option>Pediatria</option>
+                <option>Dermatologia</option>
+                <option>Ortopedia</option>
+                <option>Geriatria</option>
+                <option>Psicologia</option>
+              </optgroup>
+              <optgroup label="Exames">
+                <option>Exames Laboratoriais</option>
+                <option>Eletrocardiograma (ECG)</option>
+                <option>Ultrassonografia</option>
+                <option>Raio-X</option>
+                <option>Densitometria Óssea</option>
+              </optgroup>
+              <optgroup label="Programas">
+                <option>Check-up Anual Completo</option>
+                <option>Acompanhamento Nutricional</option>
+                <option>Controle de Doenças Crônicas</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="mensagem">Mensagem / Observações</label>
+            <textarea id="mensagem" name="mensagem" placeholder="Conte mais sobre o motivo da consulta, convênio ou preferência de horário..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Enviar via WhatsApp
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        <div class="logo">Vida<span style="color:var(--blue-300)">Plena</span> Clínica</div>
+        <p>Cuidando da sua saúde com dedicação, tecnologia e carinho há mais de 15 anos. Sua saúde é a nossa missão.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Serviços</h4>
+        <ul>
+          <li><a href="#servicos">Consultas Médicas</a></li>
+          <li><a href="#servicos">Exames Diagnósticos</a></li>
+          <li><a href="#servicos">Acompanhamento</a></li>
+          <li><a href="#agendamento">Check-up Completo</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Informações</h4>
+        <ul>
+          <li><a href="#diferenciais">Sobre a clínica</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#agendamento">Agendamento</a></li>
+          <li><a href="#">Política de privacidade</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 Clínica Vida Plena. Todos os direitos reservados.</span>
+      <span>Desenvolvido com 💙 para sua saúde</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════ JAVASCRIPT ═══════════════ -->
+<script>
+  // ── Hamburger menu ──────────────────────────────────────────────
+  const hamburger   = document.getElementById('hamburger');
+  const mobileMenu  = document.getElementById('mobile-menu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  // ── Phone mask ──────────────────────────────────────────────────
+  document.getElementById('telefone').addEventListener('input', function () {
+    let v = this.value.replace(/\D/g, '').slice(0, 11);
+    if (v.length <= 10) {
+      v = v.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    } else {
+      v = v.replace(/^(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+    }
+    this.value = v;
+  });
+
+  // ── Form → WhatsApp ─────────────────────────────────────────────
+  document.getElementById('agendamento-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const nome     = document.getElementById('nome').value.trim();
+    const telefone = document.getElementById('telefone').value.trim();
+    const servico  = document.getElementById('servico').value;
+    const mensagem = document.getElementById('mensagem').value.trim();
+
+    // Validação simples
+    if (!nome) {
+      alert('Por favor, informe seu nome completo.');
+      document.getElementById('nome').focus();
+      return;
+    }
+    if (!telefone || telefone.replace(/\D/g, '').length < 10) {
+      alert('Por favor, informe um telefone válido.');
+      document.getElementById('telefone').focus();
+      return;
+    }
+    if (!servico) {
+      alert('Por favor, selecione o serviço desejado.');
+      document.getElementById('servico').focus();
+      return;
+    }
+
+    // Monta a mensagem formatada
+    const linhas = [
+      '🏥 *Clínica Vida Plena – Solicitação de Agendamento*',
+      '',
+      `👤 *Nome:* ${nome}`,
+      `📞 *Telefone:* ${telefone}`,
+      `🩺 *Serviço desejado:* ${servico}`,
+    ];
+
+    if (mensagem) {
+      linhas.push(`💬 *Observações:* ${mensagem}`);
+    }
+
+    linhas.push('', '_Mensagem enviada pelo site._');
+
+    const texto = encodeURIComponent(linhas.join('\n'));
+
+    // Número da clínica (sem formatação)
+    const numero = '5511999990000';
+
+    window.open(`https://wa.me/${numero}?text=${texto}`, '_blank');
+  });
+
+  // ── Scroll reveal ────────────────────────────────────────────────
+  const revealEls = document.querySelectorAll('.reveal');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  // ── Active nav highlight on scroll ──────────────────────────────
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks  = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 100) {
+        current = sec.getAttribute('id');
+      }
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}`
+        ? 'var(--blue-500)'
+        : '';
+    });
+  }, { passive: true });
+</script>
+
+</body>
+</html>

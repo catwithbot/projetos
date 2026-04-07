@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Supervisão — AcolheMais</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body { background: var(--bg); }
+    .review-row { cursor: pointer; }
+    .review-row:hover td { background: var(--primary-light); }
+  </style>
+</head>
+<body>
+
+<!-- ───────── SIDEBAR ───────── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+    AcolheMais
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-label">Supervisão</div>
+    <a href="dashboard-sup.html" class="sidebar-link active">
+      <i class="fa-solid fa-house"></i> Início
+    </a>
+    <a href="#" class="sidebar-link">
+      <i class="fa-solid fa-users-between-lines"></i> Meus Estagiários
+    </a>
+    <a href="#" class="sidebar-link">
+      <i class="fa-regular fa-file-lines"></i> Sessões para revisar
+      <span class="link-badge warn">3</span>
+    </a>
+    <a href="#" class="sidebar-link">
+      <i class="fa-solid fa-triangle-exclamation"></i> Alertas
+      <span class="link-badge">1</span>
+    </a>
+
+    <div class="sidebar-section-label" style="margin-top:8px;">Relatórios</div>
+    <a href="#" class="sidebar-link">
+      <i class="fa-solid fa-chart-bar"></i> Relatórios
+    </a>
+    <a href="#" class="sidebar-link">
+      <i class="fa-solid fa-file-export"></i> Exportar dados
+    </a>
+
+    <div class="sidebar-section-label" style="margin-top:8px;">Conta</div>
+    <a href="index.html" class="sidebar-link">
+      <i class="fa-solid fa-globe"></i> Ver site
+    </a>
+    <a href="#" class="sidebar-link">
+      <i class="fa-solid fa-gear"></i> Configurações
+    </a>
+  </nav>
+
+  <div class="sidebar-plan" style="background:rgba(56,189,168,.15); color:#6BE9C8;">
+    <i class="fa-solid fa-circle-check"></i> Supervisor Ativo · R$79,90/mês
+  </div>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar" style="background:linear-gradient(135deg,var(--secondary),var(--primary));">CM</div>
+      <div>
+        <div class="sidebar-user-name">Dra. Carla Mendes</div>
+        <div class="sidebar-user-role">CRP 06/12345 · Supervisora</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ───────── MAIN ───────── -->
+<main class="dashboard-main">
+
+  <!-- Topbar -->
+  <div class="dashboard-topbar">
+    <div>
+      <div class="topbar-title">
+        <h2>Painel de Supervisão</h2>
+        <p>Dra. Carla Mendes · CRP 06/12345 · Segunda-feira, 6 de Abril de 2026</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn btn-outline btn-sm">
+        <i class="fa-solid fa-file-export"></i> Exportar relatório
+      </button>
+      <button class="btn btn-icon btn-ghost" title="Alertas" style="position:relative;">
+        <i class="fa-solid fa-bell"></i>
+        <span style="position:absolute;top:6px;right:6px;width:8px;height:8px;background:var(--danger);border-radius:50%;border:2px solid var(--surface);"></span>
+      </button>
+      <div class="avatar" style="background:linear-gradient(135deg,var(--secondary),var(--primary));color:#fff;cursor:pointer;" title="Perfil">CM</div>
+    </div>
+  </div>
+
+  <div class="dashboard-content">
+
+    <!-- ── Metrics ── -->
+    <div class="grid-4" style="margin-bottom:28px;">
+      <div class="metric-card">
+        <div class="metric-icon teal"><i class="fa-solid fa-user-graduate"></i></div>
+        <div class="metric-body">
+          <div class="metric-value">8</div>
+          <div class="metric-label">Estagiários ativos</div>
+          <div class="metric-sub" style="color:var(--text-muted); font-size:.8rem;">2 com atenção necessária</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon blue"><i class="fa-regular fa-calendar-check"></i></div>
+        <div class="metric-body">
+          <div class="metric-value">47</div>
+          <div class="metric-label">Sessões supervisionadas</div>
+          <div class="metric-sub">
+            <span class="metric-trend up"><i class="fa-solid fa-arrow-up" style="font-size:.6rem"></i> +12 vs mês passado</span>
+          </div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon orange"><i class="fa-regular fa-file-lines"></i></div>
+        <div class="metric-body">
+          <div class="metric-value" style="color: var(--warning);">3</div>
+          <div class="metric-label">Evoluções para revisar</div>
+          <div class="metric-sub" style="color:var(--warning); font-size:.8rem;">
+            <i class="fa-solid fa-clock"></i> Aguardando validação
+          </div>
+        </div>
+      </div>
+      <div class="metric-card" style="border-color: var(--danger); border-width:2px;">
+        <div class="metric-icon red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <div class="metric-body">
+          <div class="metric-value" style="color: var(--danger);">1</div>
+          <div class="metric-label">Alerta de risco</div>
+          <div class="metric-sub" style="color:var(--danger); font-size:.8rem;">
+            <i class="fa-solid fa-exclamation-circle"></i> Requer atenção imediata
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Alert (urgent) ── -->
+    <div style="margin-bottom:24px;">
+      <div class="alert-card danger">
+        <div class="alert-icon">⚠️</div>
+        <div class="alert-body">
+          <div class="alert-title">Caso requer atenção imediata</div>
+          <div class="alert-desc">
+            <strong>Estagiária Ana Lima</strong> relatou ideação em sessão de ontem (05/04) com a paciente P.F.
+            Revisar evolução e definir encaminhamento antes da próxima sessão.
+          </div>
+          <div class="alert-actions">
+            <button class="btn btn-sm btn-danger-outline" onclick="alert('Abrindo evolução da sessão...')">
+              <i class="fa-solid fa-eye"></i> Ver evolução
+            </button>
+            <button class="btn btn-sm btn-outline" onclick="alert('Iniciando encaminhamento ao CAPS...')">
+              <i class="fa-solid fa-hospital"></i> Encaminhar ao CAPS
+            </button>
+            <a href="https://wa.me/5521999999999" target="_blank" class="btn btn-sm" style="background:#25D366;color:#fff;">
+              <i class="fa-brands fa-whatsapp"></i> Falar com Ana
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Trainees + Reviews ── -->
+    <div class="grid-2" style="margin-bottom:28px; gap:24px;">
+
+      <!-- Estagiários -->
+      <div class="card" style="padding:0; overflow:hidden;">
+        <div class="card-header" style="padding:20px 24px;">
+          <div class="card-title"><i class="fa-solid fa-users-between-lines" style="color:var(--secondary); margin-right:6px;"></i> Meus Estagiários</div>
+          <a href="#" class="btn btn-ghost btn-sm">Ver todos</a>
+        </div>
+        <div style="padding:0 16px 16px; display:flex; flex-direction:column; gap:10px;">
+
+          <div class="trainee-card" style="border-left: 3px solid var(--danger);">
+            <div class="avatar green">AL</div>
+            <div class="trainee-info">
+              <div class="trainee-name">Ana Lima</div>
+              <div class="trainee-semester">8º semestre · Estácio RJ</div>
+              <div class="trainee-meta">
+                <span>Horas clínicas</span>
+                <span style="font-weight:700; color:var(--text);">68 / 120h</span>
+              </div>
+              <div class="progress-bar" style="margin-bottom:8px;">
+                <div class="progress-fill warn" style="width:57%;"></div>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:space-between;">
+                <span style="font-size:.8rem; color:var(--text-muted);">Última sessão: ontem</span>
+                <span class="badge badge-danger" style="font-size:.7rem;">Atenção</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="trainee-card">
+            <div class="avatar teal">BR</div>
+            <div class="trainee-info">
+              <div class="trainee-name">Bruno Ribeiro</div>
+              <div class="trainee-semester">7º semestre · Estácio SP</div>
+              <div class="trainee-meta">
+                <span>Horas clínicas</span>
+                <span style="font-weight:700; color:var(--text);">92 / 120h</span>
+              </div>
+              <div class="progress-bar" style="margin-bottom:8px;">
+                <div class="progress-fill green" style="width:77%;"></div>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:space-between;">
+                <span style="font-size:.8rem; color:var(--text-muted);">Última sessão: há 2 dias</span>
+                <span class="badge badge-success" style="font-size:.7rem;">Em dia</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="trainee-card">
+            <div class="avatar purple">CF</div>
+            <div class="trainee-info">
+              <div class="trainee-name">Camila Ferreira</div>
+              <div class="trainee-semester">8º semestre · Estácio RJ</div>
+              <div class="trainee-meta">
+                <span>Horas clínicas</span>
+                <span style="font-weight:700; color:var(--text);">104 / 120h</span>
+              </div>
+              <div class="progress-bar" style="margin-bottom:8px;">
+                <div class="progress-fill green" style="width:87%;"></div>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:space-between;">
+                <span style="font-size:.8rem; color:var(--text-muted);">Última sessão: hoje</span>
+                <span class="badge badge-success" style="font-size:.7rem;">Em dia</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="trainee-card" style="border-left: 3px solid var(--warning);">
+            <div class="avatar orange">DS</div>
+            <div class="trainee-info">
+              <div class="trainee-name">Diego Santos</div>
+              <div class="trainee-semester">7º semestre · Estácio BH</div>
+              <div class="trainee-meta">
+                <span>Horas clínicas</span>
+                <span style="font-weight:700; color:var(--text);">41 / 120h</span>
+              </div>
+              <div class="progress-bar" style="margin-bottom:8px;">
+                <div class="progress-fill warn" style="width:34%;"></div>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:space-between;">
+                <span style="font-size:.8rem; color:var(--text-muted);">Última sessão: há 5 dias</span>
+                <span class="badge badge-warning" style="font-size:.7rem;">Atenção</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Sessões para revisar + Relatório -->
+      <div style="display:flex; flex-direction:column; gap:20px;">
+
+        <!-- Reviews -->
+        <div class="card" style="padding:0; overflow:hidden;">
+          <div class="card-header" style="padding:20px 24px;">
+            <div class="card-title"><i class="fa-regular fa-file-lines" style="color:var(--warning); margin-right:6px;"></i> Sessões para Revisar</div>
+            <span class="badge badge-warning">3 pendentes</span>
+          </div>
+          <div class="table-container" style="border:none; border-top:1.5px solid var(--border); border-radius:0;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Estagiário(a)</th>
+                  <th>Data</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="review-row">
+                  <td>
+                    <div class="td-name">
+                      <div class="avatar-sm avatar green">AL</div>
+                      <div>
+                        <div style="font-weight:600;">Ana Lima</div>
+                        <div style="font-size:.8rem;color:var(--text-muted);">Paciente P.F. · Sessão 12</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="font-size:.875rem;">05/04/2026</td>
+                  <td>
+                    <div class="table-actions">
+                      <button class="btn btn-sm btn-primary" onclick="alert('Abrindo evolução...')">Revisar</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="review-row">
+                  <td>
+                    <div class="td-name">
+                      <div class="avatar-sm avatar teal">BR</div>
+                      <div>
+                        <div style="font-weight:600;">Bruno Ribeiro</div>
+                        <div style="font-size:.8rem;color:var(--text-muted);">Paciente L.M. · Sessão 8</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="font-size:.875rem;">04/04/2026</td>
+                  <td>
+                    <div class="table-actions">
+                      <button class="btn btn-sm btn-primary" onclick="alert('Abrindo evolução...')">Revisar</button>
+                      <button class="btn btn-sm btn-outline" onclick="alert('Sessão validada!')">Validar</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="review-row">
+                  <td>
+                    <div class="td-name">
+                      <div class="avatar-sm avatar purple">CF</div>
+                      <div>
+                        <div style="font-weight:600;">Camila Ferreira</div>
+                        <div style="font-size:.8rem;color:var(--text-muted);">Paciente R.T. · Sessão 19</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="font-size:.875rem;">06/04/2026</td>
+                  <td>
+                    <div class="table-actions">
+                      <button class="btn btn-sm btn-primary" onclick="alert('Abrindo evolução...')">Revisar</button>
+                      <button class="btn btn-sm btn-outline" onclick="alert('Sessão validada!')">Validar</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Relatório do Mês -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title"><i class="fa-solid fa-chart-pie" style="color:var(--primary); margin-right:6px;"></i> Relatório de Abril</div>
+            <span class="badge badge-outline">Mês atual</span>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div style="background:var(--primary-light); border-radius:var(--radius); padding:16px; text-align:center;">
+              <div style="font-size:1.75rem; font-weight:800; color:var(--primary); line-height:1;">47</div>
+              <div style="font-size:.8rem; color:var(--primary); font-weight:600; margin-top:4px;">Sessões supervisionadas</div>
+            </div>
+            <div style="background:var(--secondary-light); border-radius:var(--radius); padding:16px; text-align:center;">
+              <div style="font-size:1.75rem; font-weight:800; color:var(--secondary-dark); line-height:1;">94h</div>
+              <div style="font-size:.8rem; color:var(--secondary-dark); font-weight:600; margin-top:4px;">Horas supervisionadas</div>
+            </div>
+            <div style="background:var(--success-light); border-radius:var(--radius); padding:16px; text-align:center;">
+              <div style="font-size:1.75rem; font-weight:800; color:var(--success); line-height:1;">88%</div>
+              <div style="font-size:.8rem; color:var(--success); font-weight:600; margin-top:4px;">Regularidade dos estagiários</div>
+            </div>
+            <div style="background:var(--accent-light); border-radius:var(--radius); padding:16px; text-align:center;">
+              <div style="font-size:1.75rem; font-weight:800; color:var(--accent); line-height:1;">8</div>
+              <div style="font-size:.8rem; color:var(--accent); font-weight:600; margin-top:4px;">Estagiários ativos</div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="progress-wrap">
+              <div class="progress-label">
+                <span>Meta mensal de sessões</span>
+                <span style="font-weight:700;">47 / 60</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width:78%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Secondary Alert ── -->
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <div class="alert-card warning">
+        <div class="alert-icon">📋</div>
+        <div class="alert-body">
+          <div class="alert-title">Diego Santos com baixo volume de sessões</div>
+          <div class="alert-desc">Diego está com apenas 34% das horas cumpridas e não teve sessão nos últimos 5 dias. Considere entrar em contato para verificar se está tendo dificuldades.</div>
+          <div class="alert-actions">
+            <a href="https://wa.me/5521999999999" target="_blank" class="btn btn-sm" style="background:#25D366;color:#fff;">
+              <i class="fa-brands fa-whatsapp"></i> Falar com Diego
+            </a>
+            <button class="btn btn-sm btn-outline" onclick="this.closest('.alert-card').style.display='none'">Dispensar</button>
+          </div>
+        </div>
+      </div>
+      <div class="alert-card info">
+        <div class="alert-icon">ℹ️</div>
+        <div class="alert-body">
+          <div class="alert-title">Camila Ferreira quase concluindo o estágio</div>
+          <div class="alert-desc">Camila tem 104/120h e deve concluir o estágio nos próximos 2 ciclos. Prepare o relatório final de supervisão.</div>
+          <div class="alert-actions">
+            <button class="btn btn-sm btn-primary" onclick="alert('Preparando relatório...')">
+              <i class="fa-solid fa-file-export"></i> Preparar relatório final
+            </button>
+            <button class="btn btn-sm btn-outline" onclick="this.closest('.alert-card').style.display='none'">Dispensar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+</body>
+</html>

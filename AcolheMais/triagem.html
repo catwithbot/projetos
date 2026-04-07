@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triagem Gratuita — AcolheMais</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body { background: var(--bg); }
+    .feeling-check { display:none; }
+    .option-radio { display:none; }
+    .validate-msg {
+      color: var(--danger);
+      font-size: .875rem;
+      text-align: center;
+      margin-top: -16px;
+      margin-bottom: 12px;
+      display: none;
+    }
+    .validate-msg.show { display: block; }
+    .btn-whatsapp {
+      background: #25D366;
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(37,211,102,.35);
+    }
+    .btn-whatsapp:hover { background: #1DB954; box-shadow: 0 6px 20px rgba(37,211,102,.45); transform:translateY(-1px); }
+    .result-pro-header .avatar-lg { font-size:1.125rem; }
+  </style>
+</head>
+<body class="triagem-page">
+
+<!-- ───────── HEADER ───────── -->
+<header class="triagem-header">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+    AcolheMais
+  </a>
+  <span class="badge badge-primary">
+    <i class="fa-solid fa-shield-halved"></i> Triagem Gratuita e Confidencial
+  </span>
+  <a href="index.html" class="btn btn-ghost btn-sm">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+</header>
+
+<!-- ───────── MAIN ───────── -->
+<main class="triagem-main">
+  <div class="triagem-wrapper">
+
+    <!-- Progress -->
+    <div class="triagem-progress">
+      <div class="progress-steps">
+        <div class="progress-step-item">
+          <div class="step-circle active" id="sc1">1</div>
+          <div class="step-connector" id="conn1"></div>
+        </div>
+        <div class="progress-step-item">
+          <div class="step-circle" id="sc2">2</div>
+          <div class="step-connector" id="conn2"></div>
+        </div>
+        <div class="progress-step-item">
+          <div class="step-circle" id="sc3">3</div>
+          <div class="step-connector" id="conn3"></div>
+        </div>
+        <div class="progress-step-item" style="flex:0">
+          <div class="step-circle" id="sc4"><i class="fa-solid fa-check" style="font-size:.75rem;"></i></div>
+        </div>
+      </div>
+      <div class="progress-step-labels">
+        <span>Como se sente</span>
+        <span>Há quanto tempo</span>
+        <span>Situação</span>
+        <span>Resultado</span>
+      </div>
+    </div>
+
+    <!-- ── STEP 1: Como você está se sentindo? ── -->
+    <div class="triagem-step active" id="step1">
+      <div class="triagem-step-header">
+        <h2>Como você está se sentindo?</h2>
+        <p>Selecione tudo que se aplica a você. Pode escolher mais de um.</p>
+      </div>
+      <div class="feeling-grid">
+        <div class="feeling-card" data-value="ansiedade" onclick="toggleFeeling(this)">
+          <div class="feeling-emoji">😰</div>
+          <div class="feeling-label">Ansiedade e preocupação constante</div>
+        </div>
+        <div class="feeling-card" data-value="tristeza" onclick="toggleFeeling(this)">
+          <div class="feeling-emoji">😔</div>
+          <div class="feeling-label">Tristeza e desânimo</div>
+        </div>
+        <div class="feeling-card" data-value="estresse" onclick="toggleFeeling(this)">
+          <div class="feeling-emoji">😤</div>
+          <div class="feeling-label">Estresse e irritabilidade</div>
+        </div>
+        <div class="feeling-card" data-value="cansaco" onclick="toggleFeeling(this)">
+          <div class="feeling-emoji">😴</div>
+          <div class="feeling-label">Cansaço e falta de energia</div>
+        </div>
+        <div class="feeling-card" data-value="vazio" onclick="toggleFeeling(this)">
+          <div class="feeling-emoji">😶</div>
+          <div class="feeling-label">Sensação de vazio</div>
+        </div>
+        <div class="feeling-card" data-value="pensamentos" onclick="toggleFeeling(this)">
+          <div class="feeling-emoji">🤯</div>
+          <div class="feeling-label">Pensamentos difíceis de controlar</div>
+        </div>
+      </div>
+      <p class="validate-msg" id="v1"><i class="fa-solid fa-circle-exclamation"></i> Selecione pelo menos uma opção para continuar.</p>
+      <div class="triagem-footer">
+        <button class="btn btn-primary btn-lg" onclick="nextStep(1)">
+          Continuar <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: Há quanto tempo? ── -->
+    <div class="triagem-step" id="step2">
+      <div class="triagem-step-header">
+        <h2>Há quanto tempo você se sente assim?</h2>
+        <p>Isso nos ajuda a entender melhor o que você está passando.</p>
+      </div>
+      <div class="duration-grid">
+        <div class="option-card" data-value="dias" onclick="selectDuration(this)">
+          <div class="option-icon" style="background:var(--secondary-light); color:var(--secondary-dark);">
+            <i class="fa-regular fa-calendar"></i>
+          </div>
+          <div class="option-text">
+            <h4>Há poucos dias</h4>
+            <p>Menos de uma semana</p>
+          </div>
+        </div>
+        <div class="option-card" data-value="semanas" onclick="selectDuration(this)">
+          <div class="option-icon" style="background:var(--primary-light); color:var(--primary);">
+            <i class="fa-regular fa-calendar-week"></i>
+          </div>
+          <div class="option-text">
+            <h4>Há algumas semanas</h4>
+            <p>Entre 1 e 4 semanas</p>
+          </div>
+        </div>
+        <div class="option-card" data-value="meses" onclick="selectDuration(this)">
+          <div class="option-icon" style="background:var(--warning-light); color:var(--warning);">
+            <i class="fa-regular fa-calendar-days"></i>
+          </div>
+          <div class="option-text">
+            <h4>Há meses</h4>
+            <p>Entre 1 e 12 meses</p>
+          </div>
+        </div>
+        <div class="option-card" data-value="mais1ano" onclick="selectDuration(this)">
+          <div class="option-icon" style="background:var(--accent-light); color:var(--accent);">
+            <i class="fa-solid fa-hourglass-half"></i>
+          </div>
+          <div class="option-text">
+            <h4>Há mais de um ano</h4>
+            <p>Já faz bastante tempo</p>
+          </div>
+        </div>
+      </div>
+      <p class="validate-msg" id="v2"><i class="fa-solid fa-circle-exclamation"></i> Selecione uma opção para continuar.</p>
+      <div class="triagem-footer">
+        <button class="btn btn-ghost btn-lg" onclick="prevStep(2)">
+          <i class="fa-solid fa-arrow-left"></i> Voltar
+        </button>
+        <button class="btn btn-primary btn-lg" onclick="nextStep(2)">
+          Continuar <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Situação financeira ── -->
+    <div class="triagem-step" id="step3">
+      <div class="triagem-step-header">
+        <h2>Como é sua situação financeira?</h2>
+        <p>Sem julgamentos — isso nos ajuda a encontrar o atendimento certo para você.</p>
+      </div>
+      <div class="financial-grid">
+        <div class="option-card" data-value="gratuito" onclick="selectFinancial(this)">
+          <div class="option-icon">
+            <i class="fa-solid fa-heart" style="color:var(--secondary-dark);"></i>
+          </div>
+          <div class="option-text">
+            <h4>Preciso de atendimento gratuito</h4>
+            <p>Sem condições de pagar no momento — sem problema, temos opções para você.</p>
+          </div>
+        </div>
+        <div class="option-card" data-value="simbolico" onclick="selectFinancial(this)">
+          <div class="option-icon">
+            <i class="fa-solid fa-coins" style="color:var(--primary);"></i>
+          </div>
+          <div class="option-text">
+            <h4>Posso pagar um valor simbólico</h4>
+            <p>Consigo pagar algo acessível — psicólogos com vagas a preço social.</p>
+          </div>
+        </div>
+        <div class="option-card" data-value="empresa" onclick="selectFinancial(this)">
+          <div class="option-icon">
+            <i class="fa-solid fa-building" style="color:var(--accent);"></i>
+          </div>
+          <div class="option-text">
+            <h4>Quero usar o benefício da empresa</h4>
+            <p>Minha empresa ou prefeitura tem parceria com o AcolheMais.</p>
+          </div>
+        </div>
+      </div>
+      <p class="validate-msg" id="v3"><i class="fa-solid fa-circle-exclamation"></i> Selecione uma opção para continuar.</p>
+      <div class="triagem-footer">
+        <button class="btn btn-ghost btn-lg" onclick="prevStep(3)">
+          <i class="fa-solid fa-arrow-left"></i> Voltar
+        </button>
+        <button class="btn btn-primary btn-lg" onclick="nextStep(3)">
+          Ver opções disponíveis <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: Resultado ── -->
+    <div class="triagem-step" id="step4">
+      <div class="result-header">
+        <div style="width:72px;height:72px;background:var(--success-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.75rem;">
+          ✨
+        </div>
+        <span class="badge badge-success" style="margin-bottom:12px;">
+          <i class="fa-solid fa-check"></i> Encontramos profissionais para você!
+        </span>
+        <h2>Sua indicação está pronta</h2>
+        <p id="resultSubtitle">Com base nas suas respostas, veja os profissionais disponíveis.</p>
+      </div>
+
+      <!-- Main recommendation -->
+      <div class="result-match-card">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+          <span class="badge badge-primary"><i class="fa-solid fa-star"></i> Melhor indicação</span>
+          <span class="badge badge-success" id="resultPriceBadge"><i class="fa-solid fa-check"></i> Gratuito</span>
+        </div>
+        <div class="result-pro-header">
+          <div class="avatar avatar-lg green">AL</div>
+          <div class="result-pro-info">
+            <div class="result-pro-name" id="resultProName">Ana Lima — Estagiária de Psicologia</div>
+            <div class="result-pro-role" id="resultProRole">Estagiária de Psicologia · 8º semestre · Estácio RJ</div>
+            <div class="result-pro-super">
+              <i class="fa-solid fa-shield-halved" style="color:var(--primary)"></i>
+              <span id="resultSupervisor">Supervisionada por Dra. Carla Mendes (CRP 06/12345)</span>
+            </div>
+          </div>
+        </div>
+        <div class="result-tags">
+          <span class="tag">Ansiedade</span>
+          <span class="tag">Estresse</span>
+          <span class="tag" style="background:var(--secondary-light);color:var(--secondary-dark);">Atendimento online</span>
+          <span class="tag" style="background:var(--accent-light);color:var(--accent);">Triagem breve</span>
+        </div>
+        <div class="result-availability">
+          <div class="result-avail-label">
+            <i class="fa-solid fa-calendar-check"></i>
+            Próximo horário: <strong>Amanhã, 14h</strong>
+          </div>
+          <span class="badge badge-success">Disponível</span>
+        </div>
+        <div class="result-actions">
+          <a href="https://wa.me/5521999999999?text=Ol%C3%A1!%20Vim%20pelo%20AcolheMais%20e%20gostaria%20de%20agendar%20uma%20sess%C3%A3o." target="_blank" class="btn btn-whatsapp btn-xl" style="width:100%;justify-content:center;">
+            <i class="fa-brands fa-whatsapp"></i> Agendar pelo WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- More options -->
+      <div class="result-more-card">
+        <div class="result-more-title">
+          <i class="fa-solid fa-list" style="color:var(--text-muted)"></i> Mais opções disponíveis
+        </div>
+        <div class="result-mini-pro">
+          <div class="avatar teal">BM</div>
+          <div style="flex:1;">
+            <div class="result-mini-pro-name">Beatriz Melo — Psicóloga (CRP 06/78901)</div>
+            <div class="result-mini-pro-price">A partir de R$60/sessão · <span style="color:var(--success)">Disponível hoje, 17h</span></div>
+          </div>
+          <span class="badge badge-primary">Preço social</span>
+        </div>
+        <div class="result-mini-pro">
+          <div class="avatar orange">CR</div>
+          <div style="flex:1;">
+            <div class="result-mini-pro-name">Carlos Ramos — Estagiário de Psicologia</div>
+            <div class="result-mini-pro-price">Gratuito · <span style="color:var(--text-muted)">Sexta-feira, 10h</span></div>
+          </div>
+          <span class="badge badge-success">Gratuito</span>
+        </div>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn btn-outline btn-lg" style="width:100%;justify-content:center;" onclick="restartTriage()">
+          <i class="fa-solid fa-rotate-left"></i> Refazer triagem
+        </button>
+        <a href="index.html" class="btn btn-ghost btn-lg" style="width:100%;justify-content:center;">
+          <i class="fa-solid fa-house"></i> Voltar ao início
+        </a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+const state = {
+  step: 1,
+  feelings: [],
+  duration: null,
+  financial: null
+};
+
+function updateProgress(step) {
+  for (let i = 1; i <= 4; i++) {
+    const sc = document.getElementById('sc' + i);
+    sc.classList.remove('active', 'done');
+    if (i < step) {
+      sc.classList.add('done');
+      sc.innerHTML = '<i class="fa-solid fa-check" style="font-size:.75rem;"></i>';
+    } else if (i === step) {
+      sc.classList.add('active');
+      if (i < 4) sc.textContent = i;
+      else sc.innerHTML = '<i class="fa-solid fa-check" style="font-size:.75rem;"></i>';
+    } else {
+      if (i < 4) sc.textContent = i;
+      else sc.innerHTML = '<i class="fa-solid fa-check" style="font-size:.75rem;"></i>';
+    }
+  }
+  for (let i = 1; i <= 3; i++) {
+    const conn = document.getElementById('conn' + i);
+    if (conn) conn.classList.toggle('done', i < step);
+  }
+}
+
+function goToStep(n) {
+  document.querySelectorAll('.triagem-step').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById('step' + n);
+  target.classList.add('active');
+  updateProgress(n);
+  state.step = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleFeeling(card) {
+  const val = card.dataset.value;
+  card.classList.toggle('selected');
+  if (card.classList.contains('selected')) {
+    if (!state.feelings.includes(val)) state.feelings.push(val);
+  } else {
+    state.feelings = state.feelings.filter(f => f !== val);
+  }
+}
+
+function selectDuration(card) {
+  document.querySelectorAll('#step2 .option-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+  state.duration = card.dataset.value;
+}
+
+function selectFinancial(card) {
+  document.querySelectorAll('#step3 .option-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+  state.financial = card.dataset.value;
+}
+
+function nextStep(current) {
+  // Validation
+  if (current === 1) {
+    const vm = document.getElementById('v1');
+    if (state.feelings.length === 0) { vm.classList.add('show'); return; }
+    vm.classList.remove('show');
+  }
+  if (current === 2) {
+    const vm = document.getElementById('v2');
+    if (!state.duration) { vm.classList.add('show'); return; }
+    vm.classList.remove('show');
+  }
+  if (current === 3) {
+    const vm = document.getElementById('v3');
+    if (!state.financial) { vm.classList.add('show'); return; }
+    vm.classList.remove('show');
+    buildResult();
+  }
+  goToStep(current + 1);
+}
+
+function prevStep(current) { goToStep(current - 1); }
+
+function buildResult() {
+  const subtitle = document.getElementById('resultSubtitle');
+  const proName = document.getElementById('resultProName');
+  const proRole = document.getElementById('resultProRole');
+  const supervisor = document.getElementById('resultSupervisor');
+  const priceBadge = document.getElementById('resultPriceBadge');
+
+  if (state.financial === 'empresa') {
+    subtitle.textContent = 'Sua empresa tem parceria com o AcolheMais. Veja a opção disponível:';
+    proName.textContent = 'Dra. Fernanda Costa — Psicóloga Parceira';
+    proRole.textContent = 'Psicóloga (CRP 06/55432) · Convênio empresarial';
+    supervisor.innerHTML = '<i class="fa-solid fa-building" style="color:var(--primary)"></i> Sessão custeada pelo pacote da sua empresa';
+    priceBadge.innerHTML = '<i class="fa-solid fa-check"></i> Incluso no benefício';
+    priceBadge.className = 'badge badge-primary';
+  } else if (state.financial === 'simbolico') {
+    subtitle.textContent = 'Encontramos psicólogos com vagas a preço social para você:';
+    proName.textContent = 'Dr. Ricardo Souza — Psicólogo';
+    proRole.textContent = 'Psicólogo (CRP 06/34210) · Preço social';
+    supervisor.innerHTML = '<i class="fa-solid fa-star" style="color:var(--warning)"></i> 4.9 estrelas · 127 sessões realizadas';
+    priceBadge.innerHTML = 'A partir de R$60';
+    priceBadge.className = 'badge badge-primary';
+  } else {
+    subtitle.textContent = 'Com base nas suas respostas, indicamos um estagiário supervisionado gratuito:';
+    proName.textContent = 'Ana Lima — Estagiária de Psicologia';
+    proRole.textContent = 'Estagiária de Psicologia · 8º semestre · Estácio RJ';
+    supervisor.innerHTML = '<i class="fa-solid fa-shield-halved" style="color:var(--primary)"></i> Supervisionada por Dra. Carla Mendes (CRP 06/12345)';
+    priceBadge.innerHTML = '<i class="fa-solid fa-check"></i> Gratuito';
+    priceBadge.className = 'badge badge-success';
+  }
+}
+
+function restartTriage() {
+  state.feelings = [];
+  state.duration = null;
+  state.financial = null;
+  document.querySelectorAll('.feeling-card').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+  goToStep(1);
+}
+
+// Init
+updateProgress(1);
+</script>
+</body>
+</html>
