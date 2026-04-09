@@ -70,9 +70,9 @@ except ImportError:
     messagebox.showerror("Dependência faltando", "Execute:\npip install openpyxl")
     sys.exit(1)
 
-# ─────────────────────────────────────────────
+# ────────────────────────────────────────────
 # CONFIGURAÇÕES
-# ─────────────────────────────────────────────
+# ────────────────────────────────────────────
 DEFAULT_URL   = "https://amei.amorsaude.com.br"
 WAIT_TIMEOUT  = 10
 PAUSA_CURTA   = 0.3
