@@ -1,3 +1,3 @@
-2026/04/11-23:31:42.717 e47f Reusing MANIFEST /home/venom/Documents/Github/projetos/automaticozap/.wwebjs_auth/session/Default/Sync Data/LevelDB/MANIFEST-000001
-2026/04/11-23:31:42.722 e47f Recovering log #3
-2026/04/11-23:31:42.735 e47f Reusing old log /home/venom/Documents/Github/projetos/automaticozap/.wwebjs_auth/session/Default/Sync Data/LevelDB/000003.log 
+2026/04/12-01:12:30.244 145c7 Reusing MANIFEST /home/venom/Documents/Github/projetos/automaticozap/.wwebjs_auth/session/Default/Sync Data/LevelDB/MANIFEST-000001
+2026/04/12-01:12:30.245 145c7 Recovering log #3
+2026/04/12-01:12:30.246 145c7 Reusing old log /home/venom/Documents/Github/projetos/automaticozap/.wwebjs_auth/session/Default/Sync Data/LevelDB/000003.log 

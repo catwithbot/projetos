@@ -1,37 +1,26 @@
-2026/04/11-23:31:44.675 e485 Reusing MANIFEST /home/venom/Documents/Github/projetos/automaticozap/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2026/04/11-23:31:44.676 e485 Recovering log #544
-2026/04/11-23:31:44.877 e485 Reusing old log /home/venom/Documents/Github/projetos/automaticozap/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000544.log 
-2026/04/11-23:31:56.442 e485 Level-0 table #564: started
-2026/04/11-23:31:56.504 e485 Level-0 table #564: 1432596 bytes OK
-2026/04/11-23:31:56.511 e485 Delete type=0 #544
-2026/04/11-23:31:56.533 e485 Compacting 1@0 + 0@1 files
-2026/04/11-23:31:56.626 e485 Generated table #565@0: 17237 keys, 435168 bytes
-2026/04/11-23:31:56.642 e485 Generated table #566@0: 284 keys, 15771 bytes
-2026/04/11-23:31:56.642 e485 Compacted 1@0 + 0@1 files => 450939 bytes
-2026/04/11-23:31:56.645 e485 compacted to: files[ 0 2 14 0 0 0 0 ]
-2026/04/11-23:31:56.646 e485 Delete type=2 #564
-2026/04/11-23:32:01.329 e485 Compacting 1@1 + 10@2 files
-2026/04/11-23:32:01.696 e485 Generated table #567@1: 60760 keys, 2246687 bytes
-2026/04/11-23:32:01.910 e485 Generated table #568@1: 4887 keys, 2152035 bytes
-2026/04/11-23:32:02.093 e485 Generated table #569@1: 3259 keys, 2152990 bytes
-2026/04/11-23:32:02.325 e485 Generated table #570@1: 2817 keys, 2153131 bytes
-2026/04/11-23:32:02.424 e485 Generated table #571@1: 3236 keys, 2156177 bytes
-2026/04/11-23:32:02.547 e485 Generated table #572@1: 22705 keys, 2200275 bytes
-2026/04/11-23:32:02.977 e485 Generated table #573@1: 29808 keys, 2260643 bytes
-2026/04/11-23:32:03.202 e485 Generated table #574@1: 21410 keys, 2185253 bytes
-2026/04/11-23:32:03.314 e485 Generated table #575@1: 8991 keys, 2132356 bytes
-2026/04/11-23:32:03.701 e485 Generated table #576@1: 107824 keys, 2259466 bytes
-2026/04/11-23:32:03.726 e485 Generated table #577@1: 7632 keys, 162368 bytes
-2026/04/11-23:32:03.727 e485 Compacted 1@1 + 10@2 files => 22061381 bytes
-2026/04/11-23:32:03.733 e485 compacted to: files[ 0 1 15 0 0 0 0 ]
-2026/04/11-23:32:03.735 e485 Delete type=2 #552
-2026/04/11-23:32:03.735 e485 Delete type=2 #551
-2026/04/11-23:32:03.735 e485 Delete type=2 #549
-2026/04/11-23:32:03.735 e485 Delete type=2 #556
-2026/04/11-23:32:03.736 e485 Delete type=2 #550
-2026/04/11-23:32:03.736 e485 Delete type=2 #553
-2026/04/11-23:32:03.736 e485 Delete type=2 #565
-2026/04/11-23:32:03.736 e485 Delete type=2 #554
-2026/04/11-23:32:03.736 e485 Delete type=2 #548
-2026/04/11-23:32:03.737 e485 Delete type=2 #557
-2026/04/11-23:32:03.737 e485 Delete type=2 #555
+2026/04/12-01:12:31.073 145c5 Reusing MANIFEST /home/venom/Documents/Github/projetos/automaticozap/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/04/12-01:12:31.075 145c5 Recovering log #643
+2026/04/12-01:12:31.201 145c5 Reusing old log /home/venom/Documents/Github/projetos/automaticozap/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000643.log 
+2026/04/12-01:12:38.655 145c7 Level-0 table #664: started
+2026/04/12-01:12:38.739 145c7 Level-0 table #664: 1332032 bytes OK
+2026/04/12-01:12:38.744 145c7 Delete type=0 #643
+2026/04/12-01:12:39.186 145d0 Compacting 1@0 + 0@1 files
+2026/04/12-01:12:39.313 145d0 Generated table #665@0: 22529 keys, 488384 bytes
+2026/04/12-01:12:39.319 145d0 Generated table #666@0: 83 keys, 10853 bytes
+2026/04/12-01:12:39.320 145d0 Compacted 1@0 + 0@1 files => 499237 bytes
+2026/04/12-01:12:39.324 145d0 compacted to: files[ 0 2 16 0 0 0 0 ]
+2026/04/12-01:12:40.192 145d0 Compacting 1@1 + 11@2 files
+2026/04/12-01:12:40.328 145d0 Generated table #667@1: 63925 keys, 2259572 bytes
+2026/04/12-01:12:40.395 145d0 Generated table #668@1: 12825 keys, 2163517 bytes
+2026/04/12-01:12:40.438 145d0 Generated table #669@1: 3278 keys, 2152970 bytes
+2026/04/12-01:12:40.532 145d0 Generated table #670@1: 2805 keys, 2151297 bytes
+2026/04/12-01:12:40.588 145d0 Generated table #671@1: 2996 keys, 2153437 bytes
+2026/04/12-01:12:40.777 145d0 Generated table #672@1: 17358 keys, 2181094 bytes
+2026/04/12-01:12:41.089 145d0 Generated table #673@1: 29984 keys, 2261322 bytes
+2026/04/12-01:12:41.317 145d0 Generated table #674@1: 25217 keys, 2210480 bytes
+2026/04/12-01:12:41.429 145d0 Generated table #675@1: 9730 keys, 2133044 bytes
+2026/04/12-01:12:41.560 145d0 Generated table #676@1: 49610 keys, 2180356 bytes
+2026/04/12-01:12:41.579 145d0 Generated table #677@1: 4242 keys, 96224 bytes
+2026/04/12-01:12:41.579 145d0 Compacted 1@1 + 11@2 files => 21943313 bytes
+2026/04/12-01:12:41.582 145d0 compacted to: files[ 0 1 16 0 0 0 0 ]
+2026/04/12-01:12:41.583 145d0 Delete type=2 #664

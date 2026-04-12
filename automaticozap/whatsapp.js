@@ -3,6 +3,53 @@ const qrcode = require('qrcode-terminal')
 const { v4: uuidv4 } = require('uuid')
 const { extractAgenda } = require('./ollama')
 
+function getMsgTimestampMs(msg) {
+  const seconds = msg?.timestamp ?? msg?.t ?? 0
+  return Number(seconds) * 1000
+}
+
+async function fetchMessagesWithFallback(client, chatId, limite) {
+  try {
+    const chat = await client.getChatById(chatId)
+    if (!chat) {
+      throw new Error('Chat não encontrado no cache do cliente')
+    }
+    return await chat.fetchMessages({ limit: limite })
+  } catch (err) {
+    console.warn(`[importar] fetchMessages falhou (${err.message}). Tentando fallback...`)
+  }
+
+  // Tentativa 2: API de busca da lib (costuma funcionar mesmo quando fetchMessages quebra)
+  try {
+    const query = ''
+    const encontrados = await client.searchMessages(query, { chatId, limit: limite, page: 1 })
+    if (Array.isArray(encontrados) && encontrados.length > 0) {
+      return encontrados
+    }
+  } catch (err) {
+    console.warn(`[importar] searchMessages falhou (${err.message}). Tentando cache local...`)
+  }
+
+  // Tentativa 3: somente mensagens já em cache, sem chamadas que forçam carregamento do chat
+  try {
+    return await client.pupPage.evaluate((chatId, limit) => {
+      const wid = window.Store.WidFactory.createWid(chatId)
+      const chat = window.Store.Chat.get(wid)
+      if (!chat || !chat.msgs) return []
+
+      const msgs = chat.msgs
+        .getModelsArray()
+        .filter((m) => !m.isNotification)
+        .slice(-limit)
+
+      return msgs.map((m) => window.WWebJS.getMessageModel(m))
+    }, chatId, limite)
+  } catch (err) {
+    console.warn(`[importar] fallback de cache local falhou (${err.message}).`) 
+    return []
+  }
+}
+
 async function importarHistorico(client, { loadDb, saveDb, dias = 30 }) {
   const grupoAlvo = process.env.GRUPO_NOME
   if (!grupoAlvo) {
@@ -22,13 +69,10 @@ async function importarHistorico(client, { loadDb, saveDb, dias = 30 }) {
   const limite = Math.min(dias * 20, 1000)
   console.log(`[importar] Buscando até ${limite} mensagens dos últimos ${dias} dias em "${grupoAlvo}"...`)
 
-  // getChatById retorna o objeto Chat completo com o store interno inicializado,
-  // necessário para que fetchMessages funcione corretamente
-  const chat = await client.getChatById(chatInfo.id._serialized)
-  const todasMsgs = await chat.fetchMessages({ limit: limite })
+  const todasMsgs = await fetchMessagesWithFallback(client, chatInfo.id._serialized, limite)
 
   const filtradas = todasMsgs.filter(
-    (m) => m.timestamp * 1000 >= limiteMs && m.type === 'chat' && m.body && m.body.trim()
+    (m) => getMsgTimestampMs(m) >= limiteMs && m.type === 'chat' && m.body && m.body.trim()
   )
 
   console.log(`[importar] ${filtradas.length} mensagem(s) no intervalo encontrada(s)`)

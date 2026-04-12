@@ -1,35 +1,13 @@
 [
   {
-    "id": "b96edaf6-9aa6-4ecf-9237-e0bccf9c70b2",
-    "mensagemId": "true_120363424830391563@g.us_A518AACD9879108C8760884E6B4DAE0C_22042124493010@lid",
-    "doutor": "Dr Metaleiro",
-    "data": "21/04/2026",
+    "id": "d25ec4f7-b715-4c30-813e-7ee1dde4b471",
+    "mensagemId": "true_120363424830391563@g.us_A5AFB3CE19DDCED12B1CFE399E7B68CE_22042124493010@lid",
+    "doutor": "Aroldo",
+    "data": "28/04/2026",
     "horario": "00:00",
     "tipo": "Abertura de Agenda",
     "observacoes": null,
-    "criadoEm": "2026-04-12T02:25:41.268Z",
-    "mensagemOriginal": "Dr metaleiro 21/04 abrirão agenda"
-  },
-  {
-    "id": "4eddfbbc-0ed3-4445-9d22-39b44b21fed9",
-    "mensagemId": "false_120363424830391563@g.us_3EB0019B047BCF00533240_16832362725557@lid",
-    "doutor": "Samuel",
-    "data": "01/05/2026",
-    "horario": "00:00",
-    "tipo": "Abertura de Agenda",
-    "observacoes": null,
-    "criadoEm": "2026-04-12T02:29:55.449Z",
-    "mensagemOriginal": "Dr.samuel vai abrir agenda"
-  },
-  {
-    "id": "3c770080-2464-4be6-a0f9-85630ae5c595",
-    "mensagemId": "true_120363424830391563@g.us_A5FFD1FB8F734CEBC99DCD0929971BD5_22042124493010@lid",
-    "doutor": "Metaleiro",
-    "data": "20/04/2026",
-    "horario": "00:00",
-    "tipo": "Abertura de Agenda",
-    "observacoes": null,
-    "criadoEm": "2026-04-12T02:31:38.441Z",
-    "mensagemOriginal": "Dr metaleiro abrirao agenda 20/04"
+    "criadoEm": "2026-04-12T04:12:29.289Z",
+    "mensagemOriginal": "Dr Aroldo abrira 28/04"
   }
 ]
