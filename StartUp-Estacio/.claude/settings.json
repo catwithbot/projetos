@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E '\\\\.\\(html|css|js|json|md\\)$')",
+      "Bash(git -C /home/venom/Documents/Github/projetos/StartUp-Estacio/ log --oneline -10)",
+      "Bash(git -C /home/venom/Documents/Github/projetos/StartUp-Estacio/ status)"
+    ]
+  }
+}

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Acesso & Conexão — Encontre o profissional certo para você no AcolheMais 2.0. Triagem rápida e conexão com estagiários supervisionados.">
+  <meta name="theme-color" content="#1A2332">
+
+  <title>Acesso & Conexão — AcolheMais 2.0</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/acesso.css">
+</head>
+<body>
+
+  <!-- =========================================================
+       NAVIGATION
+       ========================================================= -->
+  <header class="nav" id="nav">
+    <div class="nav__container container">
+
+      <a class="nav__logo" href="index.html" aria-label="AcolheMais — Voltar ao início">
+        <svg class="nav__logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <circle cx="18" cy="18" r="18" fill="#1D9E75" fill-opacity="0.15"/>
+          <path d="M18 8C12.477 8 8 12.477 8 18s4.477 10 10 10 10-4.477 10-10S23.523 8 18 8z" fill="none" stroke="#1D9E75" stroke-width="1.5"/>
+          <path d="M13 18.5c0-2.761 2.239-5 5-5s5 2.239 5 5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"/>
+          <path d="M15.5 21.5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5" stroke="#7F77DD" stroke-width="2" stroke-linecap="round"/>
+          <path d="M10 18h2.5l1.5-3 2 6 1.5-3 1 1.5H26" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="nav__logo-text">AcolheMais</span>
+        <span class="nav__logo-version">2.0</span>
+      </a>
+
+      <nav class="nav__links" id="nav-links" aria-label="Navegação do Acesso">
+        <a href="#triagem">Triagem</a>
+        <a href="#profissionais">Profissionais</a>
+        <a href="#como-funciona-acesso">Como funciona</a>
+      </nav>
+
+      <a href="index.html" class="btn btn--ghost nav__cta">← Voltar</a>
+
+      <button class="nav__hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- =========================================================
+         PAGE HERO
+         ========================================================= -->
+    <section class="page-hero acesso-hero" id="hero">
+      <div class="container">
+        <a href="index.html" class="back-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          Voltar para o início
+        </a>
+
+        <span class="page-hero__eyebrow acesso-eyebrow">Módulo 2</span>
+        <h1>Acesso &amp; Conexão</h1>
+        <p class="page-hero__sub">
+          Responda 4 perguntas rápidas e encontramos o profissional
+          ideal para você — sem burocracia, sem fila.
+        </p>
+
+        <div class="acesso-hero__stats">
+          <div class="acesso-stat">
+            <span class="acesso-stat__number">~3 min</span>
+            <span class="acesso-stat__label">para completar</span>
+          </div>
+          <div class="acesso-stat__divider" aria-hidden="true"></div>
+          <div class="acesso-stat">
+            <span class="acesso-stat__number">100%</span>
+            <span class="acesso-stat__label">gratuito</span>
+          </div>
+          <div class="acesso-stat__divider" aria-hidden="true"></div>
+          <div class="acesso-stat">
+            <span class="acesso-stat__number">3</span>
+            <span class="acesso-stat__label">profissionais disponíveis</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         BANNER DE SUPERVISÃO
+         ========================================================= -->
+    <div class="supervision-banner" id="supervision-banner" role="note" aria-label="Informação sobre supervisão profissional">
+      <div class="container">
+        <div class="supervision-banner__inner">
+          <div class="supervision-banner__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="supervision-banner__text">
+            <strong>Todos os estagiários são supervisionados por psicólogos formados.</strong>
+            <span>
+              Cada sessão é revisada por um supervisor com CRP ativo — você tem o suporte
+              de um profissional experiente mesmo nas consultas gratuitas.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- =========================================================
+         WIZARD DE TRIAGEM
+         ========================================================= -->
+    <section class="triagem-section" id="triagem" aria-labelledby="triagem-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-eyebrow">Triagem personalizada</span>
+          <h2 id="triagem-heading">Vamos entender o que você precisa</h2>
+          <p class="section-desc">
+            Suas respostas ajudam nossa IA a encontrar o profissional mais adequado.
+            Nenhum dado é compartilhado sem sua permissão.
+          </p>
+        </div>
+
+        <!-- ── Wizard container ── -->
+        <div class="wizard" id="wizard" role="region" aria-label="Wizard de triagem" aria-live="polite">
+
+          <!-- Progress bar -->
+          <div class="wizard__progress" role="progressbar" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1" aria-label="Progresso da triagem">
+            <div class="wizard__progress-track">
+              <div class="wizard__progress-fill" id="progress-fill" style="width: 25%"></div>
+            </div>
+            <div class="wizard__progress-steps" aria-hidden="true">
+              <div class="wizard__progress-step is-active" data-step="1">
+                <div class="wizard__step-dot"></div>
+                <span class="wizard__step-label">Sentimentos</span>
+              </div>
+              <div class="wizard__progress-step" data-step="2">
+                <div class="wizard__step-dot"></div>
+                <span class="wizard__step-label">Frequência</span>
+              </div>
+              <div class="wizard__progress-step" data-step="3">
+                <div class="wizard__step-dot"></div>
+                <span class="wizard__step-label">Histórico</span>
+              </div>
+              <div class="wizard__progress-step" data-step="4">
+                <div class="wizard__step-dot"></div>
+                <span class="wizard__step-label">Match</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Step 1: Sentimentos ── -->
+          <div class="wizard__step-panel is-active" id="step-1" role="group" aria-labelledby="step-1-heading">
+            <div class="wizard__step-header">
+              <span class="wizard__step-count" aria-hidden="true">1 / 4</span>
+              <h3 id="step-1-heading">O que você está sentindo?</h3>
+              <p class="wizard__step-sub">Selecione todos que se aplicam à sua situação atual.</p>
+            </div>
+
+            <div class="feeling-grid" role="group" aria-label="Selecione os sentimentos">
+
+              <label class="feeling-card" for="f-ansiedade">
+                <input type="checkbox" id="f-ansiedade" name="feelings" value="ansiedade" class="feeling-input sr-only">
+                <div class="feeling-card__icon" aria-hidden="true">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                  </svg>
+                </div>
+                <span class="feeling-card__label">Ansiedade</span>
+                <div class="feeling-card__check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+              </label>
+
+              <label class="feeling-card" for="f-luto">
+                <input type="checkbox" id="f-luto" name="feelings" value="luto" class="feeling-input sr-only">
+                <div class="feeling-card__icon" aria-hidden="true">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                  </svg>
+                </div>
+                <span class="feeling-card__label">Luto</span>
+                <div class="feeling-card__check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+              </label>
+
+              <label class="feeling-card" for="f-relacionamento">
+                <input type="checkbox" id="f-relacionamento" name="feelings" value="relacionamento" class="feeling-input sr-only">
+                <div class="feeling-card__icon" aria-hidden="true">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                </div>
+                <span class="feeling-card__label">Relacionamento</span>
+                <div class="feeling-card__check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+              </label>
+
+              <label class="feeling-card" for="f-trabalho">
+                <input type="checkbox" id="f-trabalho" name="feelings" value="trabalho" class="feeling-input sr-only">
+                <div class="feeling-card__icon" aria-hidden="true">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                  </svg>
+                </div>
+                <span class="feeling-card__label">Trabalho / Estudo</span>
+                <div class="feeling-card__check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+              </label>
+
+              <label class="feeling-card" for="f-autoestima">
+                <input type="checkbox" id="f-autoestima" name="feelings" value="autoestima" class="feeling-input sr-only">
+                <div class="feeling-card__icon" aria-hidden="true">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="4"/>
+                    <path d="M6 20v-2a6 6 0 0 1 12 0v2"/>
+                    <path d="M12 14v2m-2 2h4"/>
+                  </svg>
+                </div>
+                <span class="feeling-card__label">Autoestima</span>
+                <div class="feeling-card__check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+              </label>
+
+              <label class="feeling-card" for="f-solidao">
+                <input type="checkbox" id="f-solidao" name="feelings" value="solidao" class="feeling-input sr-only">
+                <div class="feeling-card__icon" aria-hidden="true">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                  </svg>
+                </div>
+                <span class="feeling-card__label">Solidão</span>
+                <div class="feeling-card__check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+              </label>
+
+              <label class="feeling-card" for="f-estresse">
+                <input type="checkbox" id="f-estresse" name="feelings" value="estresse" class="feeling-input sr-only">
+                <div class="feeling-card__icon" aria-hidden="true">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                  </svg>
+                </div>
+                <span class="feeling-card__label">Estresse</span>
+                <div class="feeling-card__check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+              </label>
+
+              <label class="feeling-card" for="f-outro">
+                <input type="checkbox" id="f-outro" name="feelings" value="outro" class="feeling-input sr-only">
+                <div class="feeling-card__icon" aria-hidden="true">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
+                  </svg>
+                </div>
+                <span class="feeling-card__label">Outro</span>
+                <div class="feeling-card__check" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+              </label>
+
+            </div><!-- /.feeling-grid -->
+
+            <div class="wizard__nav">
+              <span></span>
+              <button class="btn btn--primary btn--lg" id="next-1" type="button" disabled>
+                Continuar
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+          </div><!-- /#step-1 -->
+
+
+          <!-- ── Step 2: Frequência ── -->
+          <div class="wizard__step-panel" id="step-2" role="group" aria-labelledby="step-2-heading" hidden>
+            <div class="wizard__step-header">
+              <span class="wizard__step-count" aria-hidden="true">2 / 4</span>
+              <h3 id="step-2-heading">Com qual frequência?</h3>
+              <p class="wizard__step-sub">Com que frequência esses sentimentos aparecem na sua semana?</p>
+            </div>
+
+            <div class="frequency-slider-wrap">
+              <div class="freq-labels" aria-hidden="true">
+                <span>Raramente</span>
+                <span>Às vezes</span>
+                <span>Frequente</span>
+                <span>Sempre</span>
+              </div>
+              <div class="freq-track" aria-hidden="true">
+                <div class="freq-track__fill" id="freq-fill"></div>
+              </div>
+              <input
+                type="range"
+                id="freq-slider"
+                name="frequency"
+                min="1"
+                max="4"
+                value="2"
+                step="1"
+                class="freq-slider"
+                aria-label="Frequência dos sentimentos"
+                aria-valuetext="Às vezes"
+              >
+              <div class="freq-current-label" id="freq-label" aria-live="polite">Às vezes</div>
+            </div>
+
+            <div class="freq-description-cards">
+              <div class="freq-desc-card" data-value="1">
+                <span class="freq-desc-card__emoji" aria-hidden="true">🌤</span>
+                <p>Sinto isso de vez em quando, mas não me atrapalha muito.</p>
+              </div>
+              <div class="freq-desc-card is-active" data-value="2">
+                <span class="freq-desc-card__emoji" aria-hidden="true">⛅</span>
+                <p>Aparece algumas vezes por semana e às vezes interfere no meu dia.</p>
+              </div>
+              <div class="freq-desc-card" data-value="3">
+                <span class="freq-desc-card__emoji" aria-hidden="true">🌧</span>
+                <p>Está presente quase todos os dias e impacta bastante minha rotina.</p>
+              </div>
+              <div class="freq-desc-card" data-value="4">
+                <span class="freq-desc-card__emoji" aria-hidden="true">⛈</span>
+                <p>É constante. Estou sentindo isso o tempo todo e precisando de apoio urgente.</p>
+              </div>
+            </div>
+
+            <div class="wizard__nav">
+              <button class="btn btn--ghost" id="back-2" type="button">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                Voltar
+              </button>
+              <button class="btn btn--primary btn--lg" id="next-2" type="button">
+                Continuar
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+          </div><!-- /#step-2 -->
+
+
+          <!-- ── Step 3: Histórico ── -->
+          <div class="wizard__step-panel" id="step-3" role="group" aria-labelledby="step-3-heading" hidden>
+            <div class="wizard__step-header">
+              <span class="wizard__step-count" aria-hidden="true">3 / 4</span>
+              <h3 id="step-3-heading">Você já fez terapia antes?</h3>
+              <p class="wizard__step-sub">Isso nos ajuda a calibrar como apresentamos o suporte.</p>
+            </div>
+
+            <div class="therapy-options" role="radiogroup" aria-labelledby="step-3-heading">
+
+              <label class="therapy-card" for="therapy-yes">
+                <input type="radio" id="therapy-yes" name="therapy" value="yes" class="therapy-input sr-only">
+                <div class="therapy-card__icon" aria-hidden="true">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                </div>
+                <div class="therapy-card__text">
+                  <strong>Sim, já fiz terapia</strong>
+                  <span>Tenho experiência com processo terapêutico.</span>
+                </div>
+              </label>
+
+              <label class="therapy-card" for="therapy-no">
+                <input type="radio" id="therapy-no" name="therapy" value="no" class="therapy-input sr-only">
+                <div class="therapy-card__icon" aria-hidden="true">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 8v4m0 4h.01"/>
+                  </svg>
+                </div>
+                <div class="therapy-card__text">
+                  <strong>Não, é minha primeira vez</strong>
+                  <span>Nunca tive acompanhamento psicológico.</span>
+                </div>
+              </label>
+
+            </div><!-- /.therapy-options -->
+
+            <div class="wizard__nav">
+              <button class="btn btn--ghost" id="back-3" type="button">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                Voltar
+              </button>
+              <button class="btn btn--primary btn--lg" id="next-3" type="button" disabled>
+                Ver meu match
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+          </div><!-- /#step-3 -->
+
+
+          <!-- ── Step 4: Match ── -->
+          <div class="wizard__step-panel" id="step-4" role="region" aria-labelledby="step-4-heading" hidden>
+            <div class="wizard__step-header wizard__step-header--match">
+              <span class="wizard__step-count" aria-hidden="true">4 / 4</span>
+              <div class="match-badge" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                Match encontrado
+              </div>
+              <h3 id="step-4-heading">Profissionais disponíveis para você</h3>
+              <p class="wizard__step-sub">Baseado nas suas respostas, selecionamos estes profissionais.</p>
+            </div>
+
+            <div class="professionals-grid" id="professionals-grid">
+
+              <!-- Profissional 1 -->
+              <article class="prof-card js-reveal" data-delay="0" aria-labelledby="prof-1-name">
+                <div class="prof-card__header">
+                  <div class="prof-avatar prof-avatar--teal" aria-hidden="true">MS</div>
+                  <div class="prof-card__info">
+                    <span class="prof-badge prof-badge--estagiario">Estagiário Supervisado</span>
+                    <h4 id="prof-1-name">Mariana Silva</h4>
+                    <p class="prof-card__specialty">Ansiedade · Autoestima · Relacionamentos</p>
+                  </div>
+                </div>
+                <div class="prof-card__body">
+                  <div class="prof-card__meta">
+                    <div class="prof-meta-item">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      <span>Próximo horário: <strong>Amanhã às 10h</strong></span>
+                    </div>
+                    <div class="prof-meta-item">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                      <span class="prof-price prof-price--free">Gratuito via estágio</span>
+                    </div>
+                  </div>
+                  <a
+                    class="btn btn--whatsapp prof-card__cta"
+                    href="https://wa.me/5521999999901?text=Ol%C3%A1%21+Vim+pelo+AcolheMais+e+gostaria+de+agendar+com+Mariana+Silva"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Agendar com Mariana Silva via WhatsApp"
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                    </svg>
+                    Agendar via WhatsApp
+                  </a>
+                </div>
+              </article>
+
+              <!-- Profissional 2 -->
+              <article class="prof-card prof-card--featured js-reveal" data-delay="150" aria-labelledby="prof-2-name">
+                <div class="prof-card__featured-badge" aria-label="Melhor match">Melhor match</div>
+                <div class="prof-card__header">
+                  <div class="prof-avatar prof-avatar--purple" aria-hidden="true">RC</div>
+                  <div class="prof-card__info">
+                    <span class="prof-badge prof-badge--psicologo">Psicólogo CRP</span>
+                    <h4 id="prof-2-name">Rafael Costa</h4>
+                    <p class="prof-card__specialty">Luto · Estresse · Crises emocionais</p>
+                  </div>
+                </div>
+                <div class="prof-card__body">
+                  <div class="prof-card__meta">
+                    <div class="prof-meta-item">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      <span>Próximo horário: <strong>Hoje às 18h</strong></span>
+                    </div>
+                    <div class="prof-meta-item">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                      <span class="prof-price prof-price--social">R$ 60,00 preço social</span>
+                    </div>
+                  </div>
+                  <a
+                    class="btn btn--whatsapp prof-card__cta"
+                    href="https://wa.me/5521999999902?text=Ol%C3%A1%21+Vim+pelo+AcolheMais+e+gostaria+de+agendar+com+Rafael+Costa"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Agendar com Rafael Costa via WhatsApp"
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                    </svg>
+                    Agendar via WhatsApp
+                  </a>
+                </div>
+              </article>
+
+              <!-- Profissional 3 -->
+              <article class="prof-card js-reveal" data-delay="300" aria-labelledby="prof-3-name">
+                <div class="prof-card__header">
+                  <div class="prof-avatar prof-avatar--brick" aria-hidden="true">AL</div>
+                  <div class="prof-card__info">
+                    <span class="prof-badge prof-badge--estagiario">Estagiário Supervisionado</span>
+                    <h4 id="prof-3-name">Ana Lima</h4>
+                    <p class="prof-card__specialty">Solidão · Trabalho · Identidade</p>
+                  </div>
+                </div>
+                <div class="prof-card__body">
+                  <div class="prof-card__meta">
+                    <div class="prof-meta-item">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      <span>Próximo horário: <strong>Quarta às 14h</strong></span>
+                    </div>
+                    <div class="prof-meta-item">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                      <span class="prof-price prof-price--free">Gratuito via estágio</span>
+                    </div>
+                  </div>
+                  <a
+                    class="btn btn--whatsapp prof-card__cta"
+                    href="https://wa.me/5521999999903?text=Ol%C3%A1%21+Vim+pelo+AcolheMais+e+gostaria+de+agendar+com+Ana+Lima"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Agendar com Ana Lima via WhatsApp"
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                    </svg>
+                    Agendar via WhatsApp
+                  </a>
+                </div>
+              </article>
+
+            </div><!-- /.professionals-grid -->
+
+            <div class="wizard__nav wizard__nav--match">
+              <button class="btn btn--ghost" id="back-4" type="button">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                Refazer triagem
+              </button>
+              <a href="index.html" class="btn btn--ghost btn--lg">← Voltar ao início</a>
+            </div>
+          </div><!-- /#step-4 -->
+
+        </div><!-- /.wizard -->
+
+      </div>
+    </section><!-- /#triagem -->
+
+
+    <!-- =========================================================
+         COMO FUNCIONA A SUPERVISÃO
+         ========================================================= -->
+    <section class="supervision-section" id="como-funciona-acesso" aria-labelledby="supervision-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-eyebrow">Transparência e segurança</span>
+          <h2 id="supervision-heading">Como funciona a supervisão</h2>
+          <p class="section-desc">
+            Entenda por que nosso modelo é seguro mesmo com profissionais em formação.
+          </p>
+        </div>
+
+        <div class="supervision-grid">
+
+          <div class="supervision-card js-reveal" data-delay="0">
+            <div class="supervision-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3>Supervisão semanal obrigatória</h3>
+            <p>
+              Todo estagiário participa de reuniões semanais com um psicólogo supervisor
+              formado e registrado no CRP. Cada caso é analisado em conjunto.
+            </p>
+          </div>
+
+          <div class="supervision-card js-reveal" data-delay="150">
+            <div class="supervision-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <h3>Prontuário revisado</h3>
+            <p>
+              Todas as sessões são documentadas. O supervisor revisa as anotações
+              e orienta a conduta antes da próxima sessão com você.
+            </p>
+          </div>
+
+          <div class="supervision-card js-reveal" data-delay="300">
+            <div class="supervision-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <h3>Encaminhamento imediato</h3>
+            <p>
+              Em situações de risco ou fora do escopo do estagiário, o supervisor
+              é acionado imediatamente para garantir seu bem-estar.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- /#como-funciona-acesso -->
+
+
+    <!-- =========================================================
+         CTA FINAL
+         ========================================================= -->
+    <section class="acesso-cta" aria-labelledby="acesso-cta-heading">
+      <div class="container">
+        <div class="acesso-cta__card js-reveal js-reveal--scale">
+          <h2 id="acesso-cta-heading">Pronto para dar o primeiro passo?</h2>
+          <p>
+            A triagem leva menos de 3 minutos. Sem cadastro, sem burocracia.
+            Só você e o profissional certo para o seu momento.
+          </p>
+          <div class="acesso-cta__actions">
+            <a href="#triagem" class="btn btn--primary btn--lg" id="cta-start-btn">
+              Iniciar triagem agora
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+            <a href="index.html" class="btn btn--ghost btn--lg">← Voltar ao início</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <a class="nav__logo footer__logo" href="index.html" aria-label="AcolheMais — Início">
+          <svg class="nav__logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <circle cx="18" cy="18" r="18" fill="#1D9E75" fill-opacity="0.15"/>
+            <path d="M18 8C12.477 8 8 12.477 8 18s4.477 10 10 10 10-4.477 10-10S23.523 8 18 8z" fill="none" stroke="#1D9E75" stroke-width="1.5"/>
+            <path d="M13 18.5c0-2.761 2.239-5 5-5s5 2.239 5 5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"/>
+            <path d="M15.5 21.5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5" stroke="#7F77DD" stroke-width="2" stroke-linecap="round"/>
+            <path d="M10 18h2.5l1.5-3 2 6 1.5-3 1 1.5H26" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="nav__logo-text">AcolheMais</span>
+          <span class="nav__logo-version">2.0</span>
+        </a>
+        <nav class="footer__nav" aria-label="Links do rodapé">
+          <a href="index.html">Início</a>
+          <a href="jornada.html">Jornada & IA</a>
+          <a href="acesso.html">Acesso & Conexão</a>
+        </nav>
+        <p class="footer__copy">
+          © 2025 AcolheMais 2.0 · Projeto acadêmico — Estácio
+        </p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/acesso.js"></script>
+
+</body>
+</html>

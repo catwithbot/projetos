@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AcolheMais 2.0 — Plataforma biopsicossocial que conecta você a apoio emocional acessível, com IA adaptativa e gamificação. Gratuito, sem burocracia.">
+  <meta name="theme-color" content="#1A2332">
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="AcolheMais 2.0 — Cuidado emocional que cabe na sua vida">
+  <meta property="og:description" content="Apoio psicológico acessível que parece entretenimento. Conectamos você a estagiários supervisionados via WhatsApp.">
+  <meta property="og:type"        content="website">
+  <meta property="og:locale"      content="pt_BR">
+
+  <title>AcolheMais 2.0 — Cuidado emocional que cabe na sua vida</title>
+
+  <!-- Google Fonts: Syne (display) + Plus Jakarta Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- design-system MUST load before style.css -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- =========================================================
+       NAVIGATION
+       ========================================================= -->
+  <header class="nav" id="nav">
+    <div class="nav__container container">
+
+      <!-- Logo -->
+      <a class="nav__logo" href="#hero" aria-label="AcolheMais — Início">
+        <svg class="nav__logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <circle cx="18" cy="18" r="18" fill="#1D9E75" fill-opacity="0.15"/>
+          <path d="M18 8C12.477 8 8 12.477 8 18s4.477 10 10 10 10-4.477 10-10S23.523 8 18 8z" fill="none" stroke="#1D9E75" stroke-width="1.5"/>
+          <path d="M13 18.5c0-2.761 2.239-5 5-5s5 2.239 5 5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"/>
+          <path d="M15.5 21.5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5" stroke="#7F77DD" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="18" cy="24" r="1.5" fill="#1D9E75"/>
+          <!-- Pulse / heartbeat line -->
+          <path d="M10 18h2.5l1.5-3 2 6 1.5-3 1 1.5H26" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="nav__logo-text">AcolheMais</span>
+        <span class="nav__logo-version">2.0</span>
+      </a>
+
+      <!-- Desktop links -->
+      <nav class="nav__links" id="nav-links" aria-label="Navegação principal">
+        <a href="#como-funciona">Como Funciona</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#jornada">Jornada</a>
+      </nav>
+
+      <!-- Desktop CTA -->
+      <a href="#cta-final" class="btn btn--primary nav__cta">Começar agora</a>
+
+      <!-- Mobile hamburger -->
+      <button
+        class="nav__hamburger"
+        id="hamburger"
+        aria-label="Abrir menu de navegação"
+        aria-expanded="false"
+        aria-controls="nav-links"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- =========================================================
+         HERO
+         ========================================================= -->
+    <section class="hero" id="hero" aria-labelledby="hero-headline">
+
+      <div class="hero__container container">
+
+        <!-- Content column -->
+        <div class="hero__content">
+          <span class="hero__eyebrow">Plataforma biopsicossocial</span>
+
+          <h1 class="hero__headline" id="hero-headline">
+            Cuidado emocional que<br>
+            <em class="hero__highlight">cabe na sua vida</em>
+          </h1>
+
+          <p class="hero__subheadline">
+            Conectamos você a apoio psicológico acessível, de um jeito que
+            parece entretenimento — mas transforma de verdade. Gratuito,
+            sem burocracia, pelo WhatsApp.
+          </p>
+
+          <div class="hero__actions">
+            <a href="#cta-final" class="btn btn--primary btn--lg">Quero participar</a>
+            <a href="#como-funciona" class="btn btn--ghost btn--lg">Ver como funciona</a>
+          </div>
+        </div>
+
+        <!-- Visual column -->
+        <div class="hero__visual" aria-hidden="true">
+
+          <!-- Decorative blob SVG -->
+          <svg class="hero__blob" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient id="blob-grad-1" cx="40%" cy="40%" r="60%">
+                <stop offset="0%"   stop-color="#1D9E75" stop-opacity="0.35"/>
+                <stop offset="50%"  stop-color="#7F77DD" stop-opacity="0.20"/>
+                <stop offset="100%" stop-color="#1A2332" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="blob-grad-2" cx="65%" cy="65%" r="55%">
+                <stop offset="0%"   stop-color="#D85A30" stop-opacity="0.25"/>
+                <stop offset="60%"  stop-color="#7F77DD" stop-opacity="0.12"/>
+                <stop offset="100%" stop-color="#1A2332" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="blob-blur">
+                <feGaussianBlur stdDeviation="22"/>
+              </filter>
+            </defs>
+            <!-- Outer glow rings -->
+            <circle cx="210" cy="210" r="180" fill="none" stroke="#1D9E75" stroke-opacity="0.10" stroke-width="1"/>
+            <circle cx="210" cy="210" r="150" fill="none" stroke="#7F77DD" stroke-opacity="0.08" stroke-width="1"/>
+            <circle cx="210" cy="210" r="120" fill="none" stroke="#D85A30" stroke-opacity="0.06" stroke-width="1"/>
+            <!-- Color blobs -->
+            <ellipse cx="170" cy="170" rx="140" ry="120" fill="url(#blob-grad-1)" filter="url(#blob-blur)"/>
+            <ellipse cx="260" cy="260" rx="110" ry="130" fill="url(#blob-grad-2)" filter="url(#blob-blur)"/>
+            <!-- Central icon cluster -->
+            <circle cx="210" cy="210" r="48" fill="#1F2B3D" stroke="#334866" stroke-width="1"/>
+            <!-- Heart / pulse icon in center -->
+            <path d="M194 207.5c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10"
+                  fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"/>
+            <path d="M210 207.5c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10"
+                  fill="none" stroke="#7F77DD" stroke-width="2" stroke-linecap="round"/>
+            <path d="M188 213h5.5l3-6 4 12 3-6 2 3H232"
+                  stroke="#D85A30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Orbit dots -->
+            <circle cx="210" cy="152" r="5" fill="#1D9E75" opacity="0.8"/>
+            <circle cx="268" cy="175" r="4" fill="#7F77DD" opacity="0.7"/>
+            <circle cx="282" cy="238" r="5" fill="#D85A30" opacity="0.6"/>
+            <circle cx="210" cy="268" r="4" fill="#E07B2A" opacity="0.7"/>
+            <circle cx="152" cy="238" r="5" fill="#7F77DD" opacity="0.6"/>
+            <circle cx="140" cy="175" r="4" fill="#1D9E75" opacity="0.7"/>
+          </svg>
+
+          <!-- Float card — Acesso & Conexão -->
+          <div class="hero__float-card hero__float-card--acesso">
+            <div class="hero__float-card-icon hero__float-card-icon--teal">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #1D9E75;" aria-hidden="true">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <span>Agendamento pelo WhatsApp</span>
+          </div>
+
+          <!-- Float card — Mente & Corpo -->
+          <div class="hero__float-card hero__float-card--mente">
+            <div class="hero__float-card-icon hero__float-card-icon--purple">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #7F77DD;" aria-hidden="true">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <span>Check-in biopsicossocial</span>
+          </div>
+
+          <!-- Float card — Jornada & IA -->
+          <div class="hero__float-card hero__float-card--jornada">
+            <div class="hero__float-card-icon hero__float-card-icon--brick">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #D85A30;" aria-hidden="true">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <span>Narrativa adaptativa com IA</span>
+          </div>
+
+        </div><!-- /.hero__visual -->
+
+      </div><!-- /.hero__container -->
+
+      <!-- Scroll hint -->
+      <div class="hero__scroll-hint" aria-hidden="true">
+        <span class="sr-only">Role para baixo</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #6B7E94;">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+
+    </section><!-- /#hero -->
+
+
+    <!-- =========================================================
+         COMO FUNCIONA — 3 módulos
+         ========================================================= -->
+    <section class="modules" id="como-funciona" aria-labelledby="modules-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-eyebrow">3 módulos integrados</span>
+          <h2 id="modules-heading">Como o AcolheMais funciona</h2>
+          <p class="section-desc">
+            Cada módulo atua em uma dimensão diferente do seu bem-estar,
+            trabalhando juntos de forma invisível.
+          </p>
+        </div>
+
+        <div class="modules__grid">
+
+          <!-- Card 1 — Acesso & Conexão (teal) -->
+          <article class="module-card module-card--acesso js-reveal" data-delay="0" aria-labelledby="mod-acesso-title">
+            <div class="module-card__accent-bar" aria-hidden="true"></div>
+            <div class="module-card__icon-wrap">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <span class="module-card__tag" aria-hidden="true">#1</span>
+            <h3 class="module-card__title" id="mod-acesso-title">Acesso &amp; Conexão</h3>
+            <p class="module-card__desc">
+              Agende seu acompanhamento diretamente pelo WhatsApp com estagiários
+              supervisionados por psicólogos credenciados. Zero burocracia,
+              zero custo, 100% acessível.
+            </p>
+            <a href="acesso.html" class="module-card__link" aria-label="Explorar módulo Acesso e Conexão">
+              Explorar módulo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </article>
+
+          <!-- Card 2 — Mente & Corpo (purple) -->
+          <article class="module-card module-card--mente js-reveal" data-delay="150" aria-labelledby="mod-mente-title">
+            <div class="module-card__accent-bar" aria-hidden="true"></div>
+            <div class="module-card__icon-wrap">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <span class="module-card__tag" aria-hidden="true">#2</span>
+            <h3 class="module-card__title" id="mod-mente-title">Mente &amp; Corpo</h3>
+            <p class="module-card__desc">
+              Um check-in biopsicossocial que mapeia como você está em todos os
+              aspectos — físico, emocional e social — construindo um histórico
+              pessoal que orienta seu cuidado.
+            </p>
+          </article>
+
+          <!-- Card 3 — Jornada & IA (brick) -->
+          <article class="module-card module-card--jornada js-reveal" data-delay="300" aria-labelledby="mod-jornada-title">
+            <div class="module-card__accent-bar" aria-hidden="true"></div>
+            <div class="module-card__icon-wrap">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <span class="module-card__tag" aria-hidden="true">#3</span>
+            <h3 class="module-card__title" id="mod-jornada-title">Jornada &amp; IA</h3>
+            <p class="module-card__desc">
+              Narrativas adaptativas e mini-games que se ajustam ao seu ritmo.
+              Parece entretenimento — e é apoio emocional real, movido por
+              inteligência artificial.
+            </p>
+            <a href="jornada.html" class="module-card__link" aria-label="Explorar módulo Jornada e IA">
+              Explorar módulo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+          </article>
+
+        </div><!-- /.modules__grid -->
+
+      </div>
+    </section><!-- /#como-funciona -->
+
+
+    <!-- =========================================================
+         DIFERENCIAIS
+         ========================================================= -->
+    <section class="differentials" id="diferenciais" aria-labelledby="diff-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-eyebrow">Por que AcolheMais?</span>
+          <h2 id="diff-heading">Feito para quem mais precisa</h2>
+          <p class="section-desc">
+            Desenvolvido para quebrar as barreiras que impedem o acesso
+            ao cuidado emocional no Brasil.
+          </p>
+        </div>
+
+        <ul class="differentials__grid" role="list">
+
+          <!-- 1 — Gratuito -->
+          <li class="diff-item js-reveal js-reveal--left" data-delay="0">
+            <div class="diff-item__icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <polyline points="9 12 11 14 15 10"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="diff-item__title">100% gratuito</h3>
+              <p class="diff-item__desc">Sem planos, sem mensalidade, sem surpresa. Seu bem-estar não tem preço.</p>
+            </div>
+          </li>
+
+          <!-- 2 — Supervisionado -->
+          <li class="diff-item js-reveal js-reveal--left" data-delay="100">
+            <div class="diff-item__icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7F77DD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="diff-item__title">Supervisionado por profissionais</h3>
+              <p class="diff-item__desc">Estagiários qualificados com supervisão ativa de psicólogos credenciados pelo CRP.</p>
+            </div>
+          </li>
+
+          <!-- 3 — Parece entretenimento -->
+          <li class="diff-item js-reveal js-reveal--left" data-delay="200">
+            <div class="diff-item__icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D85A30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="diff-item__title">Parece game, é cuidado real</h3>
+              <p class="diff-item__desc">Gamificação invisível e narrativas que engajam sem que você perceba que está se cuidando.</p>
+            </div>
+          </li>
+
+          <!-- 4 — Biopsicossocial -->
+          <li class="diff-item js-reveal js-reveal--left" data-delay="300">
+            <div class="diff-item__icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M8 12s1.5-3 4-3 4 3 4 3"/>
+                <path d="M8 12s1.5 3 4 3 4-3 4-3"/>
+                <line x1="12" y1="2" x2="12" y2="22"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="diff-item__title">Visão biopsicossocial</h3>
+              <p class="diff-item__desc">Cuidamos do ser humano completo — corpo, mente e contexto social integrados.</p>
+            </div>
+          </li>
+
+          <!-- 5 — IA adaptativa -->
+          <li class="diff-item js-reveal js-reveal--left" data-delay="400">
+            <div class="diff-item__icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7F77DD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12"/>
+                <path d="M8 12h8"/>
+                <path d="M12 8v8"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="diff-item__title">IA que aprende com você</h3>
+              <p class="diff-item__desc">Nossa inteligência narrativa se adapta ao seu ritmo, humor e histórico pessoal.</p>
+            </div>
+          </li>
+
+          <!-- 6 — Sem estigma -->
+          <li class="diff-item js-reveal js-reveal--left" data-delay="500">
+            <div class="diff-item__icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E07B2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="diff-item__title">Sem julgamento, sem barreira</h3>
+              <p class="diff-item__desc">Acesso pelo WhatsApp que você já usa. Sem aplicativo novo, sem cadastro complicado.</p>
+            </div>
+          </li>
+
+        </ul><!-- /.differentials__grid -->
+
+      </div>
+    </section><!-- /#diferenciais -->
+
+
+    <!-- =========================================================
+         JORNADA — 4 passos
+         ========================================================= -->
+    <section class="journey" id="jornada" aria-labelledby="journey-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-eyebrow">Sua jornada começa aqui</span>
+          <h2 id="journey-heading">4 passos simples</h2>
+          <p class="section-desc">
+            Em minutos você já está conectado. Sem burocracia, sem filas.
+          </p>
+        </div>
+
+        <ol class="journey__steps" role="list">
+
+          <li class="journey__step js-reveal" data-delay="0">
+            <div class="journey__step-number" aria-hidden="true">01</div>
+            <div class="journey__step-content">
+              <h3>Cadastre-se pelo WhatsApp</h3>
+              <p>
+                Envie uma mensagem para o nosso número e complete seu cadastro
+                em menos de 2 minutos — direto no app que você já usa.
+              </p>
+            </div>
+          </li>
+
+          <li class="journey__step js-reveal" data-delay="200">
+            <div class="journey__step-number" aria-hidden="true">02</div>
+            <div class="journey__step-content">
+              <h3>Responda o check-in inicial</h3>
+              <p>
+                Um questionário rápido mapeia como você está hoje — fisicamente,
+                emocionalmente e socialmente. Leva menos de 3 minutos.
+              </p>
+            </div>
+          </li>
+
+          <li class="journey__step js-reveal" data-delay="400">
+            <div class="journey__step-number" aria-hidden="true">03</div>
+            <div class="journey__step-content">
+              <h3>Inicie sua Jornada</h3>
+              <p>
+                Nossa IA monta uma trilha personalizada de narrativas e
+                mini-desafios baseada no seu perfil. Parece um jogo — funciona
+                como suporte emocional.
+              </p>
+            </div>
+          </li>
+
+          <li class="journey__step js-reveal" data-delay="600">
+            <div class="journey__step-number" aria-hidden="true">04</div>
+            <div class="journey__step-content">
+              <h3>Conecte-se com seu acompanhante</h3>
+              <p>
+                Quando quiser aprofundar, agende uma sessão com um estagiário
+                supervisionado. Você escolhe o horário, é gratuito e acontece
+                no seu ritmo.
+              </p>
+            </div>
+          </li>
+
+        </ol><!-- /.journey__steps -->
+
+      </div>
+    </section><!-- /#jornada -->
+
+
+    <!-- =========================================================
+         CTA FINAL
+         ========================================================= -->
+    <section class="cta-final" id="cta-final" aria-labelledby="cta-heading">
+      <div class="container">
+
+        <div class="cta-final__card js-reveal js-reveal--scale">
+
+          <h2 class="cta-final__headline" id="cta-heading">
+            Pronto para começar<br>sua jornada?
+          </h2>
+
+          <p class="cta-final__subtext">
+            Junte-se a quem já descobriu que cuidar da mente
+            pode ser leve, acessível e até divertido.
+          </p>
+
+          <div class="cta-final__actions">
+            <a href="#" class="btn btn--primary btn--lg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Baixar o app
+            </a>
+            <a
+              href="https://wa.me/5500000000000?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20AcolheMais"
+              class="btn btn--whatsapp btn--lg"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+              </svg>
+              Agendar pelo WhatsApp
+            </a>
+          </div>
+
+          <p class="cta-final__fine">Disponível em breve para Android e iOS. Sempre gratuito.</p>
+
+        </div><!-- /.cta-final__card -->
+
+      </div>
+    </section><!-- /#cta-final -->
+
+  </main><!-- /main -->
+
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="footer">
+    <div class="footer__container container">
+
+      <div class="footer__brand">
+        <svg width="24" height="24" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <circle cx="18" cy="18" r="18" fill="#1D9E75" fill-opacity="0.15"/>
+          <path d="M18 8C12.477 8 8 12.477 8 18s4.477 10 10 10 10-4.477 10-10S23.523 8 18 8z" fill="none" stroke="#1D9E75" stroke-width="1.5"/>
+          <path d="M10 18h2.5l1.5-3 2 6 1.5-3 1 1.5H26" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>AcolheMais 2.0</span>
+      </div>
+
+      <p class="footer__tagline">Saúde mental acessível para todos.</p>
+
+      <nav class="footer__links" aria-label="Links do rodapé">
+        <a href="acesso.html">Acesso &amp; Conexão</a>
+        <a href="jornada.html">Jornada &amp; IA</a>
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Uso</a>
+        <a href="#">Contato</a>
+        <a href="#">Sobre o Projeto</a>
+      </nav>
+
+      <p class="footer__copy">
+        &copy; 2026 AcolheMais — Projeto Acadêmico &middot; Estácio de Sá.
+        Todos os direitos reservados.
+      </p>
+
+    </div>
+  </footer>
+
+
+  <script src="js/main.js"></script>
+</body>
+</html>

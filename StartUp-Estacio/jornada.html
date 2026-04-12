@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jornada & IA — Módulo de gamificação biopsicossocial do AcolheMais 2.0. Mini-jogos, histórias adaptativas e check-in emocional diário.">
+  <meta name="theme-color" content="#1A2332">
+
+  <title>Jornada & IA — AcolheMais 2.0</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles (design-system FIRST) -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/jornada.css">
+
+  <!-- Inline attention-pulse keyframe (tiny, no extra file) -->
+  <style>
+    @keyframes attentionPulse {
+      0%, 100% { transform: scale(1); }
+      25%       { transform: scale(1.02); }
+      75%       { transform: scale(0.99); }
+    }
+    .attention-pulse { animation: attentionPulse 0.5s var(--ease-spring); }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================
+       NAVIGATION (shared with index.html)
+       ========================================================= -->
+  <header class="nav" id="nav">
+    <div class="nav__container container">
+
+      <a class="nav__logo" href="index.html" aria-label="AcolheMais — Voltar ao início">
+        <svg class="nav__logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <circle cx="18" cy="18" r="18" fill="#1D9E75" fill-opacity="0.15"/>
+          <path d="M18 8C12.477 8 8 12.477 8 18s4.477 10 10 10 10-4.477 10-10S23.523 8 18 8z" fill="none" stroke="#1D9E75" stroke-width="1.5"/>
+          <path d="M13 18.5c0-2.761 2.239-5 5-5s5 2.239 5 5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"/>
+          <path d="M15.5 21.5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5" stroke="#7F77DD" stroke-width="2" stroke-linecap="round"/>
+          <path d="M10 18h2.5l1.5-3 2 6 1.5-3 1 1.5H26" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="nav__logo-text">AcolheMais</span>
+        <span class="nav__logo-version">2.0</span>
+      </a>
+
+      <nav class="nav__links" id="nav-links" aria-label="Navegação da Jornada">
+        <a href="#checkin">Check-in</a>
+        <a href="#triagem">Triagem</a>
+        <a href="#historias">Histórias</a>
+      </nav>
+
+      <a href="index.html" class="btn btn--ghost nav__cta">← Voltar</a>
+
+      <button class="nav__hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- =========================================================
+         PAGE HERO
+         ========================================================= -->
+    <section class="page-hero" id="hero">
+      <div class="container">
+        <a href="index.html" class="back-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          Voltar para o início
+        </a>
+
+        <span class="page-hero__eyebrow">Módulo 3</span>
+        <h1>Jornada &amp; IA</h1>
+        <p class="page-hero__sub">
+          Apoio emocional que parece entretenimento. Conheça seu perfil,
+          explore histórias e registre como você está hoje.
+        </p>
+
+        <div class="page-hero__tabs" role="navigation" aria-label="Seções da jornada">
+          <a href="#checkin"  class="page-tab">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            Como você está
+          </a>
+          <a href="#triagem" class="page-tab">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            Conheça seu perfil
+          </a>
+          <a href="#historias" class="page-tab">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+            Histórias
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         CHECK-IN DIÁRIO
+         ========================================================= -->
+    <section class="jornada-section" id="checkin" aria-labelledby="checkin-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-eyebrow">Estado emocional</span>
+          <h2 id="checkin-heading">Como você está hoje?</h2>
+          <p class="section-desc">
+            Leva menos de 1 minuto. Seu check-in orienta a jornada de hoje.
+          </p>
+        </div>
+
+        <div class="checkin-card">
+
+          <!-- Mood selector -->
+          <fieldset class="mood-group" aria-labelledby="mood-group-label">
+            <legend class="mood-group__label" id="mood-group-label">Estado geral</legend>
+
+            <div class="mood-selector" role="group">
+
+              <!-- Mood 1 — Muito mal -->
+              <input type="radio" name="mood" id="mood-1" value="1" class="mood-input sr-only">
+              <label for="mood-1" class="mood-btn" title="Muito mal">
+                <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                  <circle cx="24" cy="24" r="20" fill="#263347" stroke="#334866" stroke-width="1.5"/>
+                  <!-- Eyes — X shape -->
+                  <line x1="15" y1="17" x2="19" y2="21" stroke="#6B7E94" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="19" y1="17" x2="15" y2="21" stroke="#6B7E94" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="29" y1="17" x2="33" y2="21" stroke="#6B7E94" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="33" y1="17" x2="29" y2="21" stroke="#6B7E94" stroke-width="2" stroke-linecap="round"/>
+                  <!-- Frown -->
+                  <path d="M16 33 Q24 27 32 33" stroke="#6B7E94" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  <!-- Tear -->
+                  <ellipse cx="18" cy="26" rx="1.5" ry="2.5" fill="#6B7E94" opacity="0.5"/>
+                </svg>
+                <span class="mood-btn__text">Muito mal</span>
+              </label>
+
+              <!-- Mood 2 — Mal -->
+              <input type="radio" name="mood" id="mood-2" value="2" class="mood-input sr-only">
+              <label for="mood-2" class="mood-btn" title="Mal">
+                <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                  <circle cx="24" cy="24" r="20" fill="#263347" stroke="#334866" stroke-width="1.5"/>
+                  <!-- Eyes — droopy -->
+                  <circle cx="17" cy="20" r="2.5" fill="#6B7E94"/>
+                  <circle cx="31" cy="20" r="2.5" fill="#6B7E94"/>
+                  <path d="M15 18 Q17 16 19 18" stroke="#6B7E94" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <path d="M29 18 Q31 16 33 18" stroke="#6B7E94" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <!-- Frown -->
+                  <path d="M17 33 Q24 28 31 33" stroke="#6B7E94" stroke-width="2" fill="none" stroke-linecap="round"/>
+                </svg>
+                <span class="mood-btn__text">Mal</span>
+              </label>
+
+              <!-- Mood 3 — Neutro -->
+              <input type="radio" name="mood" id="mood-3" value="3" class="mood-input sr-only">
+              <label for="mood-3" class="mood-btn" title="Neutro">
+                <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                  <circle cx="24" cy="24" r="20" fill="#263347" stroke="#334866" stroke-width="1.5"/>
+                  <!-- Eyes — neutral -->
+                  <circle cx="17" cy="20" r="2.5" fill="#A8B8CC"/>
+                  <circle cx="31" cy="20" r="2.5" fill="#A8B8CC"/>
+                  <!-- Straight mouth -->
+                  <line x1="17" y1="31" x2="31" y2="31" stroke="#A8B8CC" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span class="mood-btn__text">Neutro</span>
+              </label>
+
+              <!-- Mood 4 — Bem -->
+              <input type="radio" name="mood" id="mood-4" value="4" class="mood-input sr-only">
+              <label for="mood-4" class="mood-btn" title="Bem">
+                <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                  <circle cx="24" cy="24" r="20" fill="#263347" stroke="#334866" stroke-width="1.5"/>
+                  <!-- Eyes — happy -->
+                  <circle cx="17" cy="20" r="2.5" fill="#D85A30"/>
+                  <circle cx="31" cy="20" r="2.5" fill="#D85A30"/>
+                  <!-- Small smile -->
+                  <path d="M17 29 Q24 34 31 29" stroke="#D85A30" stroke-width="2" fill="none" stroke-linecap="round"/>
+                </svg>
+                <span class="mood-btn__text">Bem</span>
+              </label>
+
+              <!-- Mood 5 — Ótimo -->
+              <input type="radio" name="mood" id="mood-5" value="5" class="mood-input sr-only">
+              <label for="mood-5" class="mood-btn" title="Ótimo">
+                <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                  <circle cx="24" cy="24" r="20" fill="#263347" stroke="#334866" stroke-width="1.5"/>
+                  <!-- Eyes — arched happy -->
+                  <path d="M14 21 Q17 17 20 21" stroke="#E07B2A" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  <path d="M28 21 Q31 17 34 21" stroke="#E07B2A" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  <!-- Big smile (open) -->
+                  <path d="M15 28 Q24 37 33 28" stroke="#E07B2A" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  <path d="M15 28 Q24 37 33 28" fill="#E07B2A" opacity="0.15"/>
+                  <!-- Sparkle dots -->
+                  <circle cx="10" cy="14" r="1.5" fill="#E07B2A" opacity="0.6"/>
+                  <circle cx="38" cy="12" r="1"   fill="#E07B2A" opacity="0.5"/>
+                  <circle cx="40" cy="20" r="1.5" fill="#D85A30" opacity="0.4"/>
+                </svg>
+                <span class="mood-btn__text">Ótimo</span>
+              </label>
+
+            </div>
+          </fieldset>
+
+          <!-- Sleep slider -->
+          <div class="slider-group">
+            <div class="slider-header">
+              <label for="sleep-slider">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:4px">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                Horas de sono
+              </label>
+              <span class="slider-value" id="sleep-value" aria-live="polite">7h</span>
+            </div>
+            <input
+              type="range"
+              id="sleep-slider"
+              min="0"
+              max="12"
+              value="7"
+              step="0.5"
+              aria-label="Horas de sono: 7h"
+            >
+            <div class="slider-ticks" aria-hidden="true">
+              <span>0h</span>
+              <span>3h</span>
+              <span>6h</span>
+              <span>9h</span>
+              <span>12h</span>
+            </div>
+          </div>
+
+          <!-- Energy dots -->
+          <div class="slider-group">
+            <div class="slider-header">
+              <label id="energy-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin-right:4px">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+                Nível de energia
+              </label>
+              <span class="slider-value" id="energy-display" aria-live="polite">3 / 5</span>
+            </div>
+            <input type="hidden" id="energy-hidden" value="3">
+            <div class="energy-dots" role="group" aria-labelledby="energy-label">
+              <button class="energy-dot" data-value="1" aria-label="Energia 1 de 5" type="button"></button>
+              <button class="energy-dot" data-value="2" aria-label="Energia 2 de 5" type="button"></button>
+              <button class="energy-dot" data-value="3" aria-label="Energia 3 de 5" type="button"></button>
+              <button class="energy-dot" data-value="4" aria-label="Energia 4 de 5" type="button"></button>
+              <button class="energy-dot" data-value="5" aria-label="Energia 5 de 5" type="button"></button>
+            </div>
+            <div class="slider-ticks" aria-hidden="true">
+              <span>Sem força</span>
+              <span></span>
+              <span>Ok</span>
+              <span></span>
+              <span>Cheio</span>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <div class="checkin-submit-row">
+            <button id="checkin-submit" class="btn btn--primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Confirmar check-in
+            </button>
+          </div>
+
+          <!-- Result (hidden until submit) -->
+          <div id="checkin-result" class="checkin-result" aria-live="polite" aria-atomic="true">
+            <p class="checkin-result__greeting" id="checkin-greeting"></p>
+            <p class="checkin-result__body"     id="checkin-body"></p>
+            <div class="checkin-result__suggestion" id="checkin-suggestion"></div>
+          </div>
+
+        </div><!-- /.checkin-card -->
+
+      </div>
+    </section><!-- /#checkin -->
+
+
+    <!-- =========================================================
+         MINI-JOGO DE TRIAGEM
+         ========================================================= -->
+    <section class="jornada-section jornada-section--alt" id="triagem" aria-labelledby="triagem-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-eyebrow">Perfil comportamental</span>
+          <h2 id="triagem-heading">Conheça seu perfil</h2>
+          <p class="section-desc">
+            5 cenários do cotidiano. Escolha como você realmente reage — não
+            como você acha que deveria. Leva 3 minutos.
+          </p>
+        </div>
+
+        <!-- Intro CTA (before game starts) -->
+        <div id="triagem-intro" style="text-align: center; margin-bottom: var(--space-6);">
+          <button id="triagem-start" class="btn btn--primary btn--lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            Iniciar triagem
+          </button>
+          <p style="margin-top: var(--space-3); font-size: var(--text-sm); color: var(--text-muted);">
+            Anônimo · Sem certo ou errado · Resultado imediato
+          </p>
+        </div>
+
+        <!-- Game card (hidden initially) -->
+        <div id="triagem-card" class="triagem-card" style="display: none;">
+
+          <!-- Progress header -->
+          <div class="triagem-header">
+            <div class="triagem-progress-wrap">
+              <div class="triagem-progress-label">
+                <span>Progresso</span>
+                <span>
+                  Cenário <span id="progress-current">1</span> de <span id="progress-total">5</span>
+                </span>
+              </div>
+              <div class="triagem-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0">
+                <div class="triagem-progress-fill" id="progress-fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scenario screen -->
+          <div id="scenario-screen" class="scenario-screen">
+            <span class="scenario-label">Cenário #<span id="scenario-num">1</span></span>
+            <h3 class="scenario-situation" id="scenario-situation"></h3>
+            <p class="scenario-question" id="scenario-question"></p>
+            <div class="choices-grid" id="choices-container" role="group" aria-labelledby="scenario-question">
+              <!-- Choices injected by JS -->
+            </div>
+          </div>
+
+          <!-- Results screen (hidden until game complete) -->
+          <div id="results-screen" class="results-screen" aria-live="polite">
+
+            <div class="results-profile">
+              <span class="results-profile__badge" id="profile-badge">Calculando...</span>
+              <h3 class="results-profile__title" id="profile-title"></h3>
+              <p class="results-profile__desc"  id="profile-desc"></p>
+            </div>
+
+            <!-- Radar chart -->
+            <div class="radar-wrap">
+              <canvas id="radar-chart" width="280" height="280" aria-label="Gráfico radar com suas 3 dimensões" role="img"></canvas>
+            </div>
+
+            <!-- Dimension bars -->
+            <div class="dimension-bars">
+
+              <div class="dim-bar dim-bar--resilience" id="dim-resilience">
+                <div class="dim-bar__header">
+                  <span class="dim-bar__label">Resiliência</span>
+                  <div class="dim-bar__meta">
+                    <span class="dim-bar__score" id="score-resilience">—</span>
+                    <span class="dim-bar__status">—</span>
+                  </div>
+                </div>
+                <div class="dim-bar__track">
+                  <div class="dim-bar__fill"></div>
+                </div>
+              </div>
+
+              <div class="dim-bar dim-bar--connection" id="dim-connection">
+                <div class="dim-bar__header">
+                  <span class="dim-bar__label">Conexão Social</span>
+                  <div class="dim-bar__meta">
+                    <span class="dim-bar__score" id="score-connection">—</span>
+                    <span class="dim-bar__status">—</span>
+                  </div>
+                </div>
+                <div class="dim-bar__track">
+                  <div class="dim-bar__fill"></div>
+                </div>
+              </div>
+
+              <div class="dim-bar dim-bar--selfcare" id="dim-selfcare">
+                <div class="dim-bar__header">
+                  <span class="dim-bar__label">Autocuidado</span>
+                  <div class="dim-bar__meta">
+                    <span class="dim-bar__score" id="score-selfcare">—</span>
+                    <span class="dim-bar__status">—</span>
+                  </div>
+                </div>
+                <div class="dim-bar__track">
+                  <div class="dim-bar__fill"></div>
+                </div>
+              </div>
+
+            </div><!-- /.dimension-bars -->
+
+            <div class="results-actions">
+              <button id="restart-triagem" class="btn btn--ghost">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="1 4 1 10 7 10"/>
+                  <path d="M3.51 15a9 9 0 1 0 .49-3.46"/>
+                </svg>
+                Refazer triagem
+              </button>
+              <a href="#historias" class="btn btn--primary">
+                Ver histórias para hoje
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </a>
+            </div>
+
+          </div><!-- /#results-screen -->
+
+        </div><!-- /#triagem-card -->
+
+      </div>
+    </section><!-- /#triagem -->
+
+
+    <!-- =========================================================
+         HISTÓRIAS ADAPTATIVAS
+         ========================================================= -->
+    <section class="jornada-section" id="historias" aria-labelledby="historias-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-eyebrow">Narrativa adaptativa</span>
+          <h2 id="historias-heading">Histórias para hoje</h2>
+          <p class="section-desc">
+            Personagens reais, situações do cotidiano. Cada escolha muda o
+            desfecho — e deixa um insight.
+          </p>
+        </div>
+
+        <div class="stories-grid">
+
+          <!-- Card — Estresse no trabalho -->
+          <article
+            class="story-card js-reveal"
+            data-story="stress"
+            data-delay="0"
+            tabindex="0"
+            role="button"
+            aria-label="Abrir história: A Reunião que Não Saiu da Cabeça"
+          >
+            <div class="story-thumb story-thumb--stress">
+              <div class="story-thumb__detail" aria-hidden="true"></div>
+            </div>
+            <div class="story-info">
+              <span class="story-tag">Hoje · Estresse no trabalho</span>
+              <h3 class="story-title">A Reunião que Não Saiu da Cabeça</h3>
+              <p class="story-excerpt">Lucas olha pro teto às 2h da manhã. A voz do João ainda ecoa.</p>
+              <span class="story-read-more" aria-hidden="true">
+                Ler história
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </span>
+            </div>
+          </article>
+
+          <!-- Card — Isolamento social -->
+          <article
+            class="story-card js-reveal"
+            data-story="isolation"
+            data-delay="150"
+            tabindex="0"
+            role="button"
+            aria-label="Abrir história: O Apartamento Que Ficou Quieto Demais"
+          >
+            <div class="story-thumb story-thumb--isolation">
+              <div class="story-thumb__detail" aria-hidden="true"></div>
+            </div>
+            <div class="story-info">
+              <span class="story-tag">Hoje · Isolamento social</span>
+              <h3 class="story-title">O Apartamento Que Ficou Quieto Demais</h3>
+              <p class="story-excerpt">Beatriz conta: 4 dias sem sair de casa, sem responder mensagens.</p>
+              <span class="story-read-more" aria-hidden="true">
+                Ler história
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </span>
+            </div>
+          </article>
+
+          <!-- Card — Autocuidado -->
+          <article
+            class="story-card js-reveal"
+            data-story="selfcare"
+            data-delay="300"
+            tabindex="0"
+            role="button"
+            aria-label="Abrir história: O Domingo em que Nada Precisava Acontecer"
+          >
+            <div class="story-thumb story-thumb--selfcare">
+              <div class="story-thumb__detail" aria-hidden="true"></div>
+            </div>
+            <div class="story-info">
+              <span class="story-tag">Ontem · Autocuidado</span>
+              <h3 class="story-title">O Domingo em que Nada Precisava Acontecer</h3>
+              <p class="story-excerpt">Pela primeira vez em meses, Pedro não tinha agenda.</p>
+              <span class="story-read-more" aria-hidden="true">
+                Ler história
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </span>
+            </div>
+          </article>
+
+        </div><!-- /.stories-grid -->
+
+      </div>
+    </section><!-- /#historias -->
+
+
+    <!-- =========================================================
+         CTA — Link de volta / agendar
+         ========================================================= -->
+    <section class="jornada-section jornada-section--alt" aria-label="Próximos passos">
+      <div class="container">
+        <div class="section-header" style="margin-bottom: 0;">
+          <span class="section-eyebrow">Quer ir mais fundo?</span>
+          <h2>Conecte-se com um acompanhante</h2>
+          <p class="section-desc" style="margin-bottom: var(--space-8);">
+            Quando a jornada pede mais, nossos estagiários supervisionados
+            estão disponíveis. Gratuito, pelo WhatsApp.
+          </p>
+          <div style="display: flex; gap: var(--space-3); justify-content: center; flex-wrap: wrap;">
+            <a
+              href="https://wa.me/5500000000000?text=Oi!%20Quero%20agendar%20com%20um%20acompanhante"
+              class="btn btn--whatsapp btn--lg"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+              </svg>
+              Agendar pelo WhatsApp
+            </a>
+            <a href="index.html" class="btn btn--ghost btn--lg">← Voltar ao início</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       STORY MODAL
+       ========================================================= -->
+  <div
+    id="story-modal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    aria-hidden="true"
+  >
+    <div class="modal__backdrop" role="presentation"></div>
+
+    <div class="modal__panel">
+      <div class="modal__handle" aria-hidden="true"></div>
+
+      <button
+        class="modal__close"
+        aria-label="Fechar história"
+        type="button"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6"  y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+      <div class="modal__body">
+
+        <!-- Phase 1: Story + choices -->
+        <div id="modal-story-phase">
+          <span class="modal__tag"  id="modal-tag"></span>
+          <h2  class="modal__title" id="modal-title"></h2>
+          <div class="modal__text"  id="modal-text"></div>
+          <p   class="modal__question" id="modal-question"></p>
+          <div class="modal__choices" id="modal-choices" role="group" aria-labelledby="modal-question">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- Phase 2: Ending -->
+        <div id="modal-ending" class="modal__ending" aria-live="polite">
+          <div class="modal__ending-text" id="modal-ending-text"></div>
+          <div class="modal__actions">
+            <button id="modal-read-another" class="btn btn--ghost">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+              Ler outra história
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /.modal__body -->
+    </div><!-- /.modal__panel -->
+  </div><!-- /#story-modal -->
+
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="footer">
+    <div class="footer__container container">
+      <div class="footer__brand">
+        <svg width="24" height="24" viewBox="0 0 36 36" fill="none" aria-hidden="true" focusable="false">
+          <circle cx="18" cy="18" r="18" fill="#1D9E75" fill-opacity="0.15"/>
+          <path d="M10 18h2.5l1.5-3 2 6 1.5-3 1 1.5H26" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>AcolheMais 2.0</span>
+      </div>
+      <p class="footer__tagline">Saúde mental acessível para todos.</p>
+      <nav class="footer__links" aria-label="Links do rodapé">
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Uso</a>
+        <a href="index.html">Início</a>
+      </nav>
+      <p class="footer__copy">&copy; 2026 AcolheMais — Projeto Acadêmico · Estácio de Sá.</p>
+    </div>
+  </footer>
+
+
+  <!-- Chart.js CDN (before jornada.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- Shared nav/scroll logic -->
+  <script src="js/main.js"></script>
+
+  <!-- Module logic -->
+  <script src="js/jornada.js"></script>
+
+  <!-- Energy display sync (inline — too small for a file) -->
+  <script>
+    document.querySelectorAll('.energy-dot').forEach(dot => {
+      dot.addEventListener('click', function() {
+        const val = this.dataset.value;
+        const display = document.getElementById('energy-display');
+        if (display) display.textContent = val + ' / 5';
+      });
+    });
+  </script>
+
+</body>
+</html>

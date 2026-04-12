@@ -1,0 +1,494 @@
+/* =============================================================================
+   AcolheMais 2.0 — Design System
+   Single source of truth: tokens, reset, keyframes, atomic components
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. TOKENS — CSS Custom Properties
+   ----------------------------------------------------------------------------- */
+:root {
+  /* Color — Brand */
+  --color-teal:         #1D9E75;
+  --color-teal-light:   #2BC48F;
+  --color-teal-dark:    #167A5A;
+  --color-teal-alpha:   rgba(29, 158, 117, 0.15);
+
+  --color-purple:       #7F77DD;
+  --color-purple-light: #9C96E8;
+  --color-purple-dark:  #5E57B8;
+  --color-purple-alpha: rgba(127, 119, 221, 0.15);
+
+  --color-brick:        #D85A30;
+  --color-brick-light:  #E07553;
+  --color-brick-dark:   #B04520;
+  --color-brick-alpha:  rgba(216, 90, 48, 0.15);
+
+  --color-orange:       #E07B2A;
+  --color-orange-alpha: rgba(224, 123, 42, 0.15);
+
+  /* Color — Background scale (dark theme) */
+  --bg-base:      #1A2332;
+  --bg-surface:   #1F2B3D;
+  --bg-surface-2: #263347;
+  --bg-surface-3: #2E3F55;
+  --bg-border:    #334866;
+
+  /* Color — Text scale */
+  --text-primary:   #F0F4F8;
+  --text-secondary: #A8B8CC;
+  --text-muted:     #6B7E94;
+  --text-inverse:   #1A2332;
+
+  /* Color — Whatsapp */
+  --color-whatsapp: #25D366;
+  --color-whatsapp-dark: #128C50;
+
+  /* Typography */
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'Plus Jakarta Sans', sans-serif;
+
+  /* Font weights */
+  --fw-regular:    400;
+  --fw-medium:     500;
+  --fw-semibold:   600;
+  --fw-bold:       700;
+  --fw-extrabold:  800;
+
+  /* Font sizes — fluid with fallback for Safari < 13.4 */
+  --text-xs:   0.75rem;
+  --text-xs:   clamp(0.7rem,   1.5vw, 0.75rem);
+  --text-sm:   0.875rem;
+  --text-sm:   clamp(0.8rem,   2vw,   0.875rem);
+  --text-base: 1rem;
+  --text-base: clamp(0.95rem,  2.5vw, 1.0625rem);
+  --text-lg:   1.125rem;
+  --text-lg:   clamp(1.05rem,  3vw,   1.25rem);
+  --text-xl:   1.375rem;
+  --text-xl:   clamp(1.2rem,   3.5vw, 1.5rem);
+  --text-2xl:  1.75rem;
+  --text-2xl:  clamp(1.5rem,   4vw,   2rem);
+  --text-3xl:  2.5rem;
+  --text-3xl:  clamp(2rem,     5vw,   2.75rem);
+  --text-hero: 3.5rem;
+  --text-hero: clamp(2.4rem,   7vw,   4.25rem);
+
+  /* Line heights */
+  --lh-tight:  1.15;
+  --lh-snug:   1.35;
+  --lh-base:   1.6;
+  --lh-loose:  1.75;
+
+  /* Spacing */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* Border radius */
+  --radius-xs:   0.25rem;
+  --radius-sm:   0.5rem;
+  --radius-md:   0.875rem;
+  --radius-lg:   1.25rem;
+  --radius-xl:   1.75rem;
+  --radius-2xl:  2.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md:   0 4px 16px rgba(0, 0, 0, 0.35);
+  --shadow-lg:   0 12px 40px rgba(0, 0, 0, 0.5);
+  --shadow-xl:   0 24px 64px rgba(0, 0, 0, 0.6);
+
+  --shadow-glow-teal:   0 0 32px rgba(29,  158, 117, 0.4);
+  --shadow-glow-purple: 0 0 32px rgba(127, 119, 221, 0.4);
+  --shadow-glow-brick:  0 0 32px rgba(216,  90,  48, 0.4);
+
+  /* Transitions */
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:    cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --dur-fast:   150ms;
+  --dur-base:   300ms;
+  --dur-slow:   500ms;
+  --dur-slower: 700ms;
+  --dur-sluggish: 900ms;
+
+  /* Layout */
+  --container-max: 1200px;
+  --container-pad: clamp(1rem, 5vw, 3rem);
+  --nav-height:    68px;
+  --section-py:    clamp(4.5rem, 10vw, 8rem);
+
+  /* Z-index scale */
+  --z-base:    0;
+  --z-raised:  10;
+  --z-overlay: 100;
+  --z-nav:     200;
+  --z-modal:   300;
+}
+
+
+/* -----------------------------------------------------------------------------
+   2. MODERN CSS RESET
+   ----------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-base);
+  color: var(--text-primary);
+  background-color: var(--bg-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+img, svg, video, canvas {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* Reduced motion — disable all looping animations */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* -----------------------------------------------------------------------------
+   3. KEYFRAMES
+   ----------------------------------------------------------------------------- */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes blobBreath {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  33% {
+    transform: scale(1.03) rotate(1.5deg);
+  }
+  66% {
+    transform: scale(0.98) rotate(-1deg);
+  }
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes floatCardAlt {
+  0%, 100% { transform: translateY(0px) rotate(-2deg); }
+  50%       { transform: translateY(-8px) rotate(0deg); }
+}
+
+@keyframes chevronBounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(7px);
+    opacity: 0.4;
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 16px rgba(29, 158, 117, 0.2), var(--shadow-md); }
+  50%       { box-shadow: 0 0 36px rgba(29, 158, 117, 0.55), var(--shadow-md); }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position: 200% center; }
+}
+
+@keyframes connectorGrow {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+
+/* -----------------------------------------------------------------------------
+   4. LAYOUT PRIMITIVES
+   ----------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 640px;
+  margin-inline: auto;
+  margin-bottom: var(--space-12);
+}
+
+.section-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: var(--space-3);
+}
+
+.section-header h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.section-desc {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  line-height: var(--lh-base);
+}
+
+
+/* -----------------------------------------------------------------------------
+   5. BUTTON COMPONENTS
+   ----------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.6875rem 1.375rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.01em;
+  line-height: 1;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition:
+    background-color var(--dur-base) var(--ease-in-out),
+    border-color     var(--dur-base) var(--ease-in-out),
+    color            var(--dur-base) var(--ease-in-out),
+    box-shadow       var(--dur-base) var(--ease-in-out),
+    transform        var(--dur-fast) var(--ease-out-expo);
+  white-space: nowrap;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 3px;
+}
+
+/* Primary — filled teal */
+.btn--primary {
+  background-color: var(--color-teal);
+  color: #fff;
+  border-color: var(--color-teal);
+  box-shadow: 0 4px 20px rgba(29, 158, 117, 0.35);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-teal-light);
+  border-color: var(--color-teal-light);
+  box-shadow: 0 8px 28px rgba(29, 158, 117, 0.5);
+}
+
+/* Ghost — outlined */
+.btn--ghost {
+  background-color: transparent;
+  color: var(--text-primary);
+  border-color: var(--bg-border);
+}
+
+.btn--ghost:hover {
+  background-color: var(--bg-surface);
+  border-color: var(--text-muted);
+}
+
+/* WhatsApp */
+.btn--whatsapp {
+  background-color: var(--color-whatsapp);
+  color: #fff;
+  border-color: var(--color-whatsapp);
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+}
+
+.btn--whatsapp:hover {
+  background-color: #2fe87a;
+  border-color: #2fe87a;
+  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.45);
+}
+
+/* Size modifier */
+.btn--lg {
+  padding: 0.875rem 1.75rem;
+  font-size: var(--text-base);
+}
+
+
+/* -----------------------------------------------------------------------------
+   6. SCROLL REVEAL — base state (populated by JS)
+   ----------------------------------------------------------------------------- */
+.js-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.js-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity   var(--dur-slow) var(--ease-out-expo),
+    transform var(--dur-slow) var(--ease-out-expo);
+}
+
+.js-reveal--scale {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+.js-reveal--scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity   var(--dur-slower) var(--ease-out-expo),
+    transform var(--dur-slower) var(--ease-out-expo);
+}
+
+.js-reveal--left {
+  opacity: 0;
+  transform: translateX(-24px);
+}
+
+.js-reveal--left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity   var(--dur-slow) var(--ease-out-expo),
+    transform var(--dur-slow) var(--ease-out-expo);
+}
+
+
+/* -----------------------------------------------------------------------------
+   7. BADGE / TAG
+   ----------------------------------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.badge--teal {
+  background-color: var(--color-teal-alpha);
+  color: var(--color-teal-light);
+}
+
+.badge--purple {
+  background-color: var(--color-purple-alpha);
+  color: var(--color-purple-light);
+}
+
+.badge--brick {
+  background-color: var(--color-brick-alpha);
+  color: var(--color-brick-light);
+}
