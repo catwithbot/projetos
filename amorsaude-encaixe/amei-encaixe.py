@@ -124,9 +124,9 @@ def ler_xlsx(caminho: str) -> list:
         raise ValueError("Nenhum registro válido na planilha.")
     return registros
 
-# ────────────────────────────────────────────
+# ───────────────────────────────────────────
 # BROWSER
-# ────────────────────────────────────────────
+# ───────────────────────────────────────────
 def iniciar_browser(url: str) -> webdriver.Chrome:
     opts = Options()
     opts.add_argument("--start-maximized")
