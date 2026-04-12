@@ -4,13 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="AcolheMais 2.0 — Plataforma biopsicossocial que conecta você a apoio emocional acessível, com IA adaptativa e gamificação. Gratuito, sem burocracia.">
-  <meta name="theme-color" content="#1A2332">
+  <meta name="theme-color" content="#1D9E75">
 
   <!-- Open Graph -->
   <meta property="og:title"       content="AcolheMais 2.0 — Cuidado emocional que cabe na sua vida">
   <meta property="og:description" content="Apoio psicológico acessível que parece entretenimento. Conectamos você a estagiários supervisionados via WhatsApp.">
   <meta property="og:type"        content="website">
   <meta property="og:locale"      content="pt_BR">
+  <meta property="og:image"       content="icons/icon-512.svg">
+  <meta property="og:image:alt"   content="AcolheMais — Plataforma biopsicossocial">
+  <meta property="og:site_name"   content="AcolheMais">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.svg">
 
   <title>AcolheMais 2.0 — Cuidado emocional que cabe na sua vida</title>
 
@@ -22,6 +29,7 @@
   <!-- design-system MUST load before style.css -->
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nav-bottom.css">
 </head>
 <body>
 
@@ -33,14 +41,9 @@
 
       <!-- Logo -->
       <a class="nav__logo" href="#hero" aria-label="AcolheMais — Início">
-        <svg class="nav__logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-          <circle cx="18" cy="18" r="18" fill="#1D9E75" fill-opacity="0.15"/>
-          <path d="M18 8C12.477 8 8 12.477 8 18s4.477 10 10 10 10-4.477 10-10S23.523 8 18 8z" fill="none" stroke="#1D9E75" stroke-width="1.5"/>
-          <path d="M13 18.5c0-2.761 2.239-5 5-5s5 2.239 5 5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"/>
-          <path d="M15.5 21.5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5" stroke="#7F77DD" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="18" cy="24" r="1.5" fill="#1D9E75"/>
-          <!-- Pulse / heartbeat line -->
-          <path d="M10 18h2.5l1.5-3 2 6 1.5-3 1 1.5H26" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg class="nav__logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <rect width="32" height="32" rx="8" fill="#1D9E75"/>
+          <path d="M16 26C11 22 5 18 5 11.5A5.5 5.5 0 0 1 10.5 6C12.6 6 14.5 7.1 16 9C17.5 7.1 19.4 6 21.5 6A5.5 5.5 0 0 1 27 11.5C27 18 21 22 16 26Z" fill="white"/>
         </svg>
         <span class="nav__logo-text">AcolheMais</span>
         <span class="nav__logo-version">2.0</span>
@@ -132,13 +135,10 @@
             <ellipse cx="260" cy="260" rx="110" ry="130" fill="url(#blob-grad-2)" filter="url(#blob-blur)"/>
             <!-- Central icon cluster -->
             <circle cx="210" cy="210" r="48" fill="#1F2B3D" stroke="#334866" stroke-width="1"/>
-            <!-- Heart / pulse icon in center -->
-            <path d="M194 207.5c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10"
-                  fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"/>
-            <path d="M210 207.5c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10"
-                  fill="none" stroke="#7F77DD" stroke-width="2" stroke-linecap="round"/>
-            <path d="M188 213h5.5l3-6 4 12 3-6 2 3H232"
-                  stroke="#D85A30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Heart icon in center (same shape as nav logo) -->
+            <g transform="translate(170, 170) scale(2.5)">
+              <path d="M16 26C11 22 5 18 5 11.5A5.5 5.5 0 0 1 10.5 6C12.6 6 14.5 7.1 16 9C17.5 7.1 19.4 6 21.5 6A5.5 5.5 0 0 1 27 11.5C27 18 21 22 16 26Z" fill="#1D9E75" opacity="0.9"/>
+            </g>
             <!-- Orbit dots -->
             <circle cx="210" cy="152" r="5" fill="#1D9E75" opacity="0.8"/>
             <circle cx="268" cy="175" r="4" fill="#7F77DD" opacity="0.7"/>
@@ -246,6 +246,10 @@
               aspectos — físico, emocional e social — construindo um histórico
               pessoal que orienta seu cuidado.
             </p>
+            <a href="mente-corpo.html" class="module-card__link" aria-label="Explorar módulo Mente e Corpo">
+              Explorar módulo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
           </article>
 
           <!-- Card 3 — Jornada & IA (brick) -->
@@ -273,6 +277,130 @@
 
       </div>
     </section><!-- /#como-funciona -->
+
+
+    <!-- =========================================================
+         MOCKUPS — Visual previews of each module
+         ========================================================= -->
+    <section class="mockups" id="modulos-preview" aria-labelledby="mockups-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-eyebrow">Veja em ação</span>
+          <h2 id="mockups-heading">Uma experiência diferente de tudo que você já viu</h2>
+          <p class="section-desc">
+            Cada módulo foi desenhado para caber na sua rotina.
+            Intuitivo, bonito e sem julgamento.
+          </p>
+        </div>
+
+        <div class="mockups__grid">
+
+          <!-- ── Mockup 1: Acesso & Conexão ── -->
+          <div class="mockup js-reveal" data-delay="0">
+            <div class="mockup__phone" aria-hidden="true">
+              <div class="mockup__notch"></div>
+              <div class="mockup__screen">
+                <!-- Mini header bar -->
+                <div class="mockup__bar mockup__bar--teal">
+                  <span class="mockup__bar-dot"></span>
+                  <span class="mockup__bar-title">Como você está?</span>
+                </div>
+                <!-- Feeling grid -->
+                <div class="mockup__feeling-grid">
+                  <span class="mockup__chip mockup__chip--active">😔 Triste</span>
+                  <span class="mockup__chip">😰 Ansioso</span>
+                  <span class="mockup__chip">😴 Cansado</span>
+                  <span class="mockup__chip">😤 Irritado</span>
+                  <span class="mockup__chip">😶 Vazio</span>
+                  <span class="mockup__chip">😟 Perdido</span>
+                </div>
+                <!-- Progress dots -->
+                <div class="mockup__dots">
+                  <span class="mockup__dot mockup__dot--active mockup__dot--teal"></span>
+                  <span class="mockup__dot"></span>
+                  <span class="mockup__dot"></span>
+                  <span class="mockup__dot"></span>
+                </div>
+                <!-- CTA -->
+                <span class="mockup__btn mockup__btn--teal">Continuar →</span>
+              </div>
+            </div>
+            <div class="mockup__caption">
+              <span class="mockup__caption-num mockup__caption-num--teal">#1</span>
+              Acesso &amp; Conexão
+            </div>
+          </div>
+
+          <!-- ── Mockup 2: Mente & Corpo ── -->
+          <div class="mockup js-reveal" data-delay="150">
+            <div class="mockup__phone" aria-hidden="true">
+              <div class="mockup__notch"></div>
+              <div class="mockup__screen">
+                <!-- Header -->
+                <div class="mockup__bar mockup__bar--purple">
+                  <span class="mockup__bar-dot mockup__bar-dot--purple"></span>
+                  <span class="mockup__bar-title">Check-in diário</span>
+                </div>
+                <!-- Sleep field -->
+                <div class="mockup__field">
+                  <span class="mockup__field-label">🌙 Sono</span>
+                  <div class="mockup__track">
+                    <div class="mockup__fill mockup__fill--purple" style="width: 65%"></div>
+                    <div class="mockup__thumb mockup__thumb--purple"></div>
+                  </div>
+                  <span class="mockup__field-val">7h</span>
+                </div>
+                <!-- Mood bar -->
+                <div class="mockup__field">
+                  <span class="mockup__field-label">😊 Humor</span>
+                  <div class="mockup__mood-bar">
+                    <span class="mockup__mood-seg mockup__mood-seg--red"></span>
+                    <span class="mockup__mood-seg mockup__mood-seg--orange"></span>
+                    <span class="mockup__mood-seg mockup__mood-seg--purple mockup__mood-seg--sel"></span>
+                    <span class="mockup__mood-seg mockup__mood-seg--green"></span>
+                    <span class="mockup__mood-seg mockup__mood-seg--teal"></span>
+                  </div>
+                </div>
+                <span class="mockup__btn mockup__btn--purple">Salvar check-in</span>
+              </div>
+            </div>
+            <div class="mockup__caption">
+              <span class="mockup__caption-num mockup__caption-num--purple">#2</span>
+              Mente &amp; Corpo
+            </div>
+          </div>
+
+          <!-- ── Mockup 3: Jornada & IA ── -->
+          <div class="mockup js-reveal" data-delay="300">
+            <div class="mockup__phone" aria-hidden="true">
+              <div class="mockup__notch"></div>
+              <div class="mockup__screen">
+                <!-- Header -->
+                <div class="mockup__bar mockup__bar--brick">
+                  <span class="mockup__bar-dot mockup__bar-dot--brick"></span>
+                  <span class="mockup__bar-title">Triagem · 2/5</span>
+                </div>
+                <!-- Scenario -->
+                <p class="mockup__scenario">Seu chefe te critica na frente da equipe. O que você faz?</p>
+                <!-- Choices -->
+                <div class="mockup__choices">
+                  <span class="mockup__choice mockup__choice--active">Respira fundo e espera passar</span>
+                  <span class="mockup__choice">Conversa em particular depois</span>
+                  <span class="mockup__choice">Pede para falar a sós agora</span>
+                </div>
+              </div>
+            </div>
+            <div class="mockup__caption">
+              <span class="mockup__caption-num mockup__caption-num--brick">#3</span>
+              Jornada &amp; IA
+            </div>
+          </div>
+
+        </div><!-- /.mockups__grid -->
+
+      </div>
+    </section><!-- /#modulos-preview -->
 
 
     <!-- =========================================================
@@ -509,10 +637,9 @@
     <div class="footer__container container">
 
       <div class="footer__brand">
-        <svg width="24" height="24" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-          <circle cx="18" cy="18" r="18" fill="#1D9E75" fill-opacity="0.15"/>
-          <path d="M18 8C12.477 8 8 12.477 8 18s4.477 10 10 10 10-4.477 10-10S23.523 8 18 8z" fill="none" stroke="#1D9E75" stroke-width="1.5"/>
-          <path d="M10 18h2.5l1.5-3 2 6 1.5-3 1 1.5H26" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
+          <rect width="32" height="32" rx="8" fill="#1D9E75"/>
+          <path d="M16 26C11 22 5 18 5 11.5A5.5 5.5 0 0 1 10.5 6C12.6 6 14.5 7.1 16 9C17.5 7.1 19.4 6 21.5 6A5.5 5.5 0 0 1 27 11.5C27 18 21 22 16 26Z" fill="white"/>
         </svg>
         <span>AcolheMais 2.0</span>
       </div>
@@ -538,5 +665,16 @@
 
 
   <script src="js/main.js"></script>
+  <script src="js/nav-loader.js"></script>
+
+  <!-- PWA: register service worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .catch(err => console.warn('[SW] Registration failed:', err));
+      });
+    }
+  </script>
 </body>
 </html>

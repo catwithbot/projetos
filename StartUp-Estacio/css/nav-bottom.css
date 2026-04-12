@@ -1,0 +1,145 @@
+/* =============================================================================
+   AcolheMais 2.0 — Bottom Navigation + Page Transitions
+   Injected by js/nav-loader.js · Visible only on mobile (< 768px)
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   PAGE TRANSITION
+   A gentle opacity fade when navigating between pages.
+   html.page-transitioning is added by nav-loader.js before location change.
+   ----------------------------------------------------------------------------- */
+body {
+  transition: opacity 0.22s ease;
+}
+
+html.page-transitioning body {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+/* -----------------------------------------------------------------------------
+   BOTTOM NAVIGATION — base (hidden on desktop)
+   ----------------------------------------------------------------------------- */
+.bottom-nav {
+  display: none; /* desktop: top nav is enough */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+
+  /* Glass background matching the design system dark theme */
+  background: rgba(26, 35, 50, 0.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid var(--bg-border);
+
+  height: 60px;
+  /* iOS safe-area insets (notch / home indicator) */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+
+/* -----------------------------------------------------------------------------
+   BOTTOM NAVIGATION — mobile reveal
+   ----------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .bottom-nav {
+    display: flex;
+    align-items: stretch;
+  }
+
+  /* Push page content above the bar */
+  body {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+
+/* -----------------------------------------------------------------------------
+   NAV ITEMS
+   ----------------------------------------------------------------------------- */
+.bottom-nav__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  text-decoration: none;
+  color: var(--text-muted);
+  padding: 8px 4px;
+  position: relative;
+  transition:
+    color var(--dur-fast) var(--ease-out-expo),
+    transform var(--dur-fast) var(--ease-spring);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bottom-nav__item:hover {
+  color: var(--text-secondary);
+}
+
+.bottom-nav__item:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: -2px;
+  border-radius: var(--radius-sm);
+}
+
+.bottom-nav__item:active {
+  transform: scale(0.92);
+}
+
+
+/* -----------------------------------------------------------------------------
+   ACTIVE INDICATOR — accent line at the top edge
+   ----------------------------------------------------------------------------- */
+.bottom-nav__item--active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  animation: fadeIn var(--dur-normal) var(--ease-out-expo) both;
+}
+
+/* Per-page accent colours */
+.bottom-nav__item[data-page="index"].bottom-nav__item--active::before  { background: var(--color-teal); }
+.bottom-nav__item[data-page="jornada"].bottom-nav__item--active::before { background: var(--color-brick); }
+.bottom-nav__item[data-page="acesso"].bottom-nav__item--active::before  { background: var(--color-teal); }
+.bottom-nav__item[data-page="mente"].bottom-nav__item--active::before   { background: var(--color-purple); }
+
+/* Active item text colour */
+.bottom-nav__item[data-page="index"].bottom-nav__item--active  { color: var(--color-teal); }
+.bottom-nav__item[data-page="jornada"].bottom-nav__item--active { color: var(--color-brick); }
+.bottom-nav__item[data-page="acesso"].bottom-nav__item--active  { color: var(--color-teal); }
+.bottom-nav__item[data-page="mente"].bottom-nav__item--active   { color: var(--color-purple); }
+
+
+/* -----------------------------------------------------------------------------
+   ICON + LABEL
+   ----------------------------------------------------------------------------- */
+.bottom-nav__icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+
+.bottom-nav__item--active .bottom-nav__icon {
+  transform: scale(1.1);
+}
+
+.bottom-nav__label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.03em;
+  line-height: 1;
+}

@@ -4,7 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Acesso & Conexão — Encontre o profissional certo para você no AcolheMais 2.0. Triagem rápida e conexão com estagiários supervisionados.">
-  <meta name="theme-color" content="#1A2332">
+  <meta name="theme-color" content="#1D9E75">
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Acesso & Conexão — AcolheMais 2.0">
+  <meta property="og:description" content="Triagem rápida e conexão com estagiários de psicologia supervisionados. Gratuito, sem burocracia.">
+  <meta property="og:type"        content="website">
+  <meta property="og:locale"      content="pt_BR">
+  <meta property="og:image"       content="icons/icon-512.svg">
+  <meta property="og:image:alt"   content="AcolheMais — Acesso e Conexão">
+  <meta property="og:site_name"   content="AcolheMais">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.svg">
 
   <title>Acesso & Conexão — AcolheMais 2.0</title>
 
@@ -17,6 +30,7 @@
   <link rel="stylesheet" href="css/design-system.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/acesso.css">
+  <link rel="stylesheet" href="css/nav-bottom.css">
 </head>
 <body>
 
@@ -652,12 +666,9 @@
     <div class="container">
       <div class="footer__inner">
         <a class="nav__logo footer__logo" href="index.html" aria-label="AcolheMais — Início">
-          <svg class="nav__logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-            <circle cx="18" cy="18" r="18" fill="#1D9E75" fill-opacity="0.15"/>
-            <path d="M18 8C12.477 8 8 12.477 8 18s4.477 10 10 10 10-4.477 10-10S23.523 8 18 8z" fill="none" stroke="#1D9E75" stroke-width="1.5"/>
-            <path d="M13 18.5c0-2.761 2.239-5 5-5s5 2.239 5 5" stroke="#1D9E75" stroke-width="2" stroke-linecap="round"/>
-            <path d="M15.5 21.5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5" stroke="#7F77DD" stroke-width="2" stroke-linecap="round"/>
-            <path d="M10 18h2.5l1.5-3 2 6 1.5-3 1 1.5H26" stroke="#D85A30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg class="nav__logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <rect width="32" height="32" rx="8" fill="#1D9E75"/>
+            <path d="M16 26C11 22 5 18 5 11.5A5.5 5.5 0 0 1 10.5 6C12.6 6 14.5 7.1 16 9C17.5 7.1 19.4 6 21.5 6A5.5 5.5 0 0 1 27 11.5C27 18 21 22 16 26Z" fill="white"/>
           </svg>
           <span class="nav__logo-text">AcolheMais</span>
           <span class="nav__logo-version">2.0</span>
@@ -678,6 +689,17 @@
   <!-- Scripts -->
   <script src="js/main.js"></script>
   <script src="js/acesso.js"></script>
+  <script src="js/nav-loader.js"></script>
+
+  <!-- PWA: register service worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .catch(err => console.warn('[SW] Registration failed:', err));
+      });
+    }
+  </script>
 
 </body>
 </html>

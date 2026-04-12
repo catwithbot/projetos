@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mente & Corpo — Educação biopsicossocial e check-in diário no AcolheMais 2.0. Sono, alimentação, humor e biblioteca de conteúdo educativo.">
+  <meta name="theme-color" content="#7F77DD">
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Mente & Corpo — AcolheMais 2.0">
+  <meta property="og:description" content="Check-in biopsicossocial diário: sono, alimentação e humor. Histórico pessoal e biblioteca educativa sobre bem-estar.">
+  <meta property="og:type"        content="website">
+  <meta property="og:locale"      content="pt_BR">
+  <meta property="og:image"       content="icons/icon-512.svg">
+  <meta property="og:image:alt"   content="AcolheMais — Mente e Corpo">
+  <meta property="og:site_name"   content="AcolheMais">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.svg">
+
+  <title>Mente &amp; Corpo — AcolheMais 2.0</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles (design-system FIRST) -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/mente-corpo.css">
+  <link rel="stylesheet" href="css/nav-bottom.css">
+</head>
+<body>
+
+  <!-- =========================================================
+       NAVIGATION
+       ========================================================= -->
+  <header class="nav" id="nav">
+    <div class="nav__container container">
+
+      <a class="nav__logo" href="index.html" aria-label="AcolheMais — Voltar ao início">
+        <svg class="nav__logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <rect width="32" height="32" rx="8" fill="#1D9E75"/>
+          <path d="M16 26C11 22 5 18 5 11.5A5.5 5.5 0 0 1 10.5 6C12.6 6 14.5 7.1 16 9C17.5 7.1 19.4 6 21.5 6A5.5 5.5 0 0 1 27 11.5C27 18 21 22 16 26Z" fill="white"/>
+        </svg>
+        <span class="nav__logo-text">AcolheMais</span>
+        <span class="nav__logo-version">2.0</span>
+      </a>
+
+      <nav class="nav__links" id="nav-links" aria-label="Navegação do Mente & Corpo">
+        <a href="#checkin">Check-in</a>
+        <a href="#historico">Histórico</a>
+        <a href="#biblioteca">Biblioteca</a>
+      </nav>
+
+      <a href="index.html" class="btn btn--ghost nav__cta">← Voltar</a>
+
+      <button class="nav__hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- =========================================================
+         PAGE HERO
+         ========================================================= -->
+    <section class="page-hero mc-hero" id="hero">
+      <div class="container">
+        <a href="index.html" class="back-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          Voltar para o início
+        </a>
+
+        <span class="page-hero__eyebrow mc-eyebrow">Módulo 2</span>
+        <h1>Mente &amp; Corpo</h1>
+        <p class="page-hero__sub">
+          Seu corpo fala antes da mente. Registre como você está, entenda
+          as conexões biopsicossociais e cuide de si com ciência.
+        </p>
+
+        <div class="mc-hero__pills">
+          <span class="mc-pill">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            Sono
+          </span>
+          <span class="mc-pill">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Alimentação
+          </span>
+          <span class="mc-pill">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Humor
+          </span>
+        </div>
+
+        <div class="page-hero__tabs" role="navigation" aria-label="Seções de Mente & Corpo">
+          <a href="#checkin" class="page-tab">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            Check-in diário
+          </a>
+          <a href="#historico" class="page-tab">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+            Histórico
+          </a>
+          <a href="#biblioteca" class="page-tab">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+            Biblioteca
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         CHECK-IN DIÁRIO
+         ========================================================= -->
+    <section class="mc-section" id="checkin" aria-labelledby="checkin-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-eyebrow mc-eyebrow-sm">Registro de hoje</span>
+          <h2 id="checkin-heading">Como você está hoje?</h2>
+          <p class="section-desc">
+            Três dimensões, menos de 2 minutos. Seu registro se acumula ao longo da semana.
+          </p>
+        </div>
+
+        <div class="checkin-card mc-card">
+
+          <!-- Já registrou hoje -->
+          <div class="checkin-done" id="checkin-done" aria-live="polite" hidden>
+            <div class="checkin-done__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <p class="checkin-done__title">Check-in de hoje registrado!</p>
+            <p class="checkin-done__sub" id="checkin-done-time"></p>
+            <div class="checkin-done__insight mc-insight" id="checkin-insight" aria-live="polite"></div>
+            <button class="btn btn--ghost btn--sm" id="btn-redo">Registrar novamente</button>
+          </div>
+
+          <!-- Formulário -->
+          <form class="checkin-form" id="checkin-form" novalidate>
+
+            <!-- Sono -->
+            <fieldset class="checkin-field">
+              <legend class="checkin-field__label">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Quanto tempo você dormiu?
+              </legend>
+              <div class="sleep-slider-wrap">
+                <input
+                  type="range"
+                  id="sleep-slider"
+                  name="sleep"
+                  min="0"
+                  max="10"
+                  step="0.5"
+                  value="7"
+                  class="sleep-slider"
+                  aria-valuemin="0"
+                  aria-valuemax="10"
+                  aria-valuenow="7"
+                  aria-valuetext="7 horas"
+                >
+                <div class="sleep-display">
+                  <span class="sleep-display__value" id="sleep-value">7</span>
+                  <span class="sleep-display__unit">horas</span>
+                </div>
+              </div>
+              <div class="sleep-labels" aria-hidden="true">
+                <span>0h</span>
+                <span>2h</span>
+                <span>4h</span>
+                <span>6h</span>
+                <span>8h</span>
+                <span>10h</span>
+              </div>
+            </fieldset>
+
+            <!-- Alimentação -->
+            <fieldset class="checkin-field">
+              <legend class="checkin-field__label">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Como foi sua alimentação?
+              </legend>
+              <div class="food-scale" role="group" aria-label="Escala de alimentação de 1 a 5">
+                <input type="radio" name="food" id="food-1" value="1" class="sr-only">
+                <label for="food-1" class="food-btn" title="Muito ruim">
+                  <span class="food-icon" aria-hidden="true">😞</span>
+                  <span class="food-btn__label">Muito ruim</span>
+                </label>
+
+                <input type="radio" name="food" id="food-2" value="2" class="sr-only">
+                <label for="food-2" class="food-btn" title="Ruim">
+                  <span class="food-icon" aria-hidden="true">😕</span>
+                  <span class="food-btn__label">Ruim</span>
+                </label>
+
+                <input type="radio" name="food" id="food-3" value="3" class="sr-only">
+                <label for="food-3" class="food-btn" title="Regular" checked>
+                  <span class="food-icon" aria-hidden="true">😐</span>
+                  <span class="food-btn__label">Regular</span>
+                </label>
+
+                <input type="radio" name="food" id="food-4" value="4" class="sr-only">
+                <label for="food-4" class="food-btn" title="Boa">
+                  <span class="food-icon" aria-hidden="true">🙂</span>
+                  <span class="food-btn__label">Boa</span>
+                </label>
+
+                <input type="radio" name="food" id="food-5" value="5" class="sr-only">
+                <label for="food-5" class="food-btn" title="Ótima">
+                  <span class="food-icon" aria-hidden="true">😄</span>
+                  <span class="food-btn__label">Ótima</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- Humor -->
+            <fieldset class="checkin-field">
+              <legend class="checkin-field__label">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                Como está seu humor?
+              </legend>
+              <div class="mood-bar-wrap">
+                <div class="mood-bar" role="group" aria-label="Escala de humor">
+                  <input type="radio" name="mood" id="mc-mood-1" value="1" class="sr-only">
+                  <label for="mc-mood-1" class="mood-seg mood-seg--1" title="Muito baixo">
+                    <span class="sr-only">Muito baixo</span>
+                  </label>
+
+                  <input type="radio" name="mood" id="mc-mood-2" value="2" class="sr-only">
+                  <label for="mc-mood-2" class="mood-seg mood-seg--2" title="Baixo">
+                    <span class="sr-only">Baixo</span>
+                  </label>
+
+                  <input type="radio" name="mood" id="mc-mood-3" value="3" class="sr-only">
+                  <label for="mc-mood-3" class="mood-seg mood-seg--3" title="Neutro">
+                    <span class="sr-only">Neutro</span>
+                  </label>
+
+                  <input type="radio" name="mood" id="mc-mood-4" value="4" class="sr-only">
+                  <label for="mc-mood-4" class="mood-seg mood-seg--4" title="Bom">
+                    <span class="sr-only">Bom</span>
+                  </label>
+
+                  <input type="radio" name="mood" id="mc-mood-5" value="5" class="sr-only">
+                  <label for="mc-mood-5" class="mood-seg mood-seg--5" title="Muito bom">
+                    <span class="sr-only">Muito bom</span>
+                  </label>
+                </div>
+                <div class="mood-bar-labels" aria-hidden="true">
+                  <span>Muito baixo</span>
+                  <span>Neutro</span>
+                  <span>Muito bom</span>
+                </div>
+                <p class="mood-bar-selected" id="mood-selected-label" aria-live="polite"></p>
+              </div>
+            </fieldset>
+
+            <div class="checkin-form__footer">
+              <button type="submit" class="btn btn--primary btn--lg checkin-submit" id="btn-submit">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                Registrar check-in
+              </button>
+              <p class="checkin-form__privacy">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Dados salvos apenas no seu dispositivo
+              </p>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         HISTÓRICO DA SEMANA
+         ========================================================= -->
+    <section class="mc-section mc-section--alt" id="historico" aria-labelledby="hist-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-eyebrow mc-eyebrow-sm">Últimos 7 dias</span>
+          <h2 id="hist-heading">Seu histórico semanal</h2>
+          <p class="section-desc">
+            Padrões surgem quando você registra com consistência.
+          </p>
+        </div>
+
+        <div class="hist-card mc-card">
+          <div class="hist-legend" aria-hidden="true">
+            <span class="hist-legend__item hist-legend__item--sleep">
+              <span class="hist-legend__dot"></span> Sono
+            </span>
+            <span class="hist-legend__item hist-legend__item--mood">
+              <span class="hist-legend__dot"></span> Humor
+            </span>
+            <span class="hist-legend__item hist-legend__item--food">
+              <span class="hist-legend__dot"></span> Alimentação
+            </span>
+          </div>
+
+          <div class="hist-chart" id="hist-chart" role="img" aria-label="Gráfico de barras dos últimos 7 dias">
+            <!-- Injetado por JS -->
+            <div class="hist-empty" id="hist-empty">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <p>Nenhum registro ainda.</p>
+              <p class="hist-empty__sub">Faça seu primeiro check-in acima!</p>
+            </div>
+          </div>
+
+          <div class="hist-summary" id="hist-summary" hidden>
+            <div class="hist-avg">
+              <span class="hist-avg__label">Média sono</span>
+              <span class="hist-avg__val" id="avg-sleep">—</span>
+            </div>
+            <div class="hist-avg">
+              <span class="hist-avg__label">Humor médio</span>
+              <span class="hist-avg__val" id="avg-mood">—</span>
+            </div>
+            <div class="hist-avg">
+              <span class="hist-avg__label">Alimentação</span>
+              <span class="hist-avg__val" id="avg-food">—</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         BIBLIOTECA DE CONTEÚDO EDUCATIVO
+         ========================================================= -->
+    <section class="mc-section" id="biblioteca" aria-labelledby="bib-heading">
+      <div class="container">
+
+        <div class="section-header">
+          <span class="section-eyebrow mc-eyebrow-sm">Educação biopsicossocial</span>
+          <h2 id="bib-heading">Entenda as conexões</h2>
+          <p class="section-desc">
+            Clique em qualquer tópico para expandir o conteúdo.
+          </p>
+        </div>
+
+        <div class="mc-disclaimer" role="note" aria-label="Aviso importante">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Informação educativa — não substitui consulta com profissional de saúde.
+        </div>
+
+        <div class="bib-grid" id="bib-grid">
+
+          <!-- Card 1 — Eixo intestino-cérebro -->
+          <article class="bib-card" data-topic="gut-brain" aria-expanded="false">
+            <button class="bib-card__header" type="button" aria-expanded="false" aria-controls="gut-brain-body">
+              <div class="bib-card__icon bib-icon--gut" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+                  <path d="M8 12 Q10 9 12 12 Q14 15 16 12"/>
+                </svg>
+              </div>
+              <div class="bib-card__meta">
+                <h3 class="bib-card__title">Eixo intestino-cérebro</h3>
+                <p class="bib-card__desc">Como bactérias intestinais influenciam diretamente seu humor e cognição</p>
+                <span class="bib-card__tag">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  5 min de leitura
+                </span>
+              </div>
+              <div class="bib-card__toggle" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </button>
+            <div class="bib-card__body" id="gut-brain-body" hidden>
+              <div class="bib-card__content">
+                <p>O eixo intestino-cérebro é uma via de comunicação bidirecional que conecta o sistema nervoso entérico (o "segundo cérebro") ao sistema nervoso central. Esse canal opera por meio do nervo vago, de hormônios e de metabólitos produzidos pela microbiota intestinal — os trilhões de micro-organismos que habitam nosso trato digestivo.</p>
+                <p>Cerca de 90% da serotonina do organismo é produzida no intestino, não no cérebro. Isso significa que o que você come hoje afeta diretamente sua capacidade de regular o humor amanhã. Estudos recentes mostram que pessoas com depressão e ansiedade frequentemente apresentam menor diversidade na microbiota intestinal em comparação à população geral.</p>
+                <p>Alimentos fermentados (kefir, iogurte natural, chucrute), fibras prebióticas (banana, aveia, alho) e uma dieta variada alimentam bactérias benéficas que produzem ácidos graxos de cadeia curta — compostos com efeito anti-inflamatório sistêmico, inclusive no cérebro.</p>
+                <p>Prática: introduza um alimento fermentado por dia e observe seu padrão de humor ao longo de duas semanas. A mudança não é imediata, mas consistente.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 — Cortisol e estresse -->
+          <article class="bib-card" data-topic="cortisol" aria-expanded="false">
+            <button class="bib-card__header" type="button" aria-expanded="false" aria-controls="cortisol-body">
+              <div class="bib-card__icon bib-icon--cortisol" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+              </div>
+              <div class="bib-card__meta">
+                <h3 class="bib-card__title">Cortisol e estresse</h3>
+                <p class="bib-card__desc">Por que o hormônio do estresse pode ser aliado ou inimigo dependendo da dose</p>
+                <span class="bib-card__tag">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  4 min de leitura
+                </span>
+              </div>
+              <div class="bib-card__toggle" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </button>
+            <div class="bib-card__body" id="cortisol-body" hidden>
+              <div class="bib-card__content">
+                <p>O cortisol é um hormônio produzido pelas glândulas suprarrenais em resposta ao estresse — seja ele físico (fome, perigo) ou psicológico (prazo, conflito). Sua função primária é mobilizar energia: ele eleva a glicose no sangue, suprime processos não urgentes como digestão e imunidade, e aguça o foco de curto prazo.</p>
+                <p>O problema emerge quando o estressor nunca vai embora. Em estresse crônico, o cortisol permanece elevado por semanas ou meses. Isso danifica o hipocampo — região crucial para memória e aprendizado — reduz a densidade sináptica no córtex pré-frontal e aumenta a atividade da amígdala, tornando a pessoa cronicamente hipervigilante.</p>
+                <p>Práticas com evidência de redução do cortisol: respiração diafragmática (4-7-8 ou coerência cardíaca), exercício aeróbico moderado (30 min, 3× semana), contato social de qualidade e sono reparador — especialmente o sono de ondas lentas entre 23h e 3h.</p>
+                <p>Uma ferramenta simples: ao perceber tensão no pescoço ou maxilar, faça 3 respirações longas com expiração mais demorada que a inspiração. Isso ativa o nervo vago e inicia a resposta parassimpática em segundos.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 — Sono e memória -->
+          <article class="bib-card" data-topic="sleep" aria-expanded="false">
+            <button class="bib-card__header" type="button" aria-expanded="false" aria-controls="sleep-body">
+              <div class="bib-card__icon bib-icon--sleep" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+              </div>
+              <div class="bib-card__meta">
+                <h3 class="bib-card__title">Sono e memória</h3>
+                <p class="bib-card__desc">O que acontece no cérebro durante o sono e por que menos de 6h muda seu dia</p>
+                <span class="bib-card__tag">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  6 min de leitura
+                </span>
+              </div>
+              <div class="bib-card__toggle" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </button>
+            <div class="bib-card__body" id="sleep-body" hidden>
+              <div class="bib-card__content">
+                <p>Durante o sono, o cérebro realiza consolidação de memória: transfere informações do hipocampo (memória de curto prazo) para o córtex cerebral (memória de longo prazo). Esse processo ocorre principalmente durante o sono de ondas lentas (N3), nas primeiras horas da noite, e durante o sono REM, que predomina no final da noite.</p>
+                <p>Pesquisas do neurocientista Matthew Walker (UC Berkeley) mostram que uma noite com menos de 6 horas de sono reduz em até 40% a capacidade de formar novas memórias no dia seguinte e aumenta em 60% a reatividade emocional — tornando situações cotidianas mais difíceis de administrar.</p>
+                <p>O sistema glinfático, descoberto em 2013, é ativado predominantemente durante o sono: ele "lava" o cérebro removendo subprodutos metabólicos, incluindo proteínas associadas a doenças neurodegenerativas. Dormir mal cronicamente compromete essa limpeza noturna.</p>
+                <p>Higiene do sono: luz azul (telas) suprime melatonina por até 2h — ative modo noturno e reduza brilho após as 21h. Temperatura ideal do quarto: 18-19°C. Consistência no horário de acordar é mais importante que o horário de dormir.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 — Ciclo hormonal -->
+          <article class="bib-card" data-topic="hormones" aria-expanded="false">
+            <button class="bib-card__header" type="button" aria-expanded="false" aria-controls="hormones-body">
+              <div class="bib-card__icon bib-icon--hormones" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4.5 9.5V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v4.5"/><path d="M4.5 14.5V19a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-4.5"/><line x1="12" y1="2" x2="12" y2="22"/><path d="M4.5 12h15"/>
+                </svg>
+              </div>
+              <div class="bib-card__meta">
+                <h3 class="bib-card__title">Ciclo hormonal</h3>
+                <p class="bib-card__desc">Como estrogênio, progesterona e testosterona modulam energia, foco e emoções</p>
+                <span class="bib-card__tag">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  5 min de leitura
+                </span>
+              </div>
+              <div class="bib-card__toggle" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </button>
+            <div class="bib-card__body" id="hormones-body" hidden>
+              <div class="bib-card__content">
+                <p>Hormônios sexuais não atuam apenas na reprodução — eles atravessam a barreira hematoencefálica e modulam diretamente neurotransmissores. O estrogênio, por exemplo, aumenta a sensibilidade dos receptores de serotonina e dopamina, explicando por que variações em seus níveis — ao longo do ciclo menstrual ou na transição menopausal — produzem efeitos visíveis no humor e na cognição.</p>
+                <p>Na fase folicular (dias 1-14 do ciclo), o aumento do estrogênio costuma elevar disposição, criatividade e sociabilidade. Na fase lútea (dias 15-28), a progesterona — com efeito levemente sedativo — pode aumentar sensibilidade emocional e desejo por carboidratos simples, pois eles elevam temporariamente a serotonina.</p>
+                <p>A testosterona, presente em todos os gêneros, está associada à motivação, energia e libido. Exercício resistido (musculação), sono adequado e redução do estresse crônico são os principais estímulos não-medicamentosos para sua manutenção em níveis saudáveis.</p>
+                <p>Registrar humor e energia ao longo do ciclo pode revelar padrões pessoais valiosos — o check-in diário deste módulo foi desenhado exatamente para isso.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 5 — Microbiota -->
+          <article class="bib-card" data-topic="microbiota" aria-expanded="false">
+            <button class="bib-card__header" type="button" aria-expanded="false" aria-controls="microbiota-body">
+              <div class="bib-card__icon bib-icon--microbiota" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"/><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><line x1="12" y1="9" x2="12" y2="3"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="9" y1="12" x2="3" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/>
+                </svg>
+              </div>
+              <div class="bib-card__meta">
+                <h3 class="bib-card__title">Microbiota</h3>
+                <p class="bib-card__desc">O ecossistema interno que regula imunidade, inflamação e até sua personalidade</p>
+                <span class="bib-card__tag">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  5 min de leitura
+                </span>
+              </div>
+              <div class="bib-card__toggle" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </button>
+            <div class="bib-card__body" id="microbiota-body" hidden>
+              <div class="bib-card__content">
+                <p>A microbiota intestinal é composta por aproximadamente 38 trilhões de micro-organismos — ligeiramente mais numerosos que as células humanas do próprio corpo. Esse ecossistema possui um genoma coletivo (microbioma) com cerca de 150 vezes mais genes funcionais que o genoma humano, executando metabolismos que nosso organismo sozinho não conseguiria.</p>
+                <p>Além da produção de serotonina e outros neurotransmissores, a microbiota regula ativamente o sistema imunológico: cerca de 70% das células imunes vivem no trato gastrointestinal. Uma microbiota desequilibrada (disbiose) está associada a inflamação sistêmica de baixo grau — fator de risco independente para depressão, fadiga crônica e doenças metabólicas.</p>
+                <p>Antibióticos, dieta ultraprocessada, falta de sono e estresse crônico são os principais fatores que reduzem a diversidade microbiana. Por outro lado, contato com natureza, variedade alimentar (meta: 30 plantas diferentes por semana), prebióticos e probióticos alimentam bactérias benéficas.</p>
+                <p>Um marcador simples de saúde da microbiota: frequência e consistência das evacuações. Alterações persistentes podem indicar disbiose e merecem avaliação médica.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 6 — Neurotransmissores -->
+          <article class="bib-card" data-topic="neuro" aria-expanded="false">
+            <button class="bib-card__header" type="button" aria-expanded="false" aria-controls="neuro-body">
+              <div class="bib-card__icon bib-icon--neuro" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.14"/>
+                  <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.14"/>
+                </svg>
+              </div>
+              <div class="bib-card__meta">
+                <h3 class="bib-card__title">Neurotransmissores</h3>
+                <p class="bib-card__desc">Serotonina, dopamina, GABA e norepinefrina — o que cada um faz e como cuidar deles</p>
+                <span class="bib-card__tag">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  7 min de leitura
+                </span>
+              </div>
+              <div class="bib-card__toggle" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </button>
+            <div class="bib-card__body" id="neuro-body" hidden>
+              <div class="bib-card__content">
+                <p>Neurotransmissores são mensageiros químicos que transmitem sinais entre neurônios. Os quatro mais estudados em relação à saúde mental são: serotonina (regulação de humor, sono e apetite), dopamina (motivação, recompensa e aprendizado), GABA (inibição, calma e relaxamento muscular) e norepinefrina (alerta, foco e resposta ao estresse).</p>
+                <p>A dopamina merece atenção especial: ela não é o "hormônio do prazer" em si, mas o da antecipação — é liberada antes da recompensa, não durante. Isso explica ciclos de procrastinação e compulsão digital: cada notificação oferece uma microantecipação de recompensa que mantém o comportamento de checar o celular, mesmo quando o resultado é neutro ou negativo.</p>
+                <p>Práticas que sustentam o equilíbrio de neurotransmissores: exercício aeróbico (serotonina e BDNF), exposição solar matinal (serotonina e regulação circadiana), metas incrementais completadas (dopamina saudável), meditação e respiração lenta (GABA e parassimpático), sono reparador (restauração geral).</p>
+                <p>Importante: desequilíbrios significativos de neurotransmissores não são corrigidos apenas por hábitos — podem requerer avaliação psiquiátrica. Use este conteúdo para cultivar hábitos protetores, não para autodiagnosticar condições.</p>
+              </div>
+            </div>
+          </article>
+
+        </div><!-- /.bib-grid -->
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         BANNER — Conexão com módulo Jornada
+         ========================================================= -->
+    <section class="mc-section mc-section--alt" aria-label="Conexão com a Jornada">
+      <div class="container">
+        <div class="jornada-banner">
+          <div class="jornada-banner__visual" aria-hidden="true">
+            <div class="jornada-banner__orb"></div>
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <div class="jornada-banner__text">
+            <p class="jornada-banner__eyebrow">Módulo 3</p>
+            <h3 class="jornada-banner__title">Seu check-in de hoje influencia sua história.</h3>
+            <p class="jornada-banner__desc">O que você registrou aqui alimenta a narrativa adaptativa da Jornada. Cada dado seu molda os desafios e personagens da sua aventura.</p>
+          </div>
+          <a href="jornada.html" class="btn btn--primary btn--lg jornada-banner__cta">
+            Ir para a Jornada
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="footer">
+    <div class="footer__container container">
+      <div class="footer__brand">
+        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
+          <rect width="32" height="32" rx="8" fill="#1D9E75"/>
+          <path d="M16 26C11 22 5 18 5 11.5A5.5 5.5 0 0 1 10.5 6C12.6 6 14.5 7.1 16 9C17.5 7.1 19.4 6 21.5 6A5.5 5.5 0 0 1 27 11.5C27 18 21 22 16 26Z" fill="white"/>
+        </svg>
+        <span>AcolheMais 2.0</span>
+      </div>
+      <p class="footer__tagline">Saúde mental acessível para todos.</p>
+      <nav class="footer__links" aria-label="Links do rodapé">
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Uso</a>
+        <a href="index.html">Início</a>
+      </nav>
+      <p class="footer__copy">&copy; 2026 AcolheMais — Projeto Acadêmico · Estácio de Sá.</p>
+    </div>
+  </footer>
+
+
+  <!-- Shared nav/scroll logic -->
+  <script src="js/main.js"></script>
+  <!-- Module logic -->
+  <script src="js/mente-corpo.js"></script>
+  <script src="js/nav-loader.js"></script>
+
+  <!-- PWA: register service worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .catch(err => console.warn('[SW] Registration failed:', err));
+      });
+    }
+  </script>
+
+</body>
+</html>
