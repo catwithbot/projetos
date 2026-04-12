@@ -1,3 +1,3 @@
-2026/04/12-01:43:11.148 17ccf Reusing MANIFEST /home/venom/Documents/Github/projetos/automaticozap/.wwebjs_auth/session/Default/shared_proto_db/MANIFEST-000001
-2026/04/12-01:43:11.149 17ccf Recovering log #3
-2026/04/12-01:43:11.161 17ccf Reusing old log /home/venom/Documents/Github/projetos/automaticozap/.wwebjs_auth/session/Default/shared_proto_db/000003.log 
+2026/04/12-02:00:48.304 18928 Reusing MANIFEST /home/venom/Documents/Github/projetos/automaticozap/.wwebjs_auth/session/Default/shared_proto_db/MANIFEST-000001
+2026/04/12-02:00:48.305 18928 Recovering log #3
+2026/04/12-02:00:48.307 18928 Reusing old log /home/venom/Documents/Github/projetos/automaticozap/.wwebjs_auth/session/Default/shared_proto_db/000003.log 

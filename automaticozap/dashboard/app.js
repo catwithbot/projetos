@@ -429,6 +429,29 @@ document.getElementById('btn-export-ics').addEventListener('click', () => {
   showToast(`${filtered.length} evento(s) exportado(s)`, 'success')
 })
 
+// ── Exportar XLSX ──
+
+document.getElementById('btn-export-xlsx').addEventListener('click', () => {
+  if (allEvents.length === 0) {
+    showToast('Nenhum evento para exportar', 'error')
+    return
+  }
+
+  const params = new URLSearchParams()
+  if (filterDoutor) params.set('doutor', filterDoutor)
+
+  const url = '/api/exportar-xlsx' + (params.toString() ? '?' + params.toString() : '')
+  const a = document.createElement('a')
+  a.href = url
+  a.download = ''
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+
+  const total = filterDoutor ? allEvents.filter((e) => e.doutor === filterDoutor).length : allEvents.length
+  showToast(`${total} evento(s) exportado(s) para XLSX`, 'success')
+})
+
 // ── Modal de edição ──
 
 function openEdit(id) {

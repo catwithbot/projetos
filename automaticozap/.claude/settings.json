@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ls /home/venom/Documents/Github/projetos/automaticozap/*.js /home/venom/Documents/Github/projetos/automaticozap/*.json)"
+      "Bash(ls /home/venom/Documents/Github/projetos/automaticozap/*.js /home/venom/Documents/Github/projetos/automaticozap/*.json)",
+      "Bash(node index.js)"
     ]
   }
 }
