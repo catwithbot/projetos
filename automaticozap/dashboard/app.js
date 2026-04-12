@@ -294,8 +294,29 @@ function openGCal(id) {
 
 // ── Importar histórico ──
 
+function buildImportPayload(periodoValue) {
+  const now = new Date()
+  if (periodoValue === 'mes-atual') {
+    const mes = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
+    return { mes }
+  }
+  if (periodoValue === 'mes-anterior') {
+    const d = new Date(now.getFullYear(), now.getMonth() - 1, 1)
+    const mes = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
+    return { mes }
+  }
+  return { dias: parseInt(periodoValue) }
+}
+
+function buildImportLabel(periodoValue) {
+  if (periodoValue === 'mes-atual') return 'mês atual'
+  if (periodoValue === 'mes-anterior') return 'mês anterior'
+  return `últimos ${periodoValue} dias`
+}
+
 document.getElementById('btn-importar').addEventListener('click', async () => {
-  const dias = parseInt(document.getElementById('import-dias').value)
+  const periodo = document.getElementById('import-periodo').value
+  const payload = buildImportPayload(periodo)
   const btn = document.getElementById('btn-importar')
   btn.disabled = true
   btn.textContent = 'Importando...'
@@ -304,7 +325,7 @@ document.getElementById('btn-importar').addEventListener('click', async () => {
     const res = await fetch('/api/importar', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ dias })
+      body: JSON.stringify(payload)
     })
     const data = await res.json()
 
@@ -318,9 +339,10 @@ document.getElementById('btn-importar').addEventListener('click', async () => {
       return
     }
 
+    const label = buildImportLabel(periodo)
     const msg = data.eventos > 0
       ? `${data.eventos} evento(s) importado(s) de ${data.processadas} mensagem(s)`
-      : `Nenhum evento novo encontrado nos últimos ${dias} dias`
+      : `Nenhum evento novo encontrado no ${label}`
     showToast(msg, data.eventos > 0 ? 'success' : '')
     if (data.eventos > 0) await fetchEvents()
   } catch (err) {

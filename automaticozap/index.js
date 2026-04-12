@@ -87,9 +87,10 @@ app.post('/api/importar', async (req, res) => {
   if (!wzClient) {
     return res.status(503).json({ error: 'WhatsApp ainda não conectado' })
   }
+  const mes = req.body.mes || null
   const dias = Math.min(Math.max(parseInt(req.body.dias) || 30, 1), 365)
   try {
-    const resultado = await importarHistorico(wzClient, { loadDb, saveDb, dias })
+    const resultado = await importarHistorico(wzClient, { loadDb, saveDb, dias, mes })
     res.json(resultado)
   } catch (err) {
     console.error('[importar] Erro:', err.message)
