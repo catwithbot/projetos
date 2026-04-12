@@ -1,0 +1,37 @@
+2026/04/11-23:31:44.675 e485 Reusing MANIFEST /home/venom/Documents/Github/projetos/automaticozap/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/04/11-23:31:44.676 e485 Recovering log #544
+2026/04/11-23:31:44.877 e485 Reusing old log /home/venom/Documents/Github/projetos/automaticozap/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000544.log 
+2026/04/11-23:31:56.442 e485 Level-0 table #564: started
+2026/04/11-23:31:56.504 e485 Level-0 table #564: 1432596 bytes OK
+2026/04/11-23:31:56.511 e485 Delete type=0 #544
+2026/04/11-23:31:56.533 e485 Compacting 1@0 + 0@1 files
+2026/04/11-23:31:56.626 e485 Generated table #565@0: 17237 keys, 435168 bytes
+2026/04/11-23:31:56.642 e485 Generated table #566@0: 284 keys, 15771 bytes
+2026/04/11-23:31:56.642 e485 Compacted 1@0 + 0@1 files => 450939 bytes
+2026/04/11-23:31:56.645 e485 compacted to: files[ 0 2 14 0 0 0 0 ]
+2026/04/11-23:31:56.646 e485 Delete type=2 #564
+2026/04/11-23:32:01.329 e485 Compacting 1@1 + 10@2 files
+2026/04/11-23:32:01.696 e485 Generated table #567@1: 60760 keys, 2246687 bytes
+2026/04/11-23:32:01.910 e485 Generated table #568@1: 4887 keys, 2152035 bytes
+2026/04/11-23:32:02.093 e485 Generated table #569@1: 3259 keys, 2152990 bytes
+2026/04/11-23:32:02.325 e485 Generated table #570@1: 2817 keys, 2153131 bytes
+2026/04/11-23:32:02.424 e485 Generated table #571@1: 3236 keys, 2156177 bytes
+2026/04/11-23:32:02.547 e485 Generated table #572@1: 22705 keys, 2200275 bytes
+2026/04/11-23:32:02.977 e485 Generated table #573@1: 29808 keys, 2260643 bytes
+2026/04/11-23:32:03.202 e485 Generated table #574@1: 21410 keys, 2185253 bytes
+2026/04/11-23:32:03.314 e485 Generated table #575@1: 8991 keys, 2132356 bytes
+2026/04/11-23:32:03.701 e485 Generated table #576@1: 107824 keys, 2259466 bytes
+2026/04/11-23:32:03.726 e485 Generated table #577@1: 7632 keys, 162368 bytes
+2026/04/11-23:32:03.727 e485 Compacted 1@1 + 10@2 files => 22061381 bytes
+2026/04/11-23:32:03.733 e485 compacted to: files[ 0 1 15 0 0 0 0 ]
+2026/04/11-23:32:03.735 e485 Delete type=2 #552
+2026/04/11-23:32:03.735 e485 Delete type=2 #551
+2026/04/11-23:32:03.735 e485 Delete type=2 #549
+2026/04/11-23:32:03.735 e485 Delete type=2 #556
+2026/04/11-23:32:03.736 e485 Delete type=2 #550
+2026/04/11-23:32:03.736 e485 Delete type=2 #553
+2026/04/11-23:32:03.736 e485 Delete type=2 #565
+2026/04/11-23:32:03.736 e485 Delete type=2 #554
+2026/04/11-23:32:03.736 e485 Delete type=2 #548
+2026/04/11-23:32:03.737 e485 Delete type=2 #557
+2026/04/11-23:32:03.737 e485 Delete type=2 #555
